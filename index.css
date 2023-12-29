@@ -7,6 +7,101 @@ body {
   font-weight:300;
 }
 
+.sentence-black,.sentence-blue,.sentence-green,.sentence-yellow {
+    text-align: center;
+    font-size:0.7em;
+    color:black;
+    border:1px solid black;
+    border-radius: 5px;
+    padding: 3px;
+    font-weight: bold;
+    min-height: 2em;
+}
+
+.sentence-blue {
+    background-color:blue;
+}
+
+.sentence-yellow {
+    background-color: yellow;
+}
+
+.sentence-green {
+    background-color:green;
+}
+
+.sentence-black {
+    background-color:black;
+    color:white;
+}
+
+span.rain-blue,span.rain-orange,span.rain-red, span.sun-white, span.sun-blue, span.sun-green, span.sun-yellow, span.sur-red, span.temp {
+    font-size:0.7em;
+    color:black;
+    border:1px solid black;
+    border-radius: 5px;
+    padding: 2px;
+    font-weight: bold;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+span.temp {
+    background-color: black;
+    color: white;
+}
+
+div.tide, div.weatherResume, div.weatherSentence {
+    margin:5px;
+}
+
+span.tide-text {
+    font-size:0.7em;
+    color:black;
+    border:1px solid black;
+    border-radius: 5px;
+    font-weight: bold;
+    background-color: black;
+    color: white;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    display: inline-block;
+    padding: 2px;
+}
+
+span.sun-white {
+    background-color: white;
+}
+
+span.sun-blue {
+    background-color: blue;
+}
+
+span.sun-green {
+    background-color: green;
+}
+
+span.sun-yellow {
+    background-color: yellow;
+}
+
+span.sur-red {
+    background-color: red;
+}
+
+span.rain-red {
+    background-color: red;
+}
+
+span.rain-orange {
+    background-color: orange;
+}
+
+span.rain-blue {
+    background-color: blue;
+}
+
 table.spot-desc, table.spot-desc tr td {
     border: 1px solid black;
 }
@@ -16,8 +111,62 @@ td.spot-value {
     text-align: left;
     font-weight: bold;
 }
+
+th.logo {
+    vertical-align:middle;
+}
+
+table thead th {
+    text-align: center;
+    vertical-align: middle;
+}
+table thead th i {
+    display: block;
+    font-size: 24px; /* Ajustez la taille selon vos besoins */
+    margin: auto;
+}
+
+table thead tr {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: #f2f2f2;
+  }
+
+table.wind-data tbody th:first-child {
+    position: sticky;
+    left: 0;
+    width: 260px;
+    background-color: #f2f2f2;
+  }
+
+table.wind-data tbody tr.week-result {
+    border-top: 2px solid black;
+    padding-top: 3px;
+}
+
+table.wind-data tbody tr.week-result th {
+    vertical-align: middle;
+}
+
+table.wind-data tbody td {
+    width: 300px;
+}
+
+.table-container {
+    width: 100%;
+    height: 500px;
+    overflow: auto;
+  }
+
+div.closed {
+    margin-top:33%;
+    font-weight: bold;
+    color:black;
+}
+
 table.start {
-    width: 50%; /* Utilisez une largeur appropriée pour votre table */
+    width: 50%;
     margin-left: 25%;
     margin-right: 25%;
 }
@@ -28,9 +177,34 @@ img.img-legend {
     margin-right: 25%;
 }
 
-table.start th{
-    border: 4px solid black;
+table.start th, #settings-table th{
+    border: 1px solid black;
 }
+
+#settings-table {
+    width: 50%;
+    margin-left: 33%;
+    margin-right: 33%;
+    margin-top:10px;
+}
+
+#settings-table th.settings-form {
+    text-align: left;
+}
+
+#settings-table th.settings-button {
+    vertical-align: middle;
+}
+
+.settings-button button {
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+    border:1px solid black;
+    border-radius: 5px;
+    padding: 3px;
+}
+
 th.title {
     text-align: left;
     vertical-align:middle;
@@ -39,27 +213,38 @@ th.title {
     font-weight: bold;
 }
 
-div.weatherResume, div.weatherSentence {
-    text-align: left;
-    color:grey;
-    font-size:0.7em;
-}
-
-span.not-flyable {
-    color: rgba(0, 0, 14, 0.5);
-}
-
 table {
   width:100%;
   border-collapse:collapse;
 }
 
-td.flyable {
+td.flyable-wind {
     background-color: green;
 }
 
+td.not-flyable-wind {
+    background-color: orange;
+}
+
+td.not-flyable-low {
+    background-color: white;
+}
+
+span.not-flyable-strong {
+    color: white;
+}
+
+td.flyable {
+    background-color: green;
+}
+td.not-flyable-strong {
+    background-color: black;
+}
+td.not-flyable-medium {
+    background-color: orange;
+}
 td.not-flyable {
-    background-color: rgba(255, 0, 0, 0.5);
+    background-color: red;
 }
 
 td span {
@@ -77,5 +262,4 @@ tr td, tr th {
 a {
     color:#39c;
     text-decoration:none;
-  }
-
+}

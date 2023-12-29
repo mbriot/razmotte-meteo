@@ -6,10 +6,13 @@
     <title>Météo des sites</title>
     <link rel="stylesheet" href="index.css">
     <link rel="icon" href="/images/photos/LOGO/Logo_Razmotte_accueil.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" >
 </head>
-<?php
 
-$predictions = json_decode(file_get_contents('result.json'));
+<?php
+$arguments = $_GET;
+$predictions = json_decode(file_get_contents('result.json'),true);
+$predictions = filterPredictions($predictions,$arguments);
 
 $days = [];
 foreach(current($predictions->spots)->days as $dayResult){
@@ -24,17 +27,54 @@ echo '
         </tr>
     </table>
 ';
-echo '<span>Dernier run :' . $predictions->lastRun . '</span>';
-echo '<table border="1">
-        <tr>
-        <th> <div id="legend-back" class="legend"><a href="#legend">Ct ça marche ?</a></div></th>';
-            foreach ($days as $day) {
-                echo  "<th>${day}</th>";
-            } 
-echo    '</tr>';
 
+echo '
+    <table id="settings-table" style="display:block;">
+    <tr>
+        <th class="settings-form">
+            <div id="div-settings">
+                <div>
+                    <span>Localisation : </<span> 
+                    <input type="checkbox" id="nord" name="localisation" value="nord"><label for="nord">Nord</label>
+                    <input type="checkbox" id="autre" name="localisation" value="autre"><label for="autre">Autre</label>
+                </div>
+            
+                <div>
+                    <span>Type de site : </<span> 
+                    <input type="checkbox" id="bdm" name="bdm" value="bdm"><label for="bdm">Bord de mer</label>
+                    <input type="checkbox" id="plaine" name="plaine" value="plaine"><label for="plaine">Plaine</label>
+                    <input type="checkbox" id="treuil" name="treuil" value="treuil"><label for="treuil">Treuil</label>
+                </div>
+            
+                <div>
+                    <span>Vent correct : </<span> <input type="checkbox" id="vent" name="vent" value="vent"><label for="vent">Oui</label>
+                </div>
+            </div>
+        </th>
+        <th class="settings-button">
+            <button onclick="valider()">Valider</button>
+        </th>
+    </tr>
+    </table>';
+
+echo '<span>Dernier run :' . $predictions->lastRun . '</span>';
+echo '
+    <div class="table-container">
+    <table class="wind-data" border="1">
+        <thead>
+        <tr>
+        <th> <div id="legend-back" class="legend"><i id="settings" class="fas fa-cog"></i></div></th>';
+            foreach ($days as $day) {
+                echo  "<th>
+                        ${day}
+                        <table><td>9h</td><td>12h</td><td>15h</td></table>
+                    </th>";
+            } 
+echo    '</tr></thead>';
+
+echo '<tbody>';
 foreach ($predictions->spots as $spotName => $values) {
-    echo  '<tr>
+    echo  '<tr class="week-result">
             <th>
                 <a id="' . str_replace(' ', '_', strtolower($spotName)) . '" href="#' . str_replace(' ', '_', strtolower($spotName)) . '-desc">' . $spotName . '</a>
                 <div>' . $values->minSpeed . ' à '. $values->maxSpeed .'km/h</div>
@@ -43,32 +83,44 @@ foreach ($predictions->spots as $spotName => $values) {
             </th>';
     foreach ($values->days as $day) {
         echo '<td>';
+        if ($day->closed){
+            echo '<div class="closed">Fermé</div>';
+        } else {
             echo '<table>
                     <tr>
-                        <td class="9hWind ' . ($day->_9h->min->flyable ? "flyable" : "not-flyable") .'"><span class="9hWind ' . ($day->_9h->min->flyable ? "flyable" : "not-flyable") . '">' . $day->_9h->min->speed . '</span></td>
-                        <td class="12hWind ' . ($day->_12h->min->flyable ? "flyable" : "not-flyable") . '"><span class="12hWind ' . ($day->_12h->min->flyable ? "flyable" : "not-flyable") . '">' . $day->_12h->min->speed . '</span></td>
-                        <td class="15hWind ' . ($day->_15h->min->flyable ? "flyable" : "not-flyable") . '"><span class="15hWind ' . ($day->_15h->min->flyable ? "flyable" : "not-flyable") . '">' . $day->_15h->min->speed . '</span></td>
+                        <td class="9hWind ' . $day->_9h->min->flyable .'"><span class="9hWind ' . $day->_9h->min->flyable . '">' . $day->_9h->min->speed . '</span></td>
+                        <td class="12hWind ' . $day->_12h->min->flyable . '"><span class="12hWind ' . $day->_12h->min->flyable . '">' . $day->_12h->min->speed . '</span></td>
+                        <td class="15hWind ' . $day->_15h->min->flyable . '"><span class="15hWind ' . $day->_15h->min->flyable . '">' . $day->_15h->min->speed . '</span></td>
                     </tr>
                     <tr>
-                        <td class="9hWind ' . ($day->_9h->max->flyable ? "flyable" : "not-flyable") .'"><span class="9hWind ' . ($day->_9h->max->flyable ? "flyable" : "not-flyable") . '">' . $day->_9h->max->speed . '</span></td>
-                        <td class="12hWind ' . ($day->_12h->max->flyable ? "flyable" : "not-flyable") .'"><span class="12hWind ' . ($day->_12h->max->flyable ? "flyable" : "not-flyable") . '">' . $day->_12h->max->speed . '</span></td>
-                        <td class="15hWind ' . ($day->_15h->max->flyable ? "flyable" : "not-flyable") .'"><span class="15hWind ' . ($day->_15h->max->flyable ? "flyable" : "not-flyable") . '">' . $day->_15h->max->speed . '</span></td>
+                        <td class="9hWind ' . $day->_9h->max->flyable .'"><span class="9hWind ' . $day->_9h->max->flyable . '">' . $day->_9h->max->speed . '</span></td>
+                        <td class="12hWind ' . $day->_12h->max->flyable .'"><span class="12hWind ' . $day->_12h->max->flyable . '">' . $day->_12h->max->speed . '</span></td>
+                        <td class="15hWind ' . $day->_15h->max->flyable .'"><span class="15hWind ' . $day->_15h->max->flyable . '">' . $day->_15h->max->speed . '</span></td>
                     </tr>
                     <tr>
-                        <td class="9hWind ' . ($day->_9h->dir->flyable ? "flyable" : "not-flyable") . '"><span class="9hWind' . ($day->_9h->dir->flyable ? "flyable" : "not-flyable") . '">' . $day->_9h->dir->dir . '</span></td>
-                        <td class="12hWind ' . ($day->_12h->dir->flyable ? "flyable" : "not-flyable") . '"><span class="12hWind' . ($day->_12h->dir->flyable ? "flyable" : "not-flyable") . '">' . $day->_12h->dir->dir . '</span></td>
-                        <td class="15hWind ' . ($day->_15h->dir->flyable ? "flyable" : "not-flyable") . '"><span class="15hWind' . ($day->_15h->dir->flyable ? "flyable" : "not-flyable") . '">' . $day->_15h->dir->dir . '</span></td>
+                        <td class="9hWind ' . ($day->_9h->dir->flyable ? "flyable-wind" : "not-flyable-wind") . '"><span class="9hWind' . ($day->_9h->dir->flyable ? "flyable-wind" : "not-flyable-wind") . '">' . $day->_9h->dir->dir . '</span></td>
+                        <td class="12hWind ' . ($day->_12h->dir->flyable ? "flyable-wind" : "not-flyable-wind") . '"><span class="12hWind' . ($day->_12h->dir->flyable ? "flyable-wind" : "not-flyable-wind") . '">' . $day->_12h->dir->dir . '</span></td>
+                        <td class="15hWind ' . ($day->_15h->dir->flyable ? "flyable-wind" : "not-flyable-wind") . '"><span class="15hWind' . ($day->_15h->dir->flyable ? "flyable-wind" : "not-flyable-wind") . '">' . $day->_15h->dir->dir . '</span></td>
                     </tr>
                 </table>';
             echo '
-                    <div class="weatherSentence">' . $day->weatherSentence . '</div>
-                    <div class="weatherResume">' . $day->rain . ' / ' . $day->pression . ' / ' . $day->sunHour . ' / ' . $day->temp . '°C </div>';
+                    <div class="weatherSentence ' . $day->weatherSentence->sentenceClass . '">' . $day->weatherSentence->weatherSentence . '</div>
+                    <div class="weatherResume">
+                      <span class="' . $day->rain->rainClass . '">' . $day->rain->rain . '</span>
+                      <span class="' . $day->sunHour->sunClass . '">' . $day->sunHour->sun . 'h</span>  
+                      <span class="temp">' . $day->temp . '°C</span>
+                    </div>';
+            if(property_exists($day,'tide')){
+                echo '<div class="tide">
+                        <span class="tide-text">PM : ' . $day->tide->first . ' et ' . $day->tide->second . ', coeff ' . $day->tide->coeff . ' </span>
+                    </div>';
+            }
+        }
         echo '</td>';
     }
     echo '</tr>';
 }
-
-echo '</table>';
+echo '</tbody></table></div>';
 
 echo '
     <br><br><br>
@@ -129,5 +181,96 @@ foreach ($predictions->spots as $spotName => $values) {
 }
 
 ?>
+<script>
+    window.document.getElementById('settings').addEventListener('click', function() {
+        var settingsTable = window.document.getElementById('settings-table');
+        if (settingsTable.style.display === 'none') {
+            settingsTable.style.display = 'block';
+        } else {
+            settingsTable.style.display = 'none';
+        }
+    });
+
+    function valider() {
+        var nordCheckbox = document.getElementById('nord');
+        var autreCheckbox = document.getElementById('autre');
+        var bdmCheckbox = document.getElementById('bdm');
+        var plaineCheckbox = document.getElementById('plaine');
+        var treuilCheckbox = document.getElementById('treuil');
+        var ventCheckbox = document.getElementById('vent');
+
+        var url = window.location.href.split('?')[0]; // URL de base sans les paramètres
+        url = url.split('#')[0];
+        var params = [];
+
+        if (nordCheckbox.checked && autreCheckbox.checked){params.push('localisation=nord,autre');}
+        else if (nordCheckbox.checked) {params.push('localisation=nord');}
+        else if (autreCheckbox.checked) {params.push('localisation=autre');}
+
+        if(bdmCheckbox.checked && plaineCheckbox.checked && treuilCheckbox.checked){params.push('type=bord-de-mer,treuil,plaine');}
+        else if(bdmCheckbox.checked && treuilCheckbox.checked){params.push('type=bord-de-mer,treuil');}
+        else if(bdmCheckbox.checked && plaineCheckbox.checked){params.push('type=bord-de-mer,plaine');}
+        else if(plaineCheckbox.checked && treuilCheckbox.checked){params.push('type=plaine,treuil');}
+        else if(plaineCheckbox.checked){params.push('type=plaine');}
+        else if(treuilCheckbox.checked){params.push('type=treuil');}
+        else if(bdmCheckbox.checked){params.push('type=bord-de-mer');}
+
+        if (ventCheckbox.checked) {params.push('sortByGoodDirection=true');}
+
+      if (params.length > 0) {
+        url += '?' + params.join('&');
+      }
+
+      window.location.href = url;
+    }
+
+</script>
 </body>
 </html>
+
+<?php
+function filterByType($predictions, $type){
+    $multiType = explode(',',$type);
+    $spots = array_filter($predictions['spots'], function($spot) use ($multiType) {
+        return isset($spot['type']) && in_array($spot['type'],$multiType);
+    });
+    $predictions['spots'] = $spots;
+    return $predictions;
+}
+
+function filterByLocalisation($predictions, $localisation){
+    $multiLoc = explode(',',$localisation);
+    $spots = array_filter($predictions['spots'], function($spot) use ($multiLoc) {
+        return isset($spot['localisation']) && in_array($spot['localisation'],$multiLoc);
+    });
+    $predictions['spots'] = $spots;
+    return $predictions;
+}
+
+function compareByNumberOfGoodDirection($a, $b) {
+    return $b['numberOfGoodDirection'] - $a['numberOfGoodDirection'];
+}
+
+function sortByGoodDirection($predictions){
+    uasort($predictions['spots'], 'compareByNumberOfGoodDirection');
+    return $predictions;
+}
+
+function filterPredictions($predictions, $arguments){
+
+    if(isset($arguments['type'])){
+        $predictions = filterByType($predictions, $arguments['type']);
+    }
+
+    if(isset($arguments['localisation'])){
+        $predictions = filterByLocalisation($predictions, $arguments['localisation']);
+    }
+
+    if(isset($arguments['sortByGoodDirection'])){
+        $predictions = sortByGoodDirection($predictions);
+    }
+
+    return json_decode(json_encode($predictions));
+}
+
+?>
