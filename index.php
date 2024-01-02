@@ -29,7 +29,7 @@ echo '
 ';
 
 echo '
-    <table id="settings-table" style="display:block;">
+    <table id="settings-table" style="display:none;">
     <tr>
         <th class="settings-form">
             <div id="div-settings">
@@ -47,7 +47,9 @@ echo '
                 </div>
             
                 <div>
-                    <span>Vent correct : </<span> <input type="checkbox" id="vent" name="vent" value="vent"><label for="vent">Oui</label>
+                    <span>Vent correct : </<span> 
+                    <input type="checkbox" id="vent-semaine" name="vent-semaine" value="vent-semaine"><label for="vent-semaine">Toute la semaine</label>
+                    <input type="checkbox" id="vent-wk" name="vent-wk" value="vent-wk"><label for="vent-wk">Le week-end</label>
                 </div>
             </div>
         </th>
@@ -197,7 +199,8 @@ foreach ($predictions->spots as $spotName => $values) {
         var bdmCheckbox = document.getElementById('bdm');
         var plaineCheckbox = document.getElementById('plaine');
         var treuilCheckbox = document.getElementById('treuil');
-        var ventCheckbox = document.getElementById('vent');
+        var ventCheckbox = document.getElementById('vent-semaine');
+        var ventWkCheckbox = document.getElementById('vent-wk');
 
         var url = window.location.href.split('?')[0]; // URL de base sans les paramètres
         url = url.split('#')[0];
@@ -215,7 +218,8 @@ foreach ($predictions->spots as $spotName => $values) {
         else if(treuilCheckbox.checked){params.push('type=treuil');}
         else if(bdmCheckbox.checked){params.push('type=bord-de-mer');}
 
-        if (ventCheckbox.checked) {params.push('sortByGoodDirection=true');}
+        if (ventWkCheckbox.checked) {params.push('sortByGoodDirectionWk=true');}
+        else if (ventCheckbox.checked) {params.push('sortByGoodDirection=true');}
 
       if (params.length > 0) {
         url += '?' + params.join('&');
@@ -256,6 +260,15 @@ function sortByGoodDirection($predictions){
     return $predictions;
 }
 
+function compareByNumberOfGoodDirectionWk($a, $b) {
+    return $b['numberOfGoodDirectionWk'] - $a['numberOfGoodDirectionWk'];
+}
+
+function sortByGoodDirectionWk($predictions){
+    uasort($predictions['spots'], 'compareByNumberOfGoodDirectionWk');
+    return $predictions;
+}
+
 function filterPredictions($predictions, $arguments){
 
     if(isset($arguments['type'])){
@@ -266,7 +279,9 @@ function filterPredictions($predictions, $arguments){
         $predictions = filterByLocalisation($predictions, $arguments['localisation']);
     }
 
-    if(isset($arguments['sortByGoodDirection'])){
+    if(isset($arguments['sortByGoodDirectionWk'])){
+        $predictions = sortByGoodDirectionWk($predictions);
+    } else if(isset($arguments['sortByGoodDirection'])){
         $predictions = sortByGoodDirection($predictions);
     }
 

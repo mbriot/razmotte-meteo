@@ -170,6 +170,7 @@ function evaluateResults(){
     $predictions = json_decode(file_get_contents(__DIR__ . '/result.json'));
     foreach ($predictions->spots as $spotName => $values) {
         $numberOfGoodDirectionSlot = 0;
+        $numberOfGoodDirectionSlotWk = 0;
         foreach ($values->days as $day) {
 
             if (property_exists($day, 'closed')){
@@ -180,7 +181,12 @@ function evaluateResults(){
                 $slot->min = evaluateWind($slot->min, $values->minSpeed, $values->maxSpeed);
                 $slot->max = evaluateWind($slot->max, $values->minSpeed, $values->maxSpeed);
                 $flyableDir = in_array($slot->dir, $values->goodDirection);
-                if($flyableDir){$numberOfGoodDirectionSlot++;}
+                if($flyableDir){
+                    $numberOfGoodDirectionSlot++;
+                    if(strpos($day->day, "sam") === 0 || strpos($day->day, "dim") === 0){
+                        $numberOfGoodDirectionSlotWk++;
+                    }
+                }
                 $slot->dir = ["dir" => $slot->dir, "flyable" => $flyableDir];
             }
 
@@ -190,6 +196,7 @@ function evaluateResults(){
             $day->closed = false;
         }
         $values->numberOfGoodDirection = $numberOfGoodDirectionSlot;
+        $values->numberOfGoodDirectionWk = $numberOfGoodDirectionSlotWk;
     }
     return $predictions;
 }
@@ -219,7 +226,11 @@ function evaluateRain($rain){
 }
 
 function evaluateWeatherSentence($sentence){
-    $blueClass = ["Partiellement nuageux avec pluie","Couvert avec pluie","Ciel couvert","Principalement nuageux avec orages et averses","Partiellement nuageux avec des orages locaux et des averses possibles"];
+    $blueClass = ["Partiellement nuageux avec de la neige occasionnelle",
+        "Nuageux avec de la neige occasionnelle",
+        "Partiellement nuageux avec pluie","Couvert avec pluie",
+        "Ciel couvert","Principalement nuageux avec orages et averses",
+        "Partiellement nuageux avec des orages locaux et des averses possibles"];
     $greenClass = ["Nuageux avec des pluies occasionnelles","Partiellement nuageux avec des pluies occasionnelles"];
     $yellowClass = ["Clair, ciel sans nuages","Clair avec quelques nuages", "Partiellement nuageux"];
 

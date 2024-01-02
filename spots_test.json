@@ -2,7 +2,7 @@
     "spots" : [
         {
             "name": "Olhain",
-            "type": "plaine",
+            "type":"plaine",
             "localisation":"nord",
             "url": "olhain_france_2989622",
             "goodDirection" : ["S","SSO"],
@@ -10,29 +10,44 @@
             "maxSpeed" : 21,
             "distance": "58km,45mn",
             "geoloc": "50.433528,2.585802",
-            "excludeDays": [0,4,5,6],
-            "monthsToExcludes": [12,1],
             "description" : "Site Thermique pour niveau Brevet de Pilote (suite a l'installation de la luge d'été sous le deco). Interdit au-dessus de 1350m (TMA Lille en classe D). Idem si cross vers N ou NNE, Attention vers ENE a E",
             "balise":"https://balisemeteo.com/balise.php?idBalise=5030",
             "ffvl": "https://federation.ffvl.fr/sites_pratique/voir/486",
             "youtube":"https://www.youtube.com/watch?v=uGkeKCeHQ6Q"
         },
         {
-            "name": "Equihen",
-            "type": "bord-de-mer",
-            "localisation":"autre",
-            "url": "Équihen-plage_france_3019957",
-            "goodDirection" : ["O","OSO","SO"],
+            "name": "La Comté",
+            "type":"plaine",
+            "localisation":"nord",
+            "url": "la-comté_france_3009940",
+            "goodDirection" : ["O","ONO","NO","NNO"],
             "minSpeed" : 13,
-            "maxSpeed" : 23,
+            "maxSpeed" : 25,
+            "distance": "64km, 50mn",
+            "geoloc": "50.416602, 2.512842",
+            "excludeDays": [0],
+            "monthsToExcludes": [9,10,11,12,1,2],
+            "description" : "Interdit le dimanche en période de chasse de fin septembre à fin février. Interdit au-dessus de 1350m (TMA Lille- classe D). 2 orientations : O, NO et jusque NNO. Turbulent en OSO (deconseille). L'orientation la plus accessible est l'ONO car c'est pile face sur la pente O. Le site est petit et tres frequente. Au dela de 10 voiles quand il n'y a pas d'etagement, le vol ressemble a du close contact! Veillez a suivre le sens de circulation anti-horaire et faites preuve de bon sens. Au besoin observez. Le club de Vol a Voile de Arras est susceptible de demander une desactivation de la TMA 3.1. Pour savoir si la zone TMA 3.1 est desactivee: tel de l'ATIS de Lille Lesquin : 03 20 16 19 54",
+            "balise":"https://balisemeteo.com/balise.php?idBalise=5030",
+            "ffvl": "https://federation.ffvl.fr/sites_pratique/voir/1303",
+            "youtube":"https://www.youtube.com/watch?v=0z5yDrYiJ8g"
+        },
+        {
+            "name": "Criel",
+            "type":"bord-de-mer",
+            "localisation":"autre",
+            "url": "criel-sur-mer_france_3022461",
+            "goodDirection" : ["NO","NNO","ONO","N"],
+            "minSpeed" : 12,
+            "maxSpeed" : 22,
+            "distance": "184km,2h50",
+            "geoloc": "50.03233091444913, 1.3096789468092394",
             "needSeaCheck": true,
-            "tideTableUrl" : "Equihen-Plage/",
-            "distance": "140km,2h",
-            "geoloc": "50.67953007244548, 1.5670255869881216",
-            "description" : "Soaring - se mefier de la maree haute. Danger a atterir a maree haute dans les rochers. Accidents frequents dans les rochers en haut de plage",
-            "balise":"https://balisemeteo.com/balise.php?idBalise=159",
-            "ffvl": "https://federation.ffvl.fr/terrain/1355",
-            "youtube":"https://www.youtube.com/watch?v=uGkeKCeHQ6Q"
+            "tideTableUrl" : "Criel-sur-Mer/",
+            "description" : "Bien lire la fiche FFVL, beaucoup de chose a ne pas faire.",
+            "balise":"",
+            "ffvl": "https://federation.ffvl.fr/terrain/1385",
+            "youtube":"https://www.youtube.com/watch?v=lTPNi4BuRUM"
         }
     ]
 }
