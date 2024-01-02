@@ -34,22 +34,28 @@ echo '
         <th class="settings-form">
             <div id="div-settings">
                 <div>
-                    <span>Localisation : </<span> 
-                    <input type="checkbox" id="nord" name="localisation" value="nord"><label for="nord">Nord</label>
-                    <input type="checkbox" id="autre" name="localisation" value="autre"><label for="autre">Autre</label>
+                    <span>Localisation : </<span>
+                    <div class="loc-input">
+                        <input type="checkbox" id="nord" name="localisation" value="nord"><label for="nord">Nord</label>
+                        <input type="checkbox" id="autre" name="localisation" value="autre"><label for="autre">Autre</label>
+                    </div>
                 </div>
             
                 <div>
                     <span>Type de site : </<span> 
-                    <input type="checkbox" id="bdm" name="bdm" value="bdm"><label for="bdm">Bord de mer</label>
-                    <input type="checkbox" id="plaine" name="plaine" value="plaine"><label for="plaine">Plaine</label>
-                    <input type="checkbox" id="treuil" name="treuil" value="treuil"><label for="treuil">Treuil</label>
-                </div>
+                    <div class="type-input">
+                        <input type="checkbox" id="bdm" name="bdm" value="bdm"><label for="bdm">Bord de mer</label>
+                        <input type="checkbox" id="plaine" name="plaine" value="plaine"><label for="plaine">Plaine</label>
+                        <input type="checkbox" id="treuil" name="treuil" value="treuil"><label for="treuil">Treuil</label>
+                    </div>
+                        </div>
             
                 <div>
-                    <span>Vent correct : </<span> 
-                    <input type="checkbox" id="vent-semaine" name="vent-semaine" value="vent-semaine"><label for="vent-semaine">Toute la semaine</label>
-                    <input type="checkbox" id="vent-wk" name="vent-wk" value="vent-wk"><label for="vent-wk">Le week-end</label>
+                    <span>Orientation correct : </<span> 
+                    <div class="sort-input">
+                        <input type="checkbox" id="vent-semaine" name="vent-semaine" value="vent-semaine"><label for="vent-semaine">Toute la semaine</label>
+                        <input type="checkbox" id="vent-wk" name="vent-wk" value="vent-wk"><label for="vent-wk">Le week-end</label>
+                    </div>
                 </div>
             </div>
         </th>
@@ -106,7 +112,7 @@ foreach ($predictions->spots as $spotName => $values) {
                     </tr>
                 </table>';
             echo '
-                    <div class="weatherSentence ' . $day->weatherSentence->sentenceClass . '">' . $day->weatherSentence->weatherSentence . '</div>
+                    <div class="weatherSentence">' . $day->weatherSentence . '</div>
                     <div class="weatherResume">
                       <span class="' . $day->rain->rainClass . '">' . $day->rain->rain . '</span>
                       <span class="' . $day->sunHour->sunClass . '">' . $day->sunHour->sun . 'h</span>  

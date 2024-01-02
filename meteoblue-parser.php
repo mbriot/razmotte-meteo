@@ -178,19 +178,22 @@ function evaluateResults(){
             }
 
             foreach([$day->_9h,$day->_12h,$day->_15h] as $slot){
-                $slot->min = evaluateWind($slot->min, $values->minSpeed, $values->maxSpeed);
-                $slot->max = evaluateWind($slot->max, $values->minSpeed, $values->maxSpeed);
                 $flyableDir = in_array($slot->dir, $values->goodDirection);
                 if($flyableDir){
+                    $slot->min = evaluateWind($slot->min, $values->minSpeed, $values->maxSpeed);
+                    $slot->max = evaluateWind($slot->max, $values->minSpeed, $values->maxSpeed);
                     $numberOfGoodDirectionSlot++;
                     if(strpos($day->day, "sam") === 0 || strpos($day->day, "dim") === 0){
                         $numberOfGoodDirectionSlotWk++;
                     }
+                } else {
+                    $slot->min = ["speed" => $slot->min, "flyable" => "not-flyable-wrong-dir"];
+                    $slot->max = ["speed" => $slot->max, "flyable" => "not-flyable-wrong-dir"];
+
                 }
                 $slot->dir = ["dir" => $slot->dir, "flyable" => $flyableDir];
             }
 
-            $day->weatherSentence = evaluateWeatherSentence($day->weatherSentence);
             $day->sunHour = evaluateSun($day->sunHour);
             $day->rain = evaluateRain($day->rain);
             $day->closed = false;
@@ -202,46 +205,22 @@ function evaluateResults(){
 }
 
 function evaluateSun($sun){
-    if ($sun == 0){
-        return ["sun" => $sun, "sunClass" => "sun-white"];
-    } else if ($sun == 1){
-        return ["sun" => $sun, "sunClass" => "sun-blue"];
+    if (in_array($sun,[0,1])){
+        return ["sun" => $sun, "sunClass" => "sun-black"];
     } else if (in_array($sun,[2,3])){
-        return ["sun" => $sun, "sunClass" => "sun-green"];
-    } else if (in_array($sun,[4,5,6])){
         return ["sun" => $sun, "sunClass" => "sun-yellow"];
+    } else if (in_array($sun,[4,5,6])){
+        return ["sun" => $sun, "sunClass" => "sun-orange"];
     } else {
         return ["sun" => $sun, "sunClass" => "sun-red"];
     }
 }
 
 function evaluateRain($rain){
-    if ($rain == "0mm"){
-        return ["rain" => $rain, "rainClass" => "rain-red"];
-    } else if (substr($rain, 0, 2) == "0-"){
-        return ["rain" => $rain, "rainClass" => "rain-orange"];
+    if ($rain == "0mm" || substr($rain, 0, 2) == "0-"){
+        return ["rain" => $rain, "rainClass" => "rain"];
     } else {
         return ["rain" => $rain, "rainClass" => "rain-blue"];
-    }
-}
-
-function evaluateWeatherSentence($sentence){
-    $blueClass = ["Partiellement nuageux avec de la neige occasionnelle",
-        "Nuageux avec de la neige occasionnelle",
-        "Partiellement nuageux avec pluie","Couvert avec pluie",
-        "Ciel couvert","Principalement nuageux avec orages et averses",
-        "Partiellement nuageux avec des orages locaux et des averses possibles"];
-    $greenClass = ["Nuageux avec des pluies occasionnelles","Partiellement nuageux avec des pluies occasionnelles"];
-    $yellowClass = ["Clair, ciel sans nuages","Clair avec quelques nuages", "Partiellement nuageux"];
-
-    if (in_array($sentence, $blueClass)){
-        return ["weatherSentence" => $sentence, "sentenceClass" => "sentence-blue"];
-    } else if (in_array($sentence, $greenClass)){
-        return ["weatherSentence" => $sentence, "sentenceClass" => "sentence-green"];
-    } else if (in_array($sentence, $yellowClass)){
-        return ["weatherSentence" => $sentence, "sentenceClass" => "sentence-yellow"];
-    } else {
-        return ["weatherSentence" => $sentence, "sentenceClass" => "sentence-black"];
     }
 }
 

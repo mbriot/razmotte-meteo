@@ -7,7 +7,7 @@ body {
   font-weight:300;
 }
 
-.sentence-black,.sentence-blue,.sentence-green,.sentence-yellow {
+.weatherSentence {
     text-align: center;
     font-size:0.7em;
     color:black;
@@ -16,26 +16,11 @@ body {
     padding: 3px;
     font-weight: bold;
     min-height: 2em;
-}
-
-.sentence-blue {
-    background-color:blue;
-}
-
-.sentence-yellow {
-    background-color: yellow;
-}
-
-.sentence-green {
-    background-color:green;
-}
-
-.sentence-black {
     background-color:black;
     color:white;
 }
 
-span.rain-blue,span.rain-orange,span.rain-red, span.sun-white, span.sun-blue, span.sun-green, span.sun-yellow, span.sur-red, span.temp {
+span.rain-blue,span.rain, span.sun-white, span.sun-blue, span.sun-green, span.sun-yellow, span.sun-red,span.sun-black,span.sun-orange, span.temp {
     font-size:0.7em;
     color:black;
     border:1px solid black;
@@ -47,6 +32,9 @@ span.rain-blue,span.rain-orange,span.rain-red, span.sun-white, span.sun-blue, sp
     display: inline-block;
 }
 
+span.sun-red {
+    color:white;
+}
 span.temp {
     background-color: black;
     color: white;
@@ -70,36 +58,31 @@ span.tide-text {
     padding: 2px;
 }
 
-span.sun-white {
-    background-color: white;
-}
-
-span.sun-blue {
-    background-color: blue;
-}
-
-span.sun-green {
-    background-color: green;
+span.sun-black {
+    background-color: black;
+    color:white;
 }
 
 span.sun-yellow {
     background-color: yellow;
 }
 
-span.sur-red {
-    background-color: red;
-}
-
-span.rain-red {
-    background-color: red;
-}
-
-span.rain-orange {
+span.sun-orange {
     background-color: orange;
+}
+
+span.sun-red {
+    background-color: red;
+}
+
+span.rain {
+    background-color: black;
+    color: white;
 }
 
 span.rain-blue {
     background-color: blue;
+    color: white;
 }
 
 table.spot-desc, table.spot-desc tr td {
@@ -230,6 +213,10 @@ td.not-flyable-low {
     background-color: white;
 }
 
+td.not-flyable-wrong-dir {
+    background-color: #f2f2f2;
+}
+
 span.not-flyable-strong {
     color: white;
 }
@@ -262,4 +249,22 @@ tr td, tr th {
 a {
     color:#39c;
     text-decoration:none;
+}
+
+@media only screen and (max-width: 600px) {
+    .start {
+      display: none;
+    }
+
+    #settings-table {
+        width: 100%;
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-top:5px;
+    }
+
+    .loc-input, .sort-input, .type-input {
+        display: block;
+        margin-bottom: 10px;
+    }
 }
