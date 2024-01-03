@@ -37,33 +37,25 @@ echo '
                 <div>
                     <span>Localisation : </<span>
                     <div class="loc-input">
-                        <input type="checkbox" id="nord" name="localisation" value="nord"><label for="nord">Nord</label>
-                        <input type="checkbox" id="autre" name="localisation" value="autre"><label for="autre">Autre</label>
-                    </div>
-                </div>
-            
-                <div>
-                    <span>Type de site : </span> 
-                    <div class="type-input">
-                        <input type="checkbox" id="bdm" name="bdm" value="bdm"><label for="bdm">Bord de mer</label>
-                        <input type="checkbox" id="plaine" name="plaine" value="plaine"><label for="plaine">Plaine</label>
-                        <input type="checkbox" id="treuil" name="treuil" value="treuil"><label for="treuil">Treuil</label>
-                    </div>
-                </div>
-            
-                <div>
-                    <span>Orientation correct : </span> 
-                    <div class="sort-input">
-                        <input type="checkbox" id="vent-semaine" name="vent-semaine" value="vent-semaine"><label for="vent-semaine">Toute la semaine</label>
-                        <input type="checkbox" id="vent-wk" name="vent-wk" value="vent-wk"><label for="vent-wk">Le week-end</label>
+                        <button id="nord-button" onclick="toggleLocationOrType(this)" class="choice inactive" >Nord</button>
+                        <button id="autre-button" onclick="toggleLocationOrType(this)" class="choice inactive" >Autre</button>
                     </div>
                 </div>
 
                 <div>
-                    <span>Vent et orientation : </span> 
+                    <span>Type de site : </<span>
+                    <div class="loc-input">
+                        <button id="bdm-button" onclick="toggleLocationOrType(this)" class="choice inactive" >Bord de mer</button>
+                        <button id="plaine-button" onclick="toggleLocationOrType(this)" class="choice inactive" >Plaine</button>
+                        <button id="treuil-button" onclick="toggleLocationOrType(this)" class="choice inactive" >Treuil</button>
+                    </div>
+                </div>
+
+                <div>
+                    <span>Trier par volabilité : </span> 
                     <div class="flyability-input">
-                        <input type="checkbox" id="flyability-week" name="flyability-week" value="flyability-week"><label for="flyability-week">Toute la semaine</label>
-                        <input type="checkbox" id="flyability-weekend" name="flyability-weekend" value="flyability-weekend"><label for="flyability-weekend">Le week-end</label>
+                        <button id="flyability-week-button" onclick="toggleFlyability(this)" class="choice inactive" >Semaine</button>
+                        <button id="flyability-weekend-button" onclick="toggleFlyability(this)" class="choice inactive" >Week-End</button>
                     </div>
                 </div>
             </div>
@@ -208,69 +200,104 @@ foreach ($predictions->spots as $spotName => $values) {
         }
     });
 
+    function toggleLocationOrType(clickedButton) {
+        if (clickedButton.classList.contains("active")){
+            clickedButton.classList.remove("active");
+            clickedButton.classList.add("inactive");
+        } else {
+            clickedButton.classList.remove("inactive");
+            clickedButton.classList.add("active");
+        }
+    }
+
+    function toggleFlyability(clickedButton) {
+        var flyabilityWeekButton = document.getElementById('flyability-week-button');
+        var flyabilityWeekendButton = document.getElementById('flyability-weekend-button');
+        if (clickedButton == flyabilityWeekButton){
+            if(clickedButton.classList.contains("active")){
+                clickedButton.classList.remove("active");
+                clickedButton.classList.add("inactive");
+            } else if (clickedButton.classList.contains("inactive")){
+                clickedButton.classList.remove("inactive");
+                clickedButton.classList.add("active");
+                flyabilityWeekendButton.classList.remove("active");
+                flyabilityWeekendButton.classList.add("inactive");
+            }
+        } else if (clickedButton == flyabilityWeekendButton){
+            if(clickedButton.classList.contains("active")){
+                clickedButton.classList.remove("active");
+                clickedButton.classList.add("inactive");
+            } else if (clickedButton.classList.contains("inactive")){
+                clickedButton.classList.remove("inactive");
+                clickedButton.classList.add("active");
+                flyabilityWeekButton.classList.remove("active");
+                flyabilityWeekButton.classList.add("inactive");
+            }
+        }
+    }
+
     fillFiltersBasedOnUrl();
 
     function fillFiltersBasedOnUrl(){
-        var nordCheckbox = document.getElementById('nord');
-        var autreCheckbox = document.getElementById('autre');
-        var bdmCheckbox = document.getElementById('bdm');
-        var plaineCheckbox = document.getElementById('plaine');
-        var treuilCheckbox = document.getElementById('treuil');
-        var ventCheckbox = document.getElementById('vent-semaine');
-        var ventWkCheckbox = document.getElementById('vent-wk');
-        var flyabilityWeekCheckbox = document.getElementById('flyability-week');
-        var flyabilityWeekendCheckbox = document.getElementById('flyability-weekend');
+        var nordButton = document.getElementById('nord-button');
+        var autreButton = document.getElementById('autre-button');
+        var bdmButton = document.getElementById('bdm-button');
+        var plaineButton = document.getElementById('plaine-button');
+        var treuilButton = document.getElementById('treuil-button');
+        var flyabilityWeekButton = document.getElementById('flyability-week-button');
+        var flyabilityWeekendButton = document.getElementById('flyability-weekend-button');
 
         var url = window.location.href.split('?')[1];
-        var params = url.split('&');
+        if(url) {
+            var params = url.split('&');
+        } else {return;}
+        
         for (let index = 0; index < params.length; index++){ 
             var paramName = params[index].split('=')[0];
             var paramValue = params[index].split('=')[1].split(',');
             for (let j = 0; j < paramValue.length; j++){
-                if(paramName == "localisation" && paramValue[j] == "nord") {nordCheckbox.checked = true;}
-                if(paramName == "localisation" && paramValue[j] == "autre") {autreCheckbox.checked = true;}
-                if(paramName == "type" && paramValue[j] == "plaine") {plaineCheckbox.checked = true;}
-                if(paramName == "type" && paramValue[j] == "treuil") {treuilCheckbox.checked = true;}
-                if(paramName == "type" && paramValue[j] == "bord-de-mer") {bdmCheckbox.checked = true;}
-                if(paramName == "sortByGoodDirection") {ventCheckbox.checked = true;}
-                if(paramName == "sortByGoodDirectionWk" ) {ventWkCheckbox.checked = true;}
-                if(paramName == "sortByFlyabilityWeek" ) {flyabilityWeekCheckbox.checked = true;}
-                if(paramName == "sortByFlyabilityWeekend" ) {flyabilityWeekendCheckbox.checked = true;}
+                if(paramName == "localisation" && paramValue[j] == "nord") {nordButton.classList.add("active");}
+                if(paramName == "localisation" && paramValue[j] == "autre") {autreButton.classList.add("active");}
+                if(paramName == "type" && paramValue[j] == "plaine") {plaineButton.classList.add("active");}
+                if(paramName == "type" && paramValue[j] == "treuil") {treuilButton.classList.add("active");}
+                if(paramName == "type" && paramValue[j] == "bord-de-mer") {bdmButton.classList.add("active");}
+                if(paramName == "sortByFlyabilityWeek" ) {flyabilityWeekButton.classList.add("active");}
+                if(paramName == "sortByFlyabilityWeekend" ) {flyabilityWeekendButton.classList.add("active");}
             } 
         }
     }
 
     function submitFilters() {
-        var nordCheckbox = document.getElementById('nord');
-        var autreCheckbox = document.getElementById('autre');
-        var bdmCheckbox = document.getElementById('bdm');
-        var plaineCheckbox = document.getElementById('plaine');
-        var treuilCheckbox = document.getElementById('treuil');
+        var nordButton = document.getElementById('nord-button');
+        var autreButton = document.getElementById('autre-button');
+        var bdmButton = document.getElementById('bdm-button');
+        var plaineButton = document.getElementById('plaine-button');
+        var treuilButton = document.getElementById('treuil-button');
         var ventCheckbox = document.getElementById('vent-semaine');
         var ventWkCheckbox = document.getElementById('vent-wk');
-        var flyabilityWeekCheckbox = document.getElementById('flyability-week');
-        var flyabilityWeekendCheckbox = document.getElementById('flyability-weekend');
+        var flyabilityWeekButton = document.getElementById('flyability-week-button');
+        var flyabilityWeekendButton = document.getElementById('flyability-weekend-button');
 
         var url = window.location.href.split('?')[0];
         url = url.split('#')[0];
         var params = [];
 
-        if (nordCheckbox.checked && autreCheckbox.checked){params.push('localisation=nord,autre');}
-        else if (nordCheckbox.checked) {params.push('localisation=nord');}
-        else if (autreCheckbox.checked) {params.push('localisation=autre');}
+        if (nordButton.classList.contains("active") && autreButton.classList.contains("active")){params.push('localisation=nord,autre');}
+        else if (nordButton.classList.contains("active")) {params.push('localisation=nord');}
+        else if (autreButton.classList.contains("active")) {params.push('localisation=autre');}
 
-        if(bdmCheckbox.checked && plaineCheckbox.checked && treuilCheckbox.checked){params.push('type=bord-de-mer,treuil,plaine');}
-        else if(bdmCheckbox.checked && treuilCheckbox.checked){params.push('type=bord-de-mer,treuil');}
-        else if(bdmCheckbox.checked && plaineCheckbox.checked){params.push('type=bord-de-mer,plaine');}
-        else if(plaineCheckbox.checked && treuilCheckbox.checked){params.push('type=plaine,treuil');}
-        else if(plaineCheckbox.checked){params.push('type=plaine');}
-        else if(treuilCheckbox.checked){params.push('type=treuil');}
-        else if(bdmCheckbox.checked){params.push('type=bord-de-mer');}
+        if(bdmButton.classList.contains("active") && plaineButton.classList.contains("active") && treuilButton.classList.contains("active")){
+            params.push('type=bord-de-mer,treuil,plaine');
+        }
+        else if(bdmButton.classList.contains("active") && treuilButton.classList.contains("active")){params.push('type=bord-de-mer,treuil');}
+        else if(bdmButton.classList.contains("active") && plaineButton.classList.contains("active")){params.push('type=bord-de-mer,plaine');}
+        else if(plaineButton.classList.contains("active") && treuilButton.classList.contains("active")){params.push('type=plaine,treuil');}
+        else if(plaineButton.classList.contains("active")){params.push('type=plaine');}
+        else if(treuilButton.classList.contains("active")){params.push('type=treuil');}
+        else if(bdmButton.classList.contains("active")){params.push('type=bord-de-mer');}
 
-        if (flyabilityWeekCheckbox.checked) {params.push('sortByFlyabilityWeek=true');}
-        else if (flyabilityWeekendCheckbox.checked) {params.push('sortByFlyabilityWeekend=true');}
-        else if (ventWkCheckbox.checked) {params.push('sortByGoodDirectionWk=true');}
-        else if (ventCheckbox.checked) {params.push('sortByGoodDirection=true');}
+        if (flyabilityWeekButton.classList.contains("active")) {params.push('sortByFlyabilityWeek=true');}
+        else if (flyabilityWeekendButton.classList.contains("active")) {params.push('sortByFlyabilityWeekend=true');}
 
         if (params.length > 0) {
             url += '?' + params.join('&');
@@ -298,24 +325,6 @@ function filterByLocalisation($predictions, $localisation){
         return isset($spot['localisation']) && in_array($spot['localisation'],$multiLoc);
     });
     $predictions['spots'] = $spots;
-    return $predictions;
-}
-
-function compareByNumberOfGoodDirection($a, $b) {
-    return $b['numberOfGoodDirection'] - $a['numberOfGoodDirection'];
-}
-
-function sortByGoodDirection($predictions){
-    uasort($predictions['spots'], 'compareByNumberOfGoodDirection');
-    return $predictions;
-}
-
-function compareByNumberOfGoodDirectionWk($a, $b) {
-    return $b['numberOfGoodDirectionWk'] - $a['numberOfGoodDirectionWk'];
-}
-
-function sortByGoodDirectionWk($predictions){
-    uasort($predictions['spots'], 'compareByNumberOfGoodDirectionWk');
     return $predictions;
 }
 
@@ -351,10 +360,6 @@ function filterPredictions($predictions, $arguments){
         $predictions = sortByFlyabilityWeek($predictions);
     } else if(isset($arguments['sortByFlyabilityWeekend'])){
         $predictions = sortByFlyabilityWeekend($predictions);
-    } else if(isset($arguments['sortByGoodDirectionWk'])){
-        $predictions = sortByGoodDirectionWk($predictions);
-    } else if(isset($arguments['sortByGoodDirection'])){
-        $predictions = sortByGoodDirection($predictions);
     }
 
     return json_decode(json_encode($predictions));

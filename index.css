@@ -186,6 +186,27 @@ table.start th, #settings-table th{
     border:1px solid black;
     border-radius: 5px;
     padding: 3px;
+    font-size: 1.3em;
+}
+
+button.choice.inactive {
+    border:1px solid black;
+    border-radius: 5px;
+    padding: 3px;
+    font-size: 1.3em;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+}
+
+button.choice.active {
+    border:1px solid black;
+    border-radius: 5px;
+    padding: 3px;
+    font-size: 1.3em;
+    background-color: black;
+    color: white;
+    font-weight: bold;
 }
 
 .loc-input, .sort-input, .type-input {
