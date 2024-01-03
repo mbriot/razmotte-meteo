@@ -94,7 +94,7 @@ foreach ($predictions->spots as $spotName => $values) {
         if ($day->closed){
             echo '<div class="closed">Fermé</div>';
         } else {
-            echo '<table>
+            echo '<table class="day-result">
                     <tr>
                         <td class="9hWind ' . $day->_9h->min->flyable .'"><span class="9hWind ' . $day->_9h->min->flyable . '">' . $day->_9h->min->speed . '</span></td>
                         <td class="12hWind ' . $day->_12h->min->flyable . '"><span class="12hWind ' . $day->_12h->min->flyable . '">' . $day->_12h->min->speed . '</span></td>

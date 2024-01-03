@@ -105,7 +105,7 @@ table thead th {
 }
 table thead th i {
     display: block;
-    font-size: 24px; /* Ajustez la taille selon vos besoins */
+    font-size: 24px;
     margin: auto;
 }
 
@@ -251,7 +251,37 @@ a {
     text-decoration:none;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1200px) {
+
+    html {
+        background-color: red;
+    }
+
+    body {
+        padding:0px;
+        margin:0px;
+        font:0.7em/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color:#555;
+        font-weight:300;
+    }
+
+    .table-container {
+        height: 700px;
+    }
+
+    table.wind-data {
+        font-size: 0.8em;
+        height: 100%;
+    }
+
+    table.day-result {
+        font-size: 0.8em;
+    }
+
+    div.tide, div.weatherResume, div.weatherSentence {
+        margin:1px;
+    }
+
     .start {
       display: none;
     }
