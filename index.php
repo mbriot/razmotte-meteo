@@ -43,19 +43,27 @@ echo '
                 </div>
             
                 <div>
-                    <span>Type de site : </<span> 
+                    <span>Type de site : </span> 
                     <div class="type-input">
                         <input type="checkbox" id="bdm" name="bdm" value="bdm"><label for="bdm">Bord de mer</label>
                         <input type="checkbox" id="plaine" name="plaine" value="plaine"><label for="plaine">Plaine</label>
                         <input type="checkbox" id="treuil" name="treuil" value="treuil"><label for="treuil">Treuil</label>
                     </div>
-                        </div>
+                </div>
             
                 <div>
-                    <span>Orientation correct : </<span> 
+                    <span>Orientation correct : </span> 
                     <div class="sort-input">
                         <input type="checkbox" id="vent-semaine" name="vent-semaine" value="vent-semaine"><label for="vent-semaine">Toute la semaine</label>
                         <input type="checkbox" id="vent-wk" name="vent-wk" value="vent-wk"><label for="vent-wk">Le week-end</label>
+                    </div>
+                </div>
+
+                <div>
+                    <span>Vent et orientation : </span> 
+                    <div class="flyability-input">
+                        <input type="checkbox" id="flyability-week" name="flyability-week" value="flyability-week"><label for="flyability-week">Toute la semaine</label>
+                        <input type="checkbox" id="flyability-weekend" name="flyability-weekend" value="flyability-weekend"><label for="flyability-weekend">Le week-end</label>
                     </div>
                 </div>
             </div>
@@ -210,6 +218,8 @@ foreach ($predictions->spots as $spotName => $values) {
         var treuilCheckbox = document.getElementById('treuil');
         var ventCheckbox = document.getElementById('vent-semaine');
         var ventWkCheckbox = document.getElementById('vent-wk');
+        var flyabilityWeekCheckbox = document.getElementById('flyability-week');
+        var flyabilityWeekendCheckbox = document.getElementById('flyability-weekend');
 
         var url = window.location.href.split('?')[1];
         var params = url.split('&');
@@ -224,6 +234,8 @@ foreach ($predictions->spots as $spotName => $values) {
                 if(paramName == "type" && paramValue[j] == "bord-de-mer") {bdmCheckbox.checked = true;}
                 if(paramName == "sortByGoodDirection") {ventCheckbox.checked = true;}
                 if(paramName == "sortByGoodDirectionWk" ) {ventWkCheckbox.checked = true;}
+                if(paramName == "sortByFlyabilityWeek" ) {flyabilityWeekCheckbox.checked = true;}
+                if(paramName == "sortByFlyabilityWeekend" ) {flyabilityWeekendCheckbox.checked = true;}
             } 
         }
     }
@@ -236,6 +248,8 @@ foreach ($predictions->spots as $spotName => $values) {
         var treuilCheckbox = document.getElementById('treuil');
         var ventCheckbox = document.getElementById('vent-semaine');
         var ventWkCheckbox = document.getElementById('vent-wk');
+        var flyabilityWeekCheckbox = document.getElementById('flyability-week');
+        var flyabilityWeekendCheckbox = document.getElementById('flyability-weekend');
 
         var url = window.location.href.split('?')[0];
         url = url.split('#')[0];
@@ -253,14 +267,15 @@ foreach ($predictions->spots as $spotName => $values) {
         else if(treuilCheckbox.checked){params.push('type=treuil');}
         else if(bdmCheckbox.checked){params.push('type=bord-de-mer');}
 
-        if (ventWkCheckbox.checked) {params.push('sortByGoodDirectionWk=true');}
+        if (flyabilityWeekCheckbox.checked) {params.push('sortByFlyabilityWeek=true');}
+        else if (flyabilityWeekendCheckbox.checked) {params.push('sortByFlyabilityWeekend=true');}
+        else if (ventWkCheckbox.checked) {params.push('sortByGoodDirectionWk=true');}
         else if (ventCheckbox.checked) {params.push('sortByGoodDirection=true');}
 
-      if (params.length > 0) {
-        url += '?' + params.join('&');
-      }
-
-      window.location.href = url;
+        if (params.length > 0) {
+            url += '?' + params.join('&');
+        }
+        window.location.href = url;
     }
 
 </script>
@@ -304,6 +319,24 @@ function sortByGoodDirectionWk($predictions){
     return $predictions;
 }
 
+function compareByNumberOfFlyabilityWeek($a, $b) {
+    return $b['weekScore'] - $a['weekScore'];
+}
+
+function sortByFlyabilityWeek($predictions){
+    uasort($predictions['spots'], 'compareByNumberOfFlyabilityWeek');
+    return $predictions;
+}
+
+function compareByNumberOfFlyabilityWeekend($a, $b) {
+    return $b['weekendScore'] - $a['weekendScore'];
+}
+
+function sortByFlyabilityWeekend($predictions){
+    uasort($predictions['spots'], 'compareByNumberOfFlyabilityWeekend');
+    return $predictions;
+}
+
 function filterPredictions($predictions, $arguments){
 
     if(isset($arguments['type'])){
@@ -314,7 +347,11 @@ function filterPredictions($predictions, $arguments){
         $predictions = filterByLocalisation($predictions, $arguments['localisation']);
     }
 
-    if(isset($arguments['sortByGoodDirectionWk'])){
+    if(isset($arguments['sortByFlyabilityWeek'])){
+        $predictions = sortByFlyabilityWeek($predictions);
+    } else if(isset($arguments['sortByFlyabilityWeekend'])){
+        $predictions = sortByFlyabilityWeekend($predictions);
+    } else if(isset($arguments['sortByGoodDirectionWk'])){
         $predictions = sortByGoodDirectionWk($predictions);
     } else if(isset($arguments['sortByGoodDirection'])){
         $predictions = sortByGoodDirection($predictions);

@@ -171,6 +171,7 @@ function evaluateResults(){
     foreach ($predictions->spots as $spotName => $values) {
         $numberOfGoodDirectionSlot = 0;
         $numberOfGoodDirectionSlotWk = 0;
+        $dayScore = 0;
         foreach ($values->days as $day) {
 
             if (property_exists($day, 'closed')){
@@ -180,6 +181,7 @@ function evaluateResults(){
             foreach([$day->_9h,$day->_12h,$day->_15h] as $slot){
                 $flyableDir = in_array($slot->dir, $values->goodDirection);
                 if($flyableDir){
+                    $dayScore = $dayScore + scoreSlot($slot->min, $slot->max, $values->minSpeed, $values->maxSpeed);
                     $slot->min = evaluateWind($slot->min, $values->minSpeed, $values->maxSpeed);
                     $slot->max = evaluateWind($slot->max, $values->minSpeed, $values->maxSpeed);
                     $numberOfGoodDirectionSlot++;
@@ -197,11 +199,41 @@ function evaluateResults(){
             $day->sunHour = evaluateSun($day->sunHour);
             $day->rain = evaluateRain($day->rain);
             $day->closed = false;
+            $dayScoreName = substr($day->day, 0, 3) . 'Score';
+            $values->$dayScoreName = $dayScore;
+            $dayScore = 0;
         }
         $values->numberOfGoodDirection = $numberOfGoodDirectionSlot;
         $values->numberOfGoodDirectionWk = $numberOfGoodDirectionSlotWk;
+        $values->weekScore = computeWeekScore($values);
+        $values->weekendScore = computeWeekendScore($values);
     }
     return $predictions;
+}
+
+function computeWeekScore($week){
+    return $week->lunScore + $week->marScore + $week->merScore + $week->jeuScore + $week->venScore + $week->samScore + $week->dimScore
+        + 25*$week->numberOfGoodDirection;
+}
+
+function computeWeekendScore($week){
+    return $week->samScore + $week->dimScore + 25*$week->numberOfGoodDirectionWk;
+}
+
+function scoreSlot($min, $max, $minSpeed, $maxSpeed){
+    $min = intval($min);
+    $max = intval($max);
+    $result = 0;
+    if($min >= $minSpeed && $min <= $maxSpeed && $max >= $minSpeed && $max <= $maxSpeed){
+        $result += 1000;
+    } else if ($min >= $minSpeed && $min <= $maxSpeed && $max >= $minSpeed && $max <= $maxSpeed + 5){
+        $result += 500;
+    } else if ($min >= $minSpeed && $min <= $maxSpeed && $max >= $minSpeed && $max <= $maxSpeed + 10){
+        $result += 250;
+    } else if ($min < $minSpeed && $max >= $minSpeed && $max <= $maxSpeed){
+        $result += 250;
+    }
+    return $result;
 }
 
 function evaluateSun($sun){

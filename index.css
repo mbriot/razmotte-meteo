@@ -188,6 +188,11 @@ table.start th, #settings-table th{
     padding: 3px;
 }
 
+.loc-input, .sort-input, .type-input {
+    display: block;
+    margin-bottom: 10px;
+}
+
 th.title {
     text-align: left;
     vertical-align:middle;
@@ -278,10 +283,5 @@ a {
         margin-left: 5px;
         margin-right: 5px;
         margin-top:5px;
-    }
-
-    .loc-input, .sort-input, .type-input {
-        display: block;
-        margin-bottom: 10px;
     }
 }

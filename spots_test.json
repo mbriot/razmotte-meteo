@@ -1,36 +1,34 @@
 {
     "spots" : [
         {
-            "name": "Olhain",
+            "name": "Port à Binson",
             "type":"plaine",
-            "localisation":"nord",
-            "url": "olhain_france_2989622",
-            "goodDirection" : ["S","SSO"],
+            "localisation":"autre",
+            "url": "port-à-binson_france_2986040",
+            "goodDirection" : ["NNE","N"],
             "minSpeed" : 13,
-            "maxSpeed" : 21,
-            "distance": "58km,45mn",
-            "geoloc": "50.433528,2.585802",
-            "description" : "Site Thermique pour niveau Brevet de Pilote (suite a l'installation de la luge d'été sous le deco). Interdit au-dessus de 1350m (TMA Lille en classe D). Idem si cross vers N ou NNE, Attention vers ENE a E",
-            "balise":"https://balisemeteo.com/balise.php?idBalise=5030",
-            "ffvl": "https://federation.ffvl.fr/sites_pratique/voir/486",
-            "youtube":"https://www.youtube.com/watch?v=uGkeKCeHQ6Q"
+            "maxSpeed" : 23,
+            "distance": "214km,2hOO",
+            "geoloc": "49.07255890313045, 3.76258044575566",
+            "description" : "Site a reserver aux pilotes tres precis et plutot aguerris.",
+            "balise":"",
+            "ffvl": "https://federation.ffvl.fr/sites_pratique/voir/62",
+            "youtube":"https://www.youtube.com/watch?v=CYGA-2ZE8zc"
         },
         {
-            "name": "La Comté",
+            "name": "Osmoy",
             "type":"plaine",
-            "localisation":"nord",
-            "url": "la-comté_france_3009940",
-            "goodDirection" : ["O","ONO","NO","NNO"],
-            "minSpeed" : 13,
-            "maxSpeed" : 25,
-            "distance": "64km, 50mn",
-            "geoloc": "50.416602, 2.512842",
-            "excludeDays": [0],
-            "monthsToExcludes": [9,10,11,12,1,2],
-            "description" : "Interdit le dimanche en période de chasse de fin septembre à fin février. Interdit au-dessus de 1350m (TMA Lille- classe D). 2 orientations : O, NO et jusque NNO. Turbulent en OSO (deconseille). L'orientation la plus accessible est l'ONO car c'est pile face sur la pente O. Le site est petit et tres frequente. Au dela de 10 voiles quand il n'y a pas d'etagement, le vol ressemble a du close contact! Veillez a suivre le sens de circulation anti-horaire et faites preuve de bon sens. Au besoin observez. Le club de Vol a Voile de Arras est susceptible de demander une desactivation de la TMA 3.1. Pour savoir si la zone TMA 3.1 est desactivee: tel de l'ATIS de Lille Lesquin : 03 20 16 19 54",
-            "balise":"https://balisemeteo.com/balise.php?idBalise=5030",
-            "ffvl": "https://federation.ffvl.fr/sites_pratique/voir/1303",
-            "youtube":"https://www.youtube.com/watch?v=0z5yDrYiJ8g"
+            "localisation":"autre",
+            "url": "osmoy-saint-valery_france_2989133",
+            "goodDirection" : ["N","NNE","NE","ENE"],
+            "minSpeed" : 15,
+            "maxSpeed" : 20,
+            "distance": "230km,2h20",
+            "geoloc": "49.78800562503052, 1.2939180142605222",
+            "description" : "par vent Est, eviter d'etre sous le vent de la pointe sud qui est TRES turbulente. Demandez aux locaux de vous decrire le site et ses dangers. Belle pente ecole orientee plein Est - Elle a un tres bon rendement...",
+            "balise":"https://balisemeteo.com/balise.php?idBalise=2914",
+            "ffvl": "https://federation.ffvl.fr/sites_pratique/voir/80",
+            "youtube":"https://www.youtube.com/watch?v=PaFVxT2SC28"
         },
         {
             "name": "Criel",
@@ -47,7 +45,8 @@
             "description" : "Bien lire la fiche FFVL, beaucoup de chose a ne pas faire.",
             "balise":"",
             "ffvl": "https://federation.ffvl.fr/terrain/1385",
-            "youtube":"https://www.youtube.com/watch?v=lTPNi4BuRUM"
+            "youtube":"https://www.youtube.com/watch?v=Ar7CZH3767o"
         }
+        
     ]
 }
