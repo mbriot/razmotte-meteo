@@ -230,15 +230,11 @@ function evaluateWind($speedWind,$minSpeed,$maxSpeed){
     $minSpeed = intval($minSpeed);
     $maxSpeed = intval($maxSpeed);
     if ($speedWind < $minSpeed) {
-        $flyable = "not-flyable-low";
+        $flyable = "not-flyable-wrong-dir";
     } else if ($speedWind >= $minSpeed && $speedWind <= $maxSpeed){
         $flyable = "flyable";
-    } else if ($speedWind <= $maxSpeed + 5){
-        $flyable = "not-flyable-medium";
-    } else if ($speedWind <= $maxSpeed + 10){
+    } else {
         $flyable = "not-flyable";
-    } else if ($speedWind > $maxSpeed + 10){
-        $flyable = "not-flyable-strong";
     }
     return ["speed" => $speedWind, "flyable" => $flyable];
 }

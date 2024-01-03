@@ -209,10 +209,6 @@ td.not-flyable-wind {
     background-color: orange;
 }
 
-td.not-flyable-low {
-    background-color: white;
-}
-
 td.not-flyable-wrong-dir {
     background-color: #f2f2f2;
 }
@@ -224,12 +220,7 @@ span.not-flyable-strong {
 td.flyable {
     background-color: green;
 }
-td.not-flyable-strong {
-    background-color: black;
-}
-td.not-flyable-medium {
-    background-color: orange;
-}
+
 td.not-flyable {
     background-color: red;
 }
@@ -252,10 +243,6 @@ a {
 }
 
 @media only screen and (max-width: 1200px) {
-
-    html {
-        background-color: red;
-    }
 
     body {
         padding:0px;

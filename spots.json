@@ -250,6 +250,21 @@
             "youtube":"https://www.youtube.com/watch?v=69A1267cJ_0"
         },
         {
+            "name": "Hornu",
+            "type":"plaine",
+            "localisation":"autre",
+            "url": "hornu_belgique_2795361",
+            "goodDirection" : ["O","ONO","OSO"],
+            "minSpeed" : 10,
+            "maxSpeed" : 25,
+            "distance": "159km,1h45",
+            "geoloc": "50.42462530106177, 3.8187852681081362",
+            "description" : "Beaucoup de monde le weekend. Attero minuscule délicat.",
+            "balise":"https://balisemeteo.com/balise.php?idBalise=5040",
+            "ffvl": "https://www.fbvl.be/flying_sites/hornu/",
+            "youtube":"https://www.youtube.com/watch?v=b66ju4vbetI"
+        },
+        {
             "name": "Pasly",
             "type":"plaine",
             "localisation":"autre",
