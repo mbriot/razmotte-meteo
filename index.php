@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <body>
 <head>
@@ -60,7 +61,7 @@ echo '
             </div>
         </th>
         <th class="settings-button">
-            <button onclick="valider()">Valider</button>
+            <button onclick="submitFilters()">Valider</button>
         </th>
     </tr>
     </table>';
@@ -199,7 +200,9 @@ foreach ($predictions->spots as $spotName => $values) {
         }
     });
 
-    function valider() {
+    fillFiltersBasedOnUrl();
+
+    function fillFiltersBasedOnUrl(){
         var nordCheckbox = document.getElementById('nord');
         var autreCheckbox = document.getElementById('autre');
         var bdmCheckbox = document.getElementById('bdm');
@@ -208,7 +211,33 @@ foreach ($predictions->spots as $spotName => $values) {
         var ventCheckbox = document.getElementById('vent-semaine');
         var ventWkCheckbox = document.getElementById('vent-wk');
 
-        var url = window.location.href.split('?')[0]; // URL de base sans les paramètres
+        var url = window.location.href.split('?')[1];
+        var params = url.split('&');
+        for (let index = 0; index < params.length; index++){ 
+            var paramName = params[index].split('=')[0];
+            var paramValue = params[index].split('=')[1].split(',');
+            for (let j = 0; j < paramValue.length; j++){
+                if(paramName == "localisation" && paramValue[j] == "nord") {nordCheckbox.checked = true;}
+                if(paramName == "localisation" && paramValue[j] == "autre") {autreCheckbox.checked = true;}
+                if(paramName == "type" && paramValue[j] == "plaine") {plaineCheckbox.checked = true;}
+                if(paramName == "type" && paramValue[j] == "treuil") {treuilCheckbox.checked = true;}
+                if(paramName == "type" && paramValue[j] == "bord-de-mer") {bdmCheckbox.checked = true;}
+                if(paramName == "sortByGoodDirection") {ventCheckbox.checked = true;}
+                if(paramName == "sortByGoodDirectionWk" ) {ventWkCheckbox.checked = true;}
+            } 
+        }
+    }
+
+    function submitFilters() {
+        var nordCheckbox = document.getElementById('nord');
+        var autreCheckbox = document.getElementById('autre');
+        var bdmCheckbox = document.getElementById('bdm');
+        var plaineCheckbox = document.getElementById('plaine');
+        var treuilCheckbox = document.getElementById('treuil');
+        var ventCheckbox = document.getElementById('vent-semaine');
+        var ventWkCheckbox = document.getElementById('vent-wk');
+
+        var url = window.location.href.split('?')[0];
         url = url.split('#')[0];
         var params = [];
 
