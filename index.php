@@ -362,6 +362,11 @@ function filterPredictions($predictions, $arguments){
         $predictions = sortByFlyabilityWeekend($predictions);
     }
 
+    if (count($arguments) == 0){
+        $predictions = filterByLocalisation($predictions, "nord");
+        $predictions = sortByFlyabilityWeek($predictions);
+    }
+
     return json_decode(json_encode($predictions));
 }
 
