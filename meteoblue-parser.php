@@ -144,10 +144,6 @@ function parseMeteoblue($url, $day){
     $nineHourWind = preg_replace('/\s+/', '',$html->find('div.tab-detail.active table tr',5)->find('td',2)->find('div.cell.no-mobile',0)->plaintext);
     $twelveHourWind = preg_replace('/\s+/', '',$html->find('div.tab-detail.active table tr',5)->find('td',3)->find('div.cell.no-mobile',0)->plaintext);
     $fifteenHourWind = preg_replace('/\s+/', '',$html->find('div.tab-detail.active table tr',5)->find('td',4)->find('div.cell.no-mobile',0)->plaintext);
-    $minWind = explode('-',$nineHourWind)[0] . '-' . explode('-',$twelveHourWind)[0] . '-' . explode('-',$fifteenHourWind)[0];
-    $maxWind = explode('-',$nineHourWind)[1] . '-' . explode('-',$twelveHourWind)[1] . '-' . explode('-',$fifteenHourWind)[1];
-    _log("info","minWind 9-13-15  = " . $minWind . "\n");
-    _log("info","maxWind 9-13-15  = " . $maxWind . "\n");
 
     $dayName = preg_replace('/\s+/', '',$html->find('div[id=day'.$day.'] div.tab-day-short',0)->plaintext);
     _log("info",'day : ' . $dayName . " \n");
