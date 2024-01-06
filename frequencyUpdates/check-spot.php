@@ -24,7 +24,7 @@ function _log ($level, $message) {
 }
 
 $previousResult = json_decode(file_get_contents('result.json'),true);
-$spot = ["name" => "la comté", "url" => "la-comté_france_3009940"];
+$spot = ["name" => "equihen", "url" => "Équihen-plage_france_3019957"];
 $result = parseMeteoblue($spot['url'],2);
 if($result == $previousResult){
     _log("info","parsing Ok, result not changed");
