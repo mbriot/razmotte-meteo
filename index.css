@@ -126,6 +126,8 @@ table.wind-data tbody th:first-child {
 table.wind-data tbody tr.week-result {
     border-top: 2px solid black;
     padding-top: 3px;
+    font-size: 0.8em;
+    font-weight: bolder;
 }
 
 table.wind-data tbody tr.week-result th {
