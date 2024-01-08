@@ -106,6 +106,9 @@ function getTideTable($url){
         $coeff = $html->find('#i_donnesLongue table tr',$i+1)->find('td',1)->find('strong',0)->plaintext;
         $first = $html->find('#i_donnesLongue table tr',$i+1)->find('td',3)->find('strong',0)->plaintext;
         $second = $html->find('#i_donnesLongue table tr',$i+1)->find('td',6)->find('strong',0)->plaintext;
+        if($second == ""){
+            $second = $html->find('#i_donnesLongue table tr',$i+2)->find('td',3)->find('strong',0)->plaintext;
+        }
         $tideTable[] = ["coeff"=>$coeff,"first"=>$first,"second"=>$second];
     }
     return $tideTable;
