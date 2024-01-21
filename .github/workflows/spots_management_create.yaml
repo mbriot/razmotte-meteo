@@ -1,0 +1,137 @@
+name: spots_creator_with_issue
+on:
+  issues:
+    types: [opened, edited]
+
+jobs:
+
+  checkBefore:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check label is the good one for managing spots
+        id: checkLabel
+        if: contains( github.event.issue.labels.*.name, 'addSpot')
+        run: |
+          echo "label is addSpot, we can proceed" && 
+          echo "goodLabel=true" >> $GITHUB_OUTPUT
+      
+      - name: check issue created by the allowed users
+        id: checkUsers
+        if: contains(fromJson('["parapente-dans-le-nord", "alain"]'), github.actor)
+        run: |
+          echo "issue creator is allowed, we can proceed" && 
+          echo "goodCreator=true" >> $GITHUB_OUTPUT
+
+    outputs:
+      goodLabel: ${{ steps.checkLabel.outputs.goodLabel }}
+      goodCreator: ${{ steps.checkUsers.outputs.goodCreator }}
+
+  parseIssueAndAddSpot:
+    needs: checkBefore
+    if: needs.checkBefore.outputs.goodLabel && needs.checkBefore.outputs.goodCreator
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: parse issue and add spot to spots.json
+        id: run-action-docker
+        uses: parapente-dans-le-nord/dockerized-github-action@main
+        with:
+          issueBody: ${{ github.event.issue.body }}
+
+      - name: Upload spots.json artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: spots
+          path: src/spots.json
+      
+    outputs:
+      parsingError: ${{ steps.run-action-docker.outputs.docker-ga-action-error }}
+      parsingReason: ${{ steps.run-action-docker.outputs.docker-ga-action-reason }}
+
+  handleErrors:
+    needs: parseIssueAndAddSpot
+    if: ${{ needs.parseIssueAndAddSpot.outputs.parsingError == 'true'}}
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    
+    steps:
+
+      - run: gh issue comment $ISSUE --body "${{ needs.parseIssueAndAddSpot.outputs.parsingReason }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE: ${{ github.event.issue.html_url }}
+  
+  allGoodSaveWork:
+    needs: parseIssueAndAddSpot
+    if: ${{ needs.parseIssueAndAddSpot.outputs.parsingError == 'false' }}
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: write
+      pull-requests: write
+    
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: remove old spots.json
+        run: rm -f src/spots.json
+
+      - name: Download spots.json artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: spots
+          path: src/spots
+
+      - name: move new spots.json
+        run: mv src/spots/spots.json src
+
+      - name: delete artefact
+        run: rm -rf src/spots
+
+      - name: dynamic branch name
+        id: dynamic-branch-name
+        run: echo "BRANCH_NAME=feature_$(date +'%H%M%S')" >> $GITHUB_ENV
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: add spot from actions
+          branch: ${{ env.BRANCH_NAME }}
+          create_branch: true
+
+      - name: create pull request
+        run: gh pr create -B main -H ${{ env.BRANCH_NAME }} --title 'Merge ${{ env.BRANCH_NAME }} into main' --body 'Created by Github action'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: merge pull request
+        run: gh pr merge ${{ env.BRANCH_NAME }} --merge --delete-branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - run: gh issue comment $ISSUE --body "Opération réussie avec succés. Le résultat sera bientôt visible sur le site."
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE: ${{ github.event.issue.html_url }}
+
+      - run: gh issue close $ISSUE
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE: ${{ github.event.issue.html_url }}
+
+  pushToProd:
+    needs: allGoodSaveWork
+    runs-on: ubuntu-latest
+    steps:
+      - name: push spots.json on server
+        if: contains( github.event.issue.labels.*.name, 'pushProd')
+        run: curl -u ${{ secrets.FTPUSER}}:${{ secrets.FTPPASSWORD }} -T src/spots.json ftp://ftp.cluster007.hosting.ovh.net/www/meteonew/
+
+      

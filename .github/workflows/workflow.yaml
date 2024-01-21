@@ -1,0 +1,27 @@
+name: merge-pull-requests
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    
+jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      
+      - name: Get version in variable 
+        run: |
+            echo "VERSION=$(cat src/version.txt)" >> $GITHUB_ENV
+      
+      - name : Fail if version == tata else continue
+        if: ${{ env.VERSION == 'tata' }}
+        run: echo "Version should be anything except tata" && exit 1
+
+      - name : Congrats I can merge
+        run : echo "Congrats the value is not tata in file -> ${{ env.VERSION }}"

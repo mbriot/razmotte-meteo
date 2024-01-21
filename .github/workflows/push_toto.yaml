@@ -1,0 +1,34 @@
+name: push_toto
+
+on:
+  push:
+    branches: toto
+
+jobs:
+  test-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - run: ls -larth
+
+      - run: pwd
+
+      - name: Run my js action
+        id: run-action-js
+        uses: parapente-dans-le-nord/test-action@main
+        with:
+          repoPath: ${{ github.workspace }}
+
+      - name: Print Output js
+        id: output-js
+        run: 'echo mon actoin renvoit : ${{ steps.run-action-js.outputs.spotName }}'
+
+      - name: Run my docker action
+        id: run-action-docker
+        uses: parapente-dans-le-nord/dockerized-github-action@main
+
+      - name: Print Output docker
+        id: output-docker
+        run: 'echo mon actoin renvoit : ${{ steps.run-action-docker.outputs.spotName }}'

@@ -1,0 +1,26 @@
+name: dispatch_workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_value:
+        description: "Value needed in versions.txt"
+        required: true
+        type: string
+    
+jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Get version in variable 
+        run: |
+            echo "VERSION=$(cat src/version.txt)" >> $GITHUB_ENV
+      
+      - name : Fail if version == tata else continue
+        if: ${{ env.VERSION == inputs.version_value }}
+        run: echo "Version should be anything except ${{ inputs.version_value }}" && exit 1
+
+      - name : Congrats I can merge
+        run : echo "Congrats the value is not ${{ inputs.version_value }} in file -> ${{ env.VERSION }}"
