@@ -1,8 +1,8 @@
 ---
-name: Ajoutez un spot
+name: Gestion des spots
 about: Ajouter, modifier ou supprimer un spot en remplissant les champs
-title: Ajout d'un spot
-labels: addSpot
+title: Gestion d'un spot
+labels: manageSpot
 assignees: ''
 
 ---
