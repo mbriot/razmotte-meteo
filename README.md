@@ -1,2 +1,2 @@
 # razmotte-meteo
-crawling of meteo data for the razmotte paragliding club, yeah
+crawling of meteo data for the razmotte paragliding club, yea
