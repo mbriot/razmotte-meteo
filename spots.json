@@ -843,6 +843,36 @@
       "balise": "https://balisemeteo.com/balise.php?idBalise=5062",
       "ffvl": "https://federation.ffvl.fr/terrain/13240",
       "youtube": "https://www.youtube.com/watch?v=TbJc64BtKMQ"
+    },
+    {
+      "name": "La Creche",
+      "type": "bord-de-mer",
+      "localisation": "nord",
+      "url": "terlincthun_france_3295326",
+      "goodDirection": [
+        "OSO",
+        "ONO",
+        "O"
+      ],
+      "minSpeed": 13,
+      "maxSpeed": 23,
+      "distance": "132km 1h50mn",
+      "geoloc": "50.75035246960507 1.594958234383776",
+      "tideTableUrl": "Wimereux/",
+      "excludeDays": [
+        0,
+        1
+      ],
+      "monthsToExcludes": [
+        8,
+        9,
+        10
+      ],
+      "description": "Fermeture de janvier a fin aout",
+      "balise": "https://balisemeteo.com/balise.php?idBalise=5030",
+      "ffvl": "https://federation.ffvl.fr/terrain/740",
+      "youtube": "https://www.youtube.com/watch?v=L3AfTOjkCpU",
+      "needSeaCheck": true
     }
   ]
 }
