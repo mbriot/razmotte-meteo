@@ -10,9 +10,9 @@ jobs:
     steps:
       - name: check label is the good one for managing spots
         id: checkLabel
-        if: contains( github.event.issue.labels.*.name, 'addSpot')
+        if: contains( github.event.issue.labels.*.name, 'manageSpot')
         run: |
-          echo "label is addSpot, we can proceed" && 
+          echo "label is manageSpot, we can proceed" && 
           echo "goodLabel=true" >> $GITHUB_OUTPUT
       
       - name: check issue created by the allowed users
