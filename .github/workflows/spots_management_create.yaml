@@ -131,7 +131,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: push spots.json on server
-        if: contains( github.event.issue.labels.*.name, 'pushProd')
         run: curl -u ${{ secrets.FTPUSER}}:${{ secrets.FTPPASSWORD }} -T src/spots.json ftp://ftp.cluster007.hosting.ovh.net/www/meteonew/
 
       
