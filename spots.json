@@ -861,12 +861,22 @@
       "tideTableUrl": "Wimereux/",
       "excludeDays": [
         0,
-        1
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
       ],
       "monthsToExcludes": [
-        8,
-        9,
-        10
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
       ],
       "description": "Fermeture de janvier a fin aout",
       "balise": "https://balisemeteo.com/balise.php?idBalise=5030",
