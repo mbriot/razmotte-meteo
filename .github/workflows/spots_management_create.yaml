@@ -17,7 +17,7 @@ jobs:
       
       - name: check issue created by the allowed users
         id: checkUsers
-        if: contains(fromJson('["parapente-dans-le-nord", "alain"]'), github.actor)
+        if: contains(fromJson('["mbriot", "alainLec"]'), github.actor)
         run: |
           echo "issue creator is allowed, we can proceed" && 
           echo "goodCreator=true" >> $GITHUB_OUTPUT
@@ -39,7 +39,7 @@ jobs:
 
       - name: parse issue and add spot to spots.json
         id: run-action-docker
-        uses: parapente-dans-le-nord/dockerized-github-action@main
+        uses: mbriot/ga-action-manage-spots-razmotte@main
         with:
           issueBody: ${{ github.event.issue.body }}
 
@@ -47,7 +47,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: spots
-          path: src/spots.json
+          path: spots.json
       
     outputs:
       parsingError: ${{ steps.run-action-docker.outputs.docker-ga-action-error }}
@@ -82,19 +82,19 @@ jobs:
         uses: actions/checkout@v4
 
       - name: remove old spots.json
-        run: rm -f src/spots.json
+        run: rm -f spots.json
 
       - name: Download spots.json artifact
         uses: actions/download-artifact@v3
         with:
           name: spots
-          path: src/spots
+          path: spots
 
       - name: move new spots.json
-        run: mv src/spots/spots.json src
+        run: mv spots/spots.json .
 
       - name: delete artefact
-        run: rm -rf src/spots
+        run: rm -rf spots
 
       - name: dynamic branch name
         id: dynamic-branch-name
