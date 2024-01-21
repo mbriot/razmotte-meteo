@@ -130,7 +130,8 @@ jobs:
     needs: allGoodSaveWork
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: push spots.json on server
         run: curl -u ${{ secrets.FTPUSER}}:${{ secrets.FTPPASSWORD }} -T spots.json ftp://ftp.cluster007.hosting.ovh.net/www/meteonew/
-
-      
