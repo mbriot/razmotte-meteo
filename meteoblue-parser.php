@@ -211,7 +211,7 @@ function evaluateResults(){
 }
 
 function computeWeekScore($week){
-    return $week->lunScore + $week->marScore + $week->merScore + $week->jeuScore + $week->venScore + $week->samScore + $week->dimScore
+    return $week->lunScore + $week->marScore + $week->merScore + $week->jeuScore + $week->venScore
         + 25*$week->numberOfGoodDirection;
 }
 
@@ -236,23 +236,11 @@ function scoreSlot($min, $max, $minSpeed, $maxSpeed){
 }
 
 function evaluateSun($sun){
-    if (in_array($sun,[0,1])){
-        return ["sun" => $sun, "sunClass" => "sun-black"];
-    } else if (in_array($sun,[2,3])){
-        return ["sun" => $sun, "sunClass" => "sun-yellow"];
-    } else if (in_array($sun,[4,5,6])){
-        return ["sun" => $sun, "sunClass" => "sun-orange"];
-    } else {
-        return ["sun" => $sun, "sunClass" => "sun-red"];
-    }
+    return ["sun" => $sun, "sunClass" => "sun"];
 }
 
 function evaluateRain($rain){
-    if ($rain == "0mm" || substr($rain, 0, 2) == "0-"){
-        return ["rain" => $rain, "rainClass" => "rain"];
-    } else {
-        return ["rain" => $rain, "rainClass" => "rain-blue"];
-    }
+    return ["rain" => $rain, "rainClass" => "rain"];
 }
 
 function evaluateWind($speedWind,$minSpeed,$maxSpeed){

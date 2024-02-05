@@ -131,18 +131,6 @@ foreach ($predictions->spots as $spotName => $values) {
 }
 echo '</tbody></table></div>';
 
-echo '
-    <br><br><br>
-    <div id="legend"><a href="#legend-back">Ct ça marche ?</a></div>
-    <p>
-        Les données ci-dessus proviennent du site météoblue.<br>
-        La mise à jour est faite 3 fois par jour à 6/12/18h<br>
-        Les sites de vols sont classés par distance par rapport à Lille <br>
-        Ci dessous, une image qui explique comment lire les données pour un spot et un jour donné
-    </p>
-    <img class="img-legend" src="images/legende_mieux.png">
-';
-
 foreach ($predictions->spots as $spotName => $values) {
     echo '<h1><a id="' . str_replace(' ', '_', strtolower($spotName)) . '-desc" href="#' . str_replace(' ', '_', strtolower($spotName)) . '">' . $spotName .'</a></h1>';
     $balise = empty($values->balise) ? 'N/A' : '<a href="' . $values->balise . '">Balise</a>';
@@ -250,7 +238,11 @@ foreach ($predictions->spots as $spotName => $values) {
         var url = window.location.href.split('?')[1];
         if(url) {
             var params = url.split('&');
-        } else {return;}
+        } else {
+            flyabilityWeekButton.classList.add("active");
+            nordButton.classList.add("active");
+            return;
+        }
         
         for (let index = 0; index < params.length; index++){ 
             var paramName = params[index].split('=')[0];
