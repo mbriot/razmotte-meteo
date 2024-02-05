@@ -180,7 +180,7 @@ function evaluateResults(){
             foreach([$day->_9h,$day->_12h,$day->_15h] as $slot){
                 $flyableDir = in_array($slot->dir, $values->goodDirection);
                 if($flyableDir){
-                    $dayScore = $dayScore + scoreSlot($slot->min, $slot->max, $values->minSpeed, $values->maxSpeed);
+                    $dayScore = $dayScore + scoreSlot($slot->min, $slot->max, $values->minSpeed, $values->maxSpeed) + 25;
                     $slot->min = evaluateWind($slot->min, $values->minSpeed, $values->maxSpeed);
                     $slot->max = evaluateWind($slot->max, $values->minSpeed, $values->maxSpeed);
                     $numberOfGoodDirectionSlot++;
@@ -206,8 +206,20 @@ function evaluateResults(){
         $values->numberOfGoodDirectionWk = $numberOfGoodDirectionSlotWk;
         $values->weekScore = computeWeekScore($values);
         $values->weekendScore = computeWeekendScore($values);
+        $values->nextTwoDaysScore = computeNextTwoDaysScore($values);
     }
     return $predictions;
+}
+
+function computeNextTwoDaysScore($week){
+    $today = strftime('%A');
+    $tomorrowTimestamp = strtotime('+1 day');
+    $tomorrow = strftime('%A', $tomorrowTimestamp);
+    $todayScoreName = substr($today, 0, 3) . 'Score';
+    $tomorrowScoreName = substr($tomorrow, 0, 3) . 'Score';
+    $score = 0;
+    $score += $week->$todayScoreName + $week->$tomorrowScoreName;
+    return $score;
 }
 
 function computeWeekScore($week){
