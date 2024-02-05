@@ -368,6 +368,8 @@ function filterPredictions($predictions, $arguments){
         $predictions = sortByFlyability($predictions, 'weekScore');
     } else if(isset($arguments['sortByFlyabilityWeekend'])){
         $predictions = sortByFlyability($predictions, 'weekendScore');
+    } else if(isset($arguments['sortByFlyabilityNextTwoDays'])){
+        $predictions = sortByFlyability($predictions, 'nextTwoDaysScore');
     }
 
     if (count($arguments) == 0){
