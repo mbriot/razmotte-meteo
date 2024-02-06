@@ -17,7 +17,7 @@ jobs:
       
       - name: check issue created by the allowed users
         id: checkUsers
-        if: contains(fromJson('["mbriot", "alainLec"]'), github.actor)
+        if: contains(fromJson('["mbriot", "RazmottePara"]'), github.actor)
         run: |
           echo "issue creator is allowed, we can proceed" && 
           echo "goodCreator=true" >> $GITHUB_OUTPUT
