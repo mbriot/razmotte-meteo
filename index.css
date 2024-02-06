@@ -9,25 +9,35 @@ body {
 
 .weatherSentence {
     text-align: center;
-    font-size:0.7em;
-    color:black;
+    font-size:0.8em;
+    color:white;
+    border:1px solid black;
+    border-radius: 5px;
     padding: 3px;
-    font-weight: bold;
+    font-weight: bolder;
     min-height: 2em;
+    background-color:black;
 }
 
-span.rain, span.sun, span.temp {
-    font-size:0.7em;
+span.rain-blue,span.rain, span.sun-white, span.sun-blue, span.sun-green, span.sun-yellow, span.sun-red,span.sun-black,span.sun-orange, span.temp {
+    font-size:0.8em;
     color:black;
     padding: 2px;
-    font-weight: bold;
+    border:1px solid black;
+    border-radius: 5px;
+    font-weight: bolder;
     margin-right: 5px;
     margin-bottom: 5px;
     display: inline-block;
 }
 
+span.sun-red {
+    color:white;
+}
+
 span.temp {
-    color: black;
+    background-color: black;
+    color: white;
 }
 
 div.tide, div.weatherResume, div.weatherSentence {
@@ -35,13 +45,44 @@ div.tide, div.weatherResume, div.weatherSentence {
 }
 
 span.tide-text {
-    font-size:0.7em;
+    font-size:0.8em;
     color:black;
-    font-weight: bold;
+    border:1px solid black;
+    border-radius: 5px;
+    font-weight: bolder;
+    background-color: black;
+    color: white;
     margin-right: 5px;
     margin-bottom: 5px;
     display: inline-block;
     padding: 2px;
+}
+
+span.sun-black {
+    background-color: black;
+    color:white;
+}
+
+span.sun-yellow {
+    background-color: yellow;
+}
+
+span.sun-orange {
+    background-color: orange;
+}
+
+span.sun-red {
+    background-color: red;
+}
+
+span.rain {
+    background-color: black;
+    color: white;
+}
+
+span.rain-blue {
+    background-color: blue;
+    color: white;
 }
 
 table.spot-desc, table.spot-desc tr td {
@@ -189,23 +230,23 @@ table {
 }
 
 td.flyable-wind {
-    background-color: rgba(0, 128, 0, 0.5);
+    background-color: green;
 }
 
 td.not-flyable-wind {
-    background-color: rgba(255, 165, 0, 0.5);
+    background-color: orange;
 }
 
 td.not-flyable-wrong-dir {
-    background-color: rgba(128, 128, 128, 0.5);
+    background-color: #f2f2f2;
 }
 
 td.flyable {
-    background-color: rgba(0, 128, 0, 0.5);
+    background-color: green;
 }
 
 td.not-flyable {
-    background-color: rgba(255, 0, 0, 0.5);
+    background-color: red;
 }
 
 td span {

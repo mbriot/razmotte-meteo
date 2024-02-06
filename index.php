@@ -56,7 +56,7 @@ echo '
                     <div class="flyability-input">
                         <button id="flyability-week-button" onclick="toggleFlyability(this)" class="choice inactive" >Semaine</button>
                         <button id="flyability-weekend-button" onclick="toggleFlyability(this)" class="choice inactive" >Week-End</button>
-                        <button id="flyability-next-two-days-button" onclick="toggleFlyability(this)" class="choice inactive" >2 prochains jours</button>
+                        <button id="flyability-next-three-days-button" onclick="toggleFlyability(this)" class="choice inactive" >3 prochains jours</button>
                     </div>
                 </div>
             </div>
@@ -202,7 +202,7 @@ foreach ($predictions->spots as $spotName => $values) {
     function toggleFlyability(clickedButton) {
         var flyabilityWeekButton = document.getElementById('flyability-week-button');
         var flyabilityWeekendButton = document.getElementById('flyability-weekend-button');
-        var flyabilityNextTwoDaysButton = document.getElementById('flyability-next-two-days-button');
+        var flyabilityNextThreeDaysButton = document.getElementById('flyability-next-three-days-button');
         if (clickedButton == flyabilityWeekButton){
             if(clickedButton.classList.contains("active")){
                 clickedButton.classList.remove("active");
@@ -212,8 +212,8 @@ foreach ($predictions->spots as $spotName => $values) {
                 clickedButton.classList.add("active");
                 flyabilityWeekendButton.classList.remove("active");
                 flyabilityWeekendButton.classList.add("inactive");
-                flyabilityNextTwoDaysButton.classList.remove("active");
-                flyabilityNextTwoDaysButton.classList.add("inactive");
+                flyabilityNextThreeDaysButton.classList.remove("active");
+                flyabilityNextThreeDaysButton.classList.add("inactive");
             }
         } else if (clickedButton == flyabilityWeekendButton){
             if(clickedButton.classList.contains("active")){
@@ -224,10 +224,10 @@ foreach ($predictions->spots as $spotName => $values) {
                 clickedButton.classList.add("active");
                 flyabilityWeekButton.classList.remove("active");
                 flyabilityWeekButton.classList.add("inactive");
-                flyabilityNextTwoDaysButton.classList.remove("active");
-                flyabilityNextTwoDaysButton.classList.add("inactive");
+                flyabilityNextThreeDaysButton.classList.remove("active");
+                flyabilityNextThreeDaysButton.classList.add("inactive");
             }
-        }  else if (clickedButton == flyabilityNextTwoDaysButton){
+        }  else if (clickedButton == flyabilityNextThreeDaysButton){
             if(clickedButton.classList.contains("active")){
                 clickedButton.classList.remove("active");
                 clickedButton.classList.add("inactive");
@@ -252,13 +252,13 @@ foreach ($predictions->spots as $spotName => $values) {
         var treuilButton = document.getElementById('treuil-button');
         var flyabilityWeekButton = document.getElementById('flyability-week-button');
         var flyabilityWeekendButton = document.getElementById('flyability-weekend-button');
-        var flyabilityNextTwoDaysButton = document.getElementById('flyability-next-two-days-button');
+        var flyabilityNextThreeDaysButton = document.getElementById('flyability-next-three-days-button');
 
         var url = window.location.href.split('?')[1];
         if(url) {
             var params = url.split('&');
         } else {
-            flyabilityNextTwoDaysButton.classList.add("active");
+            flyabilityNextThreeDaysButton.classList.add("active");
             nordButton.classList.add("active");
             return;
         }
@@ -274,7 +274,7 @@ foreach ($predictions->spots as $spotName => $values) {
                 if(paramName == "type" && paramValue[j] == "bord-de-mer") {bdmButton.classList.add("active");}
                 if(paramName == "sortByFlyabilityWeek" ) {flyabilityWeekButton.classList.add("active");}
                 if(paramName == "sortByFlyabilityWeekend" ) {flyabilityWeekendButton.classList.add("active");}
-                if(paramName == "sortByFlyabilityNextTwoDays" ) {flyabilityNextTwoDaysButton.classList.add("active");}
+                if(paramName == "sortByFlyabilityNextTwoDays" ) {flyabilityNextThreeDaysButton.classList.add("active");}
             } 
         }
     }
@@ -289,7 +289,7 @@ foreach ($predictions->spots as $spotName => $values) {
         var ventWkCheckbox = document.getElementById('vent-wk');
         var flyabilityWeekButton = document.getElementById('flyability-week-button');
         var flyabilityWeekendButton = document.getElementById('flyability-weekend-button');
-        var flyabilityNextTwoDaysButton = document.getElementById('flyability-next-two-days-button');
+        var flyabilityNextThreeDaysButton = document.getElementById('flyability-next-three-days-button');
 
         var url = window.location.href.split('?')[0];
         url = url.split('#')[0];
@@ -311,7 +311,7 @@ foreach ($predictions->spots as $spotName => $values) {
 
         if (flyabilityWeekButton.classList.contains("active")) {params.push('sortByFlyabilityWeek=true');}
         else if (flyabilityWeekendButton.classList.contains("active")) {params.push('sortByFlyabilityWeekend=true');}
-        else if (flyabilityNextTwoDaysButton.classList.contains("active")) {params.push('sortByFlyabilityNextTwoDays=true');}
+        else if (flyabilityNextThreeDaysButton.classList.contains("active")) {params.push('sortByFlyabilityNextTwoDays=true');}
 
         if (params.length > 0) {
             url += '?' + params.join('&');
@@ -368,13 +368,13 @@ function filterPredictions($predictions, $arguments){
         $predictions = sortByFlyability($predictions, 'weekScore');
     } else if(isset($arguments['sortByFlyabilityWeekend'])){
         $predictions = sortByFlyability($predictions, 'weekendScore');
-    } else if(isset($arguments['sortByFlyabilityNextTwoDays'])){
-        $predictions = sortByFlyability($predictions, 'nextTwoDaysScore');
+    } else if(isset($arguments['sortByFlyabilityNextThreeDays'])){
+        $predictions = sortByFlyability($predictions, 'nextThreeDaysScore');
     }
 
     if (count($arguments) == 0){
         $predictions = filterByLocalisation($predictions, "nord");
-        $predictions = sortByFlyability($predictions, 'nextTwoDaysScore');
+        $predictions = sortByFlyability($predictions, 'nextThreeDaysScore');
         
     }
 

@@ -206,19 +206,22 @@ function evaluateResults(){
         $values->numberOfGoodDirectionWk = $numberOfGoodDirectionSlotWk;
         $values->weekScore = computeWeekScore($values);
         $values->weekendScore = computeWeekendScore($values);
-        $values->nextTwoDaysScore = computeNextTwoDaysScore($values);
+        $values->nextThreeDaysScore = computeNextThreeDaysScore($values);
     }
     return $predictions;
 }
 
-function computeNextTwoDaysScore($week){
+function computeNextThreeDaysScore($week){
     $today = strftime('%A');
     $tomorrowTimestamp = strtotime('+1 day');
     $tomorrow = strftime('%A', $tomorrowTimestamp);
+    $threeDaysTimestamp = strtotime('+2 day');
+    $threeDays = strftime('%A', $threeDaysTimestamp);
     $todayScoreName = substr($today, 0, 3) . 'Score';
     $tomorrowScoreName = substr($tomorrow, 0, 3) . 'Score';
+    $threeDaysScoreName = substr($threeDays, 0, 3) . 'Score';
     $score = 0;
-    $score += $week->$todayScoreName + $week->$tomorrowScoreName;
+    $score += $week->$todayScoreName + $week->$tomorrowScoreName + $week->$threeDaysScoreName;
     return $score;
 }
 
@@ -248,11 +251,23 @@ function scoreSlot($min, $max, $minSpeed, $maxSpeed){
 }
 
 function evaluateSun($sun){
-    return ["sun" => $sun, "sunClass" => "sun"];
+    if (in_array($sun,[0,1])){
+        return ["sun" => $sun, "sunClass" => "sun-black"];
+    } else if (in_array($sun,[2,3])){
+        return ["sun" => $sun, "sunClass" => "sun-yellow"];
+    } else if (in_array($sun,[4,5,6])){
+        return ["sun" => $sun, "sunClass" => "sun-orange"];
+    } else {
+        return ["sun" => $sun, "sunClass" => "sun-red"];
+    }
 }
 
 function evaluateRain($rain){
-    return ["rain" => $rain, "rainClass" => "rain"];
+    if ($rain == "0mm" || substr($rain, 0, 2) == "0-"){
+        return ["rain" => $rain, "rainClass" => "rain"];
+    } else {
+        return ["rain" => $rain, "rainClass" => "rain-blue"];
+    }
 }
 
 function evaluateWind($speedWind,$minSpeed,$maxSpeed){
