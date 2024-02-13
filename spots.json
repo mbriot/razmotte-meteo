@@ -6,11 +6,12 @@
       "localisation": "nord",
       "url": "olhain_france_2989622",
       "goodDirection": [
-        "S",
-        "SSO"
+        "OSO",
+        "SSO",
+        "S"
       ],
       "minSpeed": 13,
-      "maxSpeed": 21,
+      "maxSpeed": 23,
       "distance": "58km,45mn",
       "geoloc": "50.433528,2.585802",
       "description": "Site Thermique pour niveau Brevet de Pilote (suite a l'installation de la luge d'\u00e9t\u00e9 sous le deco). Interdit au-dessus de 1350m (TMA Lille en classe D). Idem si cross vers N ou NNE, Attention vers ENE a E",
