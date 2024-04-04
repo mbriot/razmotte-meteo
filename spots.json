@@ -15,6 +15,8 @@
       "geoloc": "50.433528,2.585802",
       "description": "Site Thermique pour niveau Brevet de Pilote (suite a l'installation de la luge d'\u00e9t\u00e9 sous le deco). Interdit au-dessus de 1350m (TMA Lille en classe D). Idem si cross vers N ou NNE, Attention vers ENE a E",
       "balise": "https://balisemeteo.com/balise.php?idBalise=5030",
+      "spotairBaliseType": "ffvl",
+      "spotairBaliseId": 5030,
       "ffvl": "https://federation.ffvl.fr/sites_pratique/voir/486",
       "youtube": "https://www.youtube.com/watch?v=uGkeKCeHQ6Q"
     },
@@ -85,6 +87,8 @@
       "geoloc": "50.328260, 2.657346",
       "description": "Site de treuil de 1600m. Cross possible en SO. Se limiter a 1370m sur 8 kms. -Puis FL65.",
       "balise": "https://www.balisemeteo.com/balise.php?idBalise=5021",
+      "spotairBaliseType": "ffvl",
+      "spotairBaliseId": 5021,
       "ffvl": "https://federation.ffvl.fr/terrain/13441",
       "youtube": "https://www.youtube.com/watch?v=vfGqneSCIqw"
     },
@@ -104,6 +108,8 @@
       "tideTableUrl": "Zuydcoote/",
       "description": "Pratique toler\u00e9e en soaring - Deco et Dunes au niveau de l'hopital maritime. Strictement interdit sur la dune marchand qui est un site protege",
       "balise": "https://www.allosurf.net/meteo/live/dunkerque-station-meteo-lfak-8329.html",
+      "spotairBaliseType": "synop",
+      "spotairBaliseId": 07010,
       "ffvl": "",
       "youtube": "https://www.youtube.com/watch?v=QERFnPOx-B0"
     },
@@ -170,6 +176,8 @@
       "tideTableUrl": "WISSANT/",
       "description": "Site de Soaring non officiel. Danger IMPORTANT a mare haute et montante. Ne pas pietiner les dunes.",
       "balise": "",
+      "spotairBaliseType": "meteo-france",
+      "spotairBaliseId": 62054001,
       "ffvl": "",
       "youtube": "https://www.youtube.com/watch?v=mjcjm_7dXi8"
     },
@@ -228,6 +236,8 @@
       "tideTableUrl": "WISSANT/",
       "description": "De janvier a fin aout, interdiction formelle d'aller \u00e0 droite du d\u00e9co vers Sangatte. Se mefier de la maree haute.",
       "balise": "",
+      "spotairBaliseType": "meteo-france",
+      "spotairBaliseId": 62054001,
       "ffvl": "",
       "youtube": "https://www.youtube.com/watch?v=RUJ11Xn_5uw"
     },
@@ -253,6 +263,8 @@
       ],
       "description": "Interdit le dimanche en p\u00e9riode de chasse. Site un peu piegeux sur l'effet venturie en haut de pente. Reculade frequente. Le site se trouvant dans la C.T.R. de l'aerodrome du Touquet en classe D, il est obligatoire de prevenir le service de la navigation aerienne en telephonant au No 03-21-06-62-86 ou 03-21-06-62-71ou 03-21-06-62-73 avant de decoller",
       "balise": "",
+      "spotairBaliseType": "meteo-france",
+      "spotairBaliseId": 62826001,
       "ffvl": "https://federation.ffvl.fr/sites_pratique/voir/895",
       "youtube": "https://www.youtube.com/watch?v=pVchgmrZFA8"
     },
@@ -293,6 +305,8 @@
       "tideTableUrl": "Equihen-Plage/",
       "description": "Interdiction formelle de passer devant la piste de l'a\u00e9rodrome d'Alprech (avant le phare et \u00e0 droite du d\u00e9co). Se mefier de la maree haute. Danger a atterir a maree haute dans les rochers. Accidents frequents dans les rochers en haut de plage",
       "balise": "https://balisemeteo.com/balise.php?idBalise=159",
+      "spotairBaliseType": "ffvl",
+      "spotairBaliseId": 159,
       "ffvl": "https://federation.ffvl.fr/terrain/1355",
       "youtube": "https://www.youtube.com/watch?v=E1Ju9g2Javw"
     },
