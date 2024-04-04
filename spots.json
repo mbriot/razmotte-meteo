@@ -48,6 +48,8 @@
       ],
       "description": "Interdit le dimanche en p\u00e9riode de chasse de fin septembre \u00e0 fin f\u00e9vrier. Interdit au-dessus de 1350m (TMA Lille- classe D). 2 orientations : O, NO et jusque NNO. Turbulent en OSO (deconseille). L'orientation la plus accessible est l'ONO car c'est pile face sur la pente O. Le site est petit et tres frequente. Au dela de 10 voiles quand il n'y a pas d'etagement, le vol ressemble a du close contact! Veillez a suivre le sens de circulation anti-horaire et faites preuve de bon sens. Au besoin observez. Le club de Vol a Voile de Arras est susceptible de demander une desactivation de la TMA 3.1. Pour savoir si la zone TMA 3.1 est desactivee: tel de l'ATIS de Lille Lesquin : 03 20 16 19 54",
       "balise": "https://balisemeteo.com/balise.php?idBalise=5030",
+      "spotairBaliseType": "ffvl",
+      "spotairBaliseId": 5030,
       "ffvl": "https://federation.ffvl.fr/sites_pratique/voir/1303",
       "youtube": "https://www.youtube.com/watch?v=0z5yDrYiJ8g"
     },
@@ -67,7 +69,9 @@
       "distance": "43km, 40mn",
       "geoloc": "50.40151031490451, 2.9264901253761377",
       "description": "Site id\u00e9al de gonflage, \u00e9galement de treuil de 600m. Cross possible plein Sud. Se limiter a 750m pendant 7 kms (TMA Lille- classe D). Puis 1370 m pendant 14 kms",
-      "balise": "",
+      "balise": "https://www.openwindmap.org/PP63",
+      "spotairBaliseType": "pioupiou",
+      "spotairBaliseId": 63,
       "ffvl": "",
       "youtube": "https://www.youtube.com/watch?v=-aLED1ES6PE"
     },
