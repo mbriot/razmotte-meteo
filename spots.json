@@ -109,7 +109,7 @@
       "description": "Pratique toler\u00e9e en soaring - Deco et Dunes au niveau de l'hopital maritime. Strictement interdit sur la dune marchand qui est un site protege",
       "balise": "https://www.allosurf.net/meteo/live/dunkerque-station-meteo-lfak-8329.html",
       "spotairBaliseType": "synop",
-      "spotairBaliseId": 07010,
+      "spotairBaliseId": "07010",
       "ffvl": "",
       "youtube": "https://www.youtube.com/watch?v=QERFnPOx-B0"
     },
