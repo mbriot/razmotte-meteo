@@ -84,12 +84,14 @@ echo    '</tr></thead>';
 
 echo '<tbody>';
 foreach ($predictions->spots as $spotName => $values) {
+    $spotairCode = (is_null($values->spotairBaliseType)||is_null($values->spotairBaliseId)) ? '' : '<iframe width="75" height="75" frameBorder="0" src="https://www.spotair.mobi/widget/wind/'. $values->spotairBaliseType .'/'. $values->spotairBaliseId .'?mode=free_flight&unit=kmh&name=true&quadrant=true&windValues=true&dark=true"></iframe>';
     echo  '<tr class="week-result">
             <th>
                 <a id="' . str_replace(' ', '_', strtolower($spotName)) . '" href="#' . str_replace(' ', '_', strtolower($spotName)) . '-desc">' . $spotName . '</a>
                 <div>' . $values->minSpeed . ' à '. $values->maxSpeed .'km/h</div>
                 <div>' . join(', ', $values->goodDirection) . '</div>
                 <div>' . $values->distance . '</div>
+                <div>' . $spotairCode . '</div>
             </th>';
     foreach ($values->days as $day) {
         echo '<td>';

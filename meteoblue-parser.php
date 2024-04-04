@@ -86,6 +86,8 @@ function scrapeSpots ($spots) {
         $spotResult['geoloc'] = $spot->geoloc;
         $spotResult['description'] = $spot->description;
         $spotResult['balise'] = $spot->balise;
+        $spotResult['spotairBaliseType'] = $spot->spotairBaliseType;
+        $spotResult['spotairBaliseId'] = $spot->spotairBaliseId;
         $spotResult['ffvl'] = $spot->ffvl;
         $spotResult['youtube'] = $spot->youtube;
         $allSpotsResult["spots"][$spot->name] = $spotResult;
