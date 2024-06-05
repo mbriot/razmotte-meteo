@@ -128,15 +128,9 @@ function spotIsClosed($date, $spot){
 
 function parseMeteoblue($url, $day){
     $urlBuilded = 'https://www.meteoblue.com/fr/meteo/semaine/' . $url . "?day=" . $day;
-    $html = file_get_html($urlBuilded);
-    if (!$html) {
-        _log("error","Failed to fetch HTML from $urlBuilded");
-        // Handle the error or throw an exception
-    }
     $retryCount = 0;
     $maxRetries = 3;
     while ($retryCount < $maxRetries) {
-        sleep(1); // Wait for 1 second before retrying
         $html = file_get_html($urlBuilded);
         if (!$html) {
             _log("error","Failed to fetch HTML from $urlBuilded");
