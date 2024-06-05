@@ -40,7 +40,7 @@ function getSpots () {
     _log("info","spots.json red");
     try {
         $spots = json_decode($spotsJson)->spots;
-    } catch(Excption $e){
+    } catch(Exception $e){
         _log("error","problème pour décoder le json");
         _log("error", $e);
         exit(1);
@@ -129,6 +129,29 @@ function spotIsClosed($date, $spot){
 function parseMeteoblue($url, $day){
     $urlBuilded = 'https://www.meteoblue.com/fr/meteo/semaine/' . $url . "?day=" . $day;
     $html = file_get_html($urlBuilded);
+    if (!$html) {
+        _log("error","Failed to fetch HTML from $urlBuilded");
+        // Handle the error or throw an exception
+    }
+    $retryCount = 0;
+    $maxRetries = 3;
+    while ($retryCount < $maxRetries) {
+        sleep(1); // Wait for 1 second before retrying
+        $html = file_get_html($urlBuilded);
+        if (!$html) {
+            _log("error","Failed to fetch HTML from $urlBuilded");
+            $retryCount++;
+            _log("info", "retry number " . $retryCount);
+            continue;
+        } else {
+            break;
+        
+        }
+    }
+    if ($retryCount == $maxRetries) {
+        _log("error", "Failed to fetch HTML after $maxRetries retries");
+        // Handle the error or throw an exception
+    }
     _log("info","Will parse with url " . $urlBuilded);
     $maxTemp = preg_replace('/\s+/', ' ',preg_replace('/[^0-9]/', '', $html->find('div[id=day'.$day.'] div.tab-content div.temps div.tab-temp-max',0)->plaintext));
     $minTemp = preg_replace('/\s+/', ' ',preg_replace('/[^0-9]/', '', $html->find('div[id=day'.$day.'] div.tab-content div.temps div.tab-temp-min',0)->plaintext));
