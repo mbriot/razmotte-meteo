@@ -88,7 +88,7 @@ foreach ($predictions->spots as $spotName => $values) {
             <th>
                 <a id="' . str_replace(' ', '_', strtolower($spotName)) . '" href="#' . str_replace(' ', '_', strtolower($spotName)) . '-desc">' . $spotName . '</a>
                 <div>' . $values->minSpeed . ' à '. $values->maxSpeed .'km/h</div>
-                <div>' . join(', ', $values->goodDirection) . '</div>
+                <div>' . join(', ', $values->goodDirectionInFrench) . '</div>
                 <div>' . $values->distance . '</div>
             </th>';
     foreach ($values->days as $day) {
@@ -144,7 +144,7 @@ foreach ($predictions->spots as $spotName => $values) {
         </tr>
         <tr>
             <td class="spot-title">Directions du vent</td>
-            <td class="spot-value">' . join(', ', $values->goodDirection) . '</td>
+            <td class="spot-value">' . join(', ', $values->goodDirectionInFrench) . '</td>
         </tr>
         <tr>
             <td class="spot-title">Description</td>

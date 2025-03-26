@@ -82,6 +82,7 @@ function scrapeSpots ($spots) {
         $spotResult['minSpeed'] = $spot->minSpeed;
         $spotResult['maxSpeed'] = $spot->maxSpeed;
         $spotResult['goodDirection'] = $spot->goodDirection;
+        $spotResult['goodDirectionInFrench'] = $spot->goodDirectionInFrench;
         $spotResult['distance'] = $spot->distance;
         $spotResult['geoloc'] = $spot->geoloc;
         $spotResult['description'] = $spot->description;
@@ -136,8 +137,10 @@ function parseMeteoblue($url, $day){
             _log("error","Failed to fetch HTML from $urlBuilded");
             $retryCount++;
             _log("info", "retry number " . $retryCount);
+            sleep(3);
             continue;
         } else {
+            usleep(250000);
             break;
         
         }

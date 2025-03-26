@@ -1,11 +1,46 @@
 {
   "spots": [
     {
+      "name": "Zoutelande",
+      "type": "bord-de-mer",
+      "localisation": "autre",
+      "url": "zoutelande_pays-bas_2743822",
+      "goodDirection": [
+        "ONO",
+        "WNW",
+        "O",
+        "W",
+        "OSO",
+        "WSW",
+        "SO",
+        "SW"
+      ],
+      "goodDirectionInFrench": [
+        "ONO",
+        "O",
+        "OSO",
+        "SO"
+      ],
+      "minSpeed": 13,
+      "maxSpeed": 23,
+      "distance": "160km,2h15",
+      "geoloc": "51.492972, 3.499858",
+      "description": "Site de bord de mer en hollande. Moins loin qu'Equihen depuis Lille !",
+      "balise": "",
+      "ffvl": "",
+      "youtube": "https://www.youtube.com/watch?v=kEmqnZoQSWU"
+    },
+    {
       "name": "Olhain",
       "type": "plaine",
       "localisation": "nord",
       "url": "olhain_france_2989622",
       "goodDirection": [
+        "SSO",
+        "SSW",
+        "S"
+      ],
+      "goodDirectionInFrench": [
         "SSO",
         "S"
       ],
@@ -24,6 +59,16 @@
       "localisation": "nord",
       "url": "la-comt\u00e9_france_3009940",
       "goodDirection": [
+        "O",
+        "W",
+        "ONO",
+        "WNW",
+        "NO",
+        "NW",
+        "NNO",
+        "NNW"
+      ],
+      "goodDirectionInFrench": [
         "O",
         "ONO",
         "NO",
@@ -56,6 +101,14 @@
       "url": "rouvroy_france_2982383",
       "goodDirection": [
         "O",
+        "W",
+        "E",
+        "OSO",
+        "WSW",
+        "ESE"
+      ],
+      "goodDirectionInFrench": [
+        "O",
         "E",
         "OSO",
         "ESE"
@@ -79,6 +132,11 @@
         "NE",
         "ENE"
       ],
+      "goodDirectionInFrench": [
+        "NNE",
+        "NE",
+        "ENE"
+      ],
       "minSpeed": 5,
       "maxSpeed": 18,
       "distance": "48km, 50mn",
@@ -94,6 +152,9 @@
       "localisation": "nord",
       "url": "zuydcoote_france_2967110",
       "goodDirection": [
+        "NNO"
+      ],
+      "goodDirectionInFrench": [
         "NNO"
       ],
       "minSpeed": 20,
@@ -113,6 +174,12 @@
       "localisation": "nord",
       "url": "licques_france_2998492",
       "goodDirection": [
+        "SSE",
+        "S",
+        "SSO",
+        "SSW"
+      ],
+      "goodDirectionInFrench": [
         "SSE",
         "S",
         "SSO"
@@ -143,6 +210,10 @@
       "localisation": "nord",
       "url": "chuignolles_france_3024997",
       "goodDirection": [
+        "SO",
+        "SW"
+      ],
+      "goodDirectionInFrench": [
         "SO"
       ],
       "minSpeed": 15,
@@ -160,6 +231,10 @@
       "localisation": "nord",
       "url": "wissant_france_2967326",
       "goodDirection": [
+        "NO",
+        "NW"
+      ],
+      "goodDirectionInFrench": [
         "NO"
       ],
       "minSpeed": 20,
@@ -179,6 +254,10 @@
       "localisation": "nord",
       "url": "sangatte_france_2976217",
       "goodDirection": [
+        "NNO",
+        "NNW"
+      ],
+      "goodDirectionInFrench": [
         "NNO"
       ],
       "minSpeed": 13,
@@ -218,6 +297,12 @@
       "url": "sangatte_france_2976217",
       "goodDirection": [
         "ONO",
+        "WNW",
+        "NO",
+        "NW"
+      ],
+      "goodDirectionInFrench": [
+        "ONO",
         "NO"
       ],
       "minSpeed": 13,
@@ -237,6 +322,10 @@
       "localisation": "nord",
       "url": "frencq_france_3017226",
       "goodDirection": [
+        "NE",
+        "NNE"
+      ],
+      "goodDirectionInFrench": [
         "NE",
         "NNE"
       ],
@@ -262,6 +351,10 @@
       "localisation": "nord",
       "url": "50.845N1.585E",
       "goodDirection": [
+        "OSO",
+        "WSW"
+      ],
+      "goodDirectionInFrench": [
         "OSO"
       ],
       "minSpeed": 13,
@@ -281,6 +374,14 @@
       "localisation": "nord",
       "url": "\u00c9quihen-plage_france_3019957",
       "goodDirection": [
+        "O",
+        "W",
+        "OSO",
+        "WSW",
+        "SO",
+        "SW"
+      ],
+      "goodDirectionInFrench": [
         "O",
         "OSO",
         "SO"
@@ -305,6 +406,13 @@
         "S",
         "SSE",
         "SSO",
+        "SSW",
+        "SE"
+      ],
+      "goodDirectionInFrench": [
+        "S",
+        "SSE",
+        "SSO",
         "SE"
       ],
       "minSpeed": 10,
@@ -322,6 +430,14 @@
       "localisation": "autre",
       "url": "hornu_belgique_2795361",
       "goodDirection": [
+        "O",
+        "W",
+        "ONO",
+        "WNW",
+        "OSO",
+        "WSW"
+      ],
+      "goodDirectionInFrench": [
         "O",
         "ONO",
         "OSO"
@@ -341,6 +457,14 @@
       "localisation": "autre",
       "url": "pasly_france_2988421",
       "goodDirection": [
+        "SO",
+        "SW",
+        "S",
+        "SSO",
+        "SSW",
+        "SSE"
+      ],
+      "goodDirectionInFrench": [
         "SO",
         "S",
         "SSO",
@@ -362,6 +486,14 @@
       "url": "nesle-normandeuse_france_2990734",
       "goodDirection": [
         "ONO",
+        "WNW",
+        "OSO",
+        "WSW",
+        "O",
+        "W"
+      ],
+      "goodDirectionInFrench": [
+        "ONO",
         "OSO",
         "O"
       ],
@@ -380,6 +512,15 @@
       "localisation": "autre",
       "url": "criel-sur-mer_france_3022461",
       "goodDirection": [
+        "NO",
+        "NW",
+        "NNO",
+        "NNW",
+        "ONO",
+        "WNW",
+        "N"
+      ],
+      "goodDirectionInFrench": [
         "NO",
         "NNO",
         "ONO",
@@ -405,6 +546,10 @@
         "NNE",
         "NE"
       ],
+      "goodDirectionInFrench": [
+        "NNE",
+        "NE"
+      ],
       "minSpeed": 13,
       "maxSpeed": 23,
       "distance": "214km,2hOO",
@@ -420,6 +565,10 @@
       "localisation": "autre",
       "url": "port-\u00e0-binson_france_2986040",
       "goodDirection": [
+        "NNE",
+        "N"
+      ],
+      "goodDirectionInFrench": [
         "NNE",
         "N"
       ],
@@ -442,6 +591,11 @@
         "ESE",
         "ENE"
       ],
+      "goodDirectionInFrench": [
+        "E",
+        "ESE",
+        "ENE"
+      ],
       "minSpeed": 15,
       "maxSpeed": 20,
       "distance": "191km,2h2O",
@@ -457,6 +611,12 @@
       "localisation": "autre",
       "url": "beauraing_belgique_2802501",
       "goodDirection": [
+        "N",
+        "NNE",
+        "NNO",
+        "NNW"
+      ],
+      "goodDirectionInFrench": [
         "N",
         "NNE",
         "NNO"
@@ -478,6 +638,13 @@
       "goodDirection": [
         "N",
         "NO",
+        "NW",
+        "NNO",
+        "NNW"
+      ],
+      "goodDirectionInFrench": [
+        "N",
+        "NO",
         "NNO"
       ],
       "minSpeed": 14,
@@ -495,6 +662,11 @@
       "localisation": "autre",
       "url": "revin_france_2983806",
       "goodDirection": [
+        "S",
+        "SSE",
+        "SE"
+      ],
+      "goodDirectionInFrench": [
         "S",
         "SSE",
         "SE"
@@ -531,6 +703,14 @@
       "url": "fumay_france_3016907",
       "goodDirection": [
         "O",
+        "W",
+        "ONO",
+        "WNW",
+        "NO",
+        "NW"
+      ],
+      "goodDirectionInFrench": [
+        "O",
         "ONO",
         "NO"
       ],
@@ -565,6 +745,13 @@
       "localisation": "autre",
       "url": "nohan_france_7628410",
       "goodDirection": [
+        "NNE",
+        "N",
+        "NE",
+        "NNO",
+        "NNW"
+      ],
+      "goodDirectionInFrench": [
         "NNE",
         "N",
         "NE",
@@ -605,6 +792,11 @@
         "E",
         "ENE"
       ],
+      "goodDirectionInFrench": [
+        "NE",
+        "E",
+        "ENE"
+      ],
       "minSpeed": 12,
       "maxSpeed": 18,
       "distance": "205km,3h00",
@@ -638,6 +830,13 @@
         "N",
         "NE",
         "NNE",
+        "NNO",
+        "NNW"
+      ],
+      "goodDirectionInFrench": [
+        "N",
+        "NE",
+        "NNE",
         "NNO"
       ],
       "minSpeed": 14,
@@ -668,6 +867,9 @@
       "goodDirection": [
         "SE"
       ],
+      "goodDirectionInFrench": [
+        "SE"
+      ],
       "minSpeed": 15,
       "maxSpeed": 22,
       "distance": "200km,2h15",
@@ -685,6 +887,9 @@
       "goodDirection": [
         "SE"
       ],
+      "goodDirectionInFrench": [
+        "SE"
+      ],
       "minSpeed": 12,
       "maxSpeed": 20,
       "distance": "203km,3h00",
@@ -700,6 +905,11 @@
       "localisation": "autre",
       "url": "prayon_belgique_2788650",
       "goodDirection": [
+        "NE",
+        "ENE",
+        "NNE"
+      ],
+      "goodDirectionInFrench": [
         "NE",
         "ENE",
         "NNE"
@@ -724,6 +934,12 @@
         "NE",
         "ENE"
       ],
+      "goodDirectionInFrench": [
+        "N",
+        "NNE",
+        "NE",
+        "ENE"
+      ],
       "minSpeed": 15,
       "maxSpeed": 20,
       "distance": "230km,2h20",
@@ -739,6 +955,10 @@
       "localisation": "autre",
       "url": "grauves_france_3014826",
       "goodDirection": [
+        "SO",
+        "SW"
+      ],
+      "goodDirectionInFrench": [
         "SO"
       ],
       "minSpeed": 10,
@@ -760,6 +980,11 @@
         "NE",
         "E"
       ],
+      "goodDirectionInFrench": [
+        "ENE",
+        "NE",
+        "E"
+      ],
       "minSpeed": 12,
       "maxSpeed": 20,
       "distance": "244km,3h00",
@@ -775,6 +1000,11 @@
       "localisation": "autre",
       "url": "grand-coo_belgique_2797298",
       "goodDirection": [
+        "O",
+        "W",
+        "S"
+      ],
+      "goodDirectionInFrench": [
         "O",
         "S"
       ],
@@ -794,6 +1024,12 @@
       "url": "vincelles_france_2968058",
       "goodDirection": [
         "SSO",
+        "SSW",
+        "S",
+        "SSE"
+      ],
+      "goodDirectionInFrench": [
+        "SSO",
         "S",
         "SSE"
       ],
@@ -812,6 +1048,12 @@
       "localisation": "autre",
       "url": "londini\u00e8res_france_2997784",
       "goodDirection": [
+        "SSO",
+        "SSW",
+        "S",
+        "SSE"
+      ],
+      "goodDirectionInFrench": [
         "SSO",
         "S",
         "SSE"
@@ -833,6 +1075,12 @@
       "goodDirection": [
         "NNE",
         "N",
+        "NNO",
+        "NNW"
+      ],
+      "goodDirectionInFrench": [
+        "NNE",
+        "N",
         "NNO"
       ],
       "minSpeed": 13,
@@ -850,6 +1098,14 @@
       "localisation": "nord",
       "url": "terlincthun_france_3295326",
       "goodDirection": [
+        "OSO",
+        "WSW",
+        "ONO",
+        "WNW",
+        "O",
+        "W"
+      ],
+      "goodDirectionInFrench": [
         "OSO",
         "ONO",
         "O"

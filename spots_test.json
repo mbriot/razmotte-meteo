@@ -7,6 +7,14 @@
             "url": "Équihen-plage_france_3019957",
             "goodDirection": [
                 "O",
+                "W",
+                "OSO",
+                "WSW",
+                "SO",
+                "SW"
+            ],
+            "goodDirectionInFrench": [
+                "O",
                 "OSO",
                 "SO"
             ],
@@ -20,7 +28,34 @@
             "balise": "https://balisemeteo.com/balise.php?idBalise=159",
             "ffvl": "https://federation.ffvl.fr/terrain/1355",
             "youtube": "https://www.youtube.com/watch?v=E1Ju9g2Javw"
-        }
+        },
+        {
+            "name": "Hornu",
+            "type": "plaine",
+            "localisation": "autre",
+            "url": "hornu_belgique_2795361",
+            "goodDirection": [
+              "O",
+              "W",
+              "ONO",
+              "WNW",
+              "OSO",
+              "WSW"
+            ],
+            "goodDirectionInFrench": [
+              "O",
+              "ONO",
+              "OSO"
+            ],
+            "minSpeed": 10,
+            "maxSpeed": 25,
+            "distance": "159km,1h45",
+            "geoloc": "50.42462530106177, 3.8187852681081362",
+            "description": "Beaucoup de monde le weekend. Attero minuscule d\u00e9licat.",
+            "balise": "https://balisemeteo.com/balise.php?idBalise=5040",
+            "ffvl": "https://www.fbvl.be/flying_sites/hornu/",
+            "youtube": "https://www.youtube.com/watch?v=b66ju4vbetI"
+          }
         
     ]
 }
