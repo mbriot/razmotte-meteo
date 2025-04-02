@@ -366,6 +366,13 @@ function getParameters(&$SPOT_FILE, &$BATCH_NUMBER){
             }
         }
     }
+
+    if (isset($_GET['spotFile'])) {
+        $SPOT_FILE = $_GET['spotFile'];
+    }
+    if (isset($_GET['batchNumber'])) {
+        $BATCH_NUMBER = $_GET['batchNumber'];
+    }
 }
 
 deleteLogFile();
