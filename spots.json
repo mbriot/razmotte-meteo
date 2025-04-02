@@ -90,7 +90,7 @@
         2
       ],
       "description": "Interdit le dimanche en p\u00e9riode de chasse de fin septembre \u00e0 fin f\u00e9vrier. Interdit au-dessus de 1350m (TMA Lille- classe D). 2 orientations : O, NO et jusque NNO. Turbulent en OSO (deconseille). L'orientation la plus accessible est l'ONO car c'est pile face sur la pente O. Le site est petit et tres frequente. Au dela de 10 voiles quand il n'y a pas d'etagement, le vol ressemble a du close contact! Veillez a suivre le sens de circulation anti-horaire et faites preuve de bon sens. Au besoin observez. Le club de Vol a Voile de Arras est susceptible de demander une desactivation de la TMA 3.1. Pour savoir si la zone TMA 3.1 est desactivee: tel de l'ATIS de Lille Lesquin : 03 20 16 19 54",
-      "balise": "https://balisemeteo.com/balise.php?idBalise=5030",
+      "balise": "https://www.openwindmap.org/pioupiou-1750",
       "ffvl": "https://federation.ffvl.fr/sites_pratique/voir/1303",
       "youtube": "https://www.youtube.com/watch?v=0z5yDrYiJ8g"
     },
@@ -152,7 +152,8 @@
       "localisation": "nord",
       "url": "zuydcoote_france_2967110",
       "goodDirection": [
-        "NNO"
+        "NNO",
+        "NNW"
       ],
       "goodDirectionInFrench": [
         "NNO"

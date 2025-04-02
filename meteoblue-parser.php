@@ -4,8 +4,27 @@ require __DIR__ . '/simple_html_dom.php';
 
 $LOGFILE =  __DIR__ . '/error.log';
 $RESULT_PATH = __DIR__ . '/result.json';
+$TEMP_PATH = __DIR__ . 'temp_result.json';
 $SPOT_FILE = __DIR__ . '/spots.json';
 
+$windDirTranslation = [
+    "N" => "N",
+    "NNE" => "NNE",
+    "NE" => "NE",
+    "ENE" => "ENE",
+    "E" => "E",
+    "ESE" => "ESE",
+    "SE" => "SE",
+    "SSE" => "SSE",
+    "S" => "S",
+    "SSW" => "SSO",
+    "SW" => "SO",
+    "WSW" => "OSO",
+    "W" => "O",
+    "WNW" => "ONO",
+    "NW" => "NO",
+    "NNW" => "NNO"
+];
 function getDateMs(){
     $date = date("Y-m-d H:i:s");
     $microseconds = microtime(true);
@@ -25,7 +44,8 @@ function _log ($level, $message) {
 
 function getSpots () {
     global $SPOT_FILE;
-    _log("info","Enter getSpots function with spotFile = " . $SPOT_FILE);
+    global $BATCH_NUMBER;
+    _log("info","Enter getSpots function with spotFile = " . $SPOT_FILE . " and batchNumber = " . $BATCH_NUMBER);
     try {
         $spotsJson = file_get_contents($SPOT_FILE);
         if ($spotsJson === false) {
@@ -46,6 +66,20 @@ function getSpots () {
         exit(1);
     }
     _log("info","spots.json decoded, number of spots : " . count($spots));
+    
+    if ($BATCH_NUMBER == 1) {
+        $spots = array_slice($spots, 0, 10);
+    } else if ($BATCH_NUMBER == 2) {
+        $spots = array_slice($spots, 10, 10);
+    } else if ($BATCH_NUMBER == 3) {
+        $spots = array_slice($spots, 20, 10);
+    } else if ($BATCH_NUMBER == 4) {
+        $spots = array_slice($spots, 30, 100);
+    } else {
+        $spots = array_slice($spots, 0, 2);
+    }
+
+    _log("info","spots.json sliced, number of spots : " . count($spots));
     return $spots;
 }
 
@@ -128,6 +162,7 @@ function spotIsClosed($date, $spot){
 }
 
 function parseMeteoblue($url, $day){
+    global $windDirTranslation;
     $urlBuilded = 'https://www.meteoblue.com/fr/meteo/semaine/' . $url . "?day=" . $day;
     $retryCount = 0;
     $maxRetries = 3;
@@ -140,7 +175,6 @@ function parseMeteoblue($url, $day){
             sleep(3);
             continue;
         } else {
-            usleep(250000);
             break;
         
         }
@@ -159,9 +193,9 @@ function parseMeteoblue($url, $day){
 
     _log("info",$maxTemp . "~" . $minTemp . " " . $rain . " " . $sunHour . " " . $sentenceWeather . "\n");
 
-    $nineHourWindDir = $html->find('div.tab-detail.active table tr',4)->find('td',2)->plaintext;
-    $twelveHourWindDir = $html->find('div.tab-detail.active table tr',4)->find('td',3)->plaintext;
-    $fifteenHourWindDir = $html->find('div.tab-detail.active table tr',4)->find('td',4)->plaintext;
+    $nineHourWindDir = $windDirTranslation[$html->find('div.tab-detail.active table tr',4)->find('td',2)->plaintext];
+    $twelveHourWindDir = $windDirTranslation[$html->find('div.tab-detail.active table tr',4)->find('td',3)->plaintext];
+    $fifteenHourWindDir = $windDirTranslation[$html->find('div.tab-detail.active table tr',4)->find('td',4)->plaintext];
     _log("info","windDir = " . $nineHourWindDir . "/" . $twelveHourWindDir . "/" . $fifteenHourWindDir . "\n");
 
     $nineHourWind = preg_replace('/\s+/', '',$html->find('div.tab-detail.active table tr',5)->find('td',2)->find('div.cell.no-mobile',0)->plaintext);
@@ -185,8 +219,9 @@ function parseMeteoblue($url, $day){
 }
 
 function evaluateResults(){
+    global $TEMP_PATH;
     _log("info","start evaluate spots slots");
-    $predictions = json_decode(file_get_contents(__DIR__ . '/result.json'));
+    $predictions = json_decode(file_get_contents($TEMP_PATH));
     foreach ($predictions->spots as $spotName => $values) {
         $numberOfGoodDirectionSlot = 0;
         $numberOfGoodDirectionSlotWk = 0;
@@ -318,7 +353,7 @@ function deleteLogFile(){
     }
 }
 
-function getParameters(&$SPOT_FILE){
+function getParameters(&$SPOT_FILE, &$BATCH_NUMBER){
     global $argv;
     foreach ($argv as $argument) {
         if (strpos($argument, '=') !== false) {
@@ -326,19 +361,31 @@ function getParameters(&$SPOT_FILE){
             if ($name == "spotFile"){
                 $SPOT_FILE = $value;
             }
+            if ($name == "batchNumber"){
+                $BATCH_NUMBER = $value;
+            }
         }
     }
 }
 
 deleteLogFile();
-getParameters($SPOT_FILE);
+getParameters($SPOT_FILE, $BATCH_NUMBER);
 _log("info","Starting new parsing");
 $spots = getSpots();
+
 $results = scrapeSpots($spots);
-file_put_contents($RESULT_PATH, json_encode($results));
+file_put_contents($TEMP_PATH, json_encode($results));
 $results = evaluateResults();
 $results->lastRun = date("d-m-Y H:i");
 _log("info",json_encode($results));
-file_put_contents($RESULT_PATH, json_encode($results));
+
+$previousResults = json_decode(file_get_contents($RESULT_PATH));
+
+foreach ($results->spots as $spotName => $values) {
+    $previousResults->spots->$spotName = $values;
+}
+
+$previousResults->lastRun = $results->lastRun;
+file_put_contents($RESULT_PATH, json_encode($previousResults));
 
 ?>

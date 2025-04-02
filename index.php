@@ -274,8 +274,8 @@ foreach ($predictions->spots as $spotName => $values) {
                 if(paramName == "type" && paramValue[j] == "bord-de-mer") {bdmButton.classList.add("active");}
                 if(paramName == "sortByFlyabilityWeek" ) {flyabilityWeekButton.classList.add("active");}
                 if(paramName == "sortByFlyabilityWeekend" ) {flyabilityWeekendButton.classList.add("active");}
-                if(paramName == "sortByFlyabilityNextTwoDays" ) {flyabilityNextThreeDaysButton.classList.add("active");}
-            } 
+                if(paramName == "sortByFlyabilityNextThreeDays" ) {flyabilityNextThreeDaysButton.classList.add("active");}
+            }
         }
     }
 
@@ -311,7 +311,7 @@ foreach ($predictions->spots as $spotName => $values) {
 
         if (flyabilityWeekButton.classList.contains("active")) {params.push('sortByFlyabilityWeek=true');}
         else if (flyabilityWeekendButton.classList.contains("active")) {params.push('sortByFlyabilityWeekend=true');}
-        else if (flyabilityNextThreeDaysButton.classList.contains("active")) {params.push('sortByFlyabilityNextTwoDays=true');}
+        else if (flyabilityNextThreeDaysButton.classList.contains("active")) {params.push('sortByFlyabilityNextThreeDays=true');}
 
         if (params.length > 0) {
             url += '?' + params.join('&');
@@ -353,6 +353,7 @@ function sortByFlyability($predictions, $type){
     uasort($predictions['spots'], $comparisonFunction);
     return $predictions;
 }
+
 
 function filterPredictions($predictions, $arguments){
 
