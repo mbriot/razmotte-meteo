@@ -76,10 +76,13 @@ function getSpots () {
     } else if ($BATCH_NUMBER == 4) {
         $spots = array_slice($spots, 30, 100);
     } else {
-        $spots = array_slice($spots, 0, 2);
+        $spots = array_slice($spots, 0, 10);
     }
 
     _log("info","spots.json sliced, number of spots : " . count($spots));
+    $firstSpot = reset($spots);
+    $lastSpot = end($spots);
+    _log("info","first spot : " . $firstSpot->name . ", last spot : " . $lastSpot->name);
     return $spots;
 }
 
@@ -372,6 +375,20 @@ function getParameters(&$SPOT_FILE, &$BATCH_NUMBER){
     }
     if (isset($_GET['batchNumber'])) {
         $BATCH_NUMBER = $_GET['batchNumber'];
+        return;
+    }
+
+     if (empty($BATCH_NUMBER)) {
+        $currentHour = (int)date('G'); 
+        if (in_array($currentHour, [6, 12, 18, 22])) {
+            $BATCH_NUMBER = 1;
+        } else if (in_array($currentHour, [5, 11, 17, 22])) {
+            $BATCH_NUMBER = 2;
+        } else if (in_array($currentHour, [4, 16])) {
+            $BATCH_NUMBER = 3;
+        } else if (in_array($currentHour, [3, 15])) {
+            $BATCH_NUMBER = 4;
+        }
     }
 }
 
