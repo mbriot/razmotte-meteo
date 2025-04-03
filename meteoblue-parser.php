@@ -178,6 +178,7 @@ function parseMeteoblue($url, $day){
             sleep(3);
             continue;
         } else {
+            usleep(500000);
             break;
         
         }
