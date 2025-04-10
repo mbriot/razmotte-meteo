@@ -1352,6 +1352,30 @@
     "balise": "https://balisemeteo.com/balise.php?idBalise=136",
     "ffvl": "https://federation.ffvl.fr/terrain/1126",
     "youtube": "https://www.youtube.com/watch?v=kiXZnEXAZb4"
+  },
+  {
+    "name": "Dom Le Mesnil",
+    "type": "plaine",
+    "localisation": "autre",
+    "url": "dom-le-mesnil_france_3021181",
+    "goodDirection": [
+      "N",
+      "NNE",
+      "NE"
+    ],
+    "goodDirectionInFrench": [
+      "N",
+      "NNE",
+      "NE"
+    ],
+    "minSpeed": 5,
+    "maxSpeed": 20,
+    "distance": "219km,2h35",
+    "geoloc": "49.6861, 4.804",
+    "description": "Vol de plaine, marche quand c'est trop nord pour Letanne.",
+    "balise": "https",
+    "ffvl": "https://federation.ffvl.fr/sites_pratique/voir/13616",
+    "youtube": ""
   }
   ]
 }
