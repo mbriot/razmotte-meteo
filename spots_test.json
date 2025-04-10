@@ -1,61 +1,30 @@
 {
     "spots" : [
+       
         {
-            "name": "Equihen",
-            "type": "bord-de-mer",
-            "localisation": "nord",
-            "url": "Équihen-plage_france_3019957",
-            "goodDirection": [
-                "O",
-                "W",
-                "OSO",
-                "WSW",
-                "SO",
-                "SW"
-            ],
-            "goodDirectionInFrench": [
-                "O",
-                "OSO",
-                "SO"
-            ],
-            "minSpeed": 13,
-            "maxSpeed": 23,
-            "distance": "140km,2h",
-            "geoloc": "50.67953007244548, 1.5670255869881216",
-            "needSeaCheck": true,
-            "tideTableUrl": "Equihen-Plage/",
-            "description": "Interdiction formelle de passer devant la piste de l'aérodrome d'Alprech (avant le phare et à droite du déco). Se mefier de la maree haute. Danger a atterir a maree haute dans les rochers. Accidents frequents dans les rochers en haut de plage",
-            "balise": "https://balisemeteo.com/balise.php?idBalise=159",
-            "ffvl": "https://federation.ffvl.fr/terrain/1355",
-            "youtube": "https://www.youtube.com/watch?v=E1Ju9g2Javw"
-        },
-        {
-            "name": "Hornu",
-            "type": "plaine",
-            "localisation": "autre",
-            "url": "hornu_belgique_2795361",
-            "goodDirection": [
-              "O",
-              "W",
-              "ONO",
-              "WNW",
-              "OSO",
-              "WSW"
-            ],
-            "goodDirectionInFrench": [
-              "O",
-              "ONO",
-              "OSO"
-            ],
-            "minSpeed": 10,
-            "maxSpeed": 25,
-            "distance": "159km,1h45",
-            "geoloc": "50.42462530106177, 3.8187852681081362",
-            "description": "Beaucoup de monde le weekend. Attero minuscule d\u00e9licat.",
-            "balise": "https://balisemeteo.com/balise.php?idBalise=5040",
-            "ffvl": "https://www.fbvl.be/flying_sites/hornu/",
-            "youtube": "https://www.youtube.com/watch?v=b66ju4vbetI"
-          }
+          "name": "Zuydcoote",
+          "type": "bord-de-mer",
+          "localisation": "nord",
+          "url": "zuydcoote_france_2967110",
+          "goodDirection": [
+            "NNO",
+            "NNW"
+          ],
+          "goodDirectionInFrench": [
+            "NNO"
+          ],
+          "minSpeed": 20,
+          "maxSpeed": 28,
+          "distance": "89km, 1h10mn",
+          "geoloc": "51.0695241732366, 2.4778886748927222",
+          "needSeaCheck": true,
+          "tideTableUrl": "Zuydcoote/",
+          "description": "Pratique toler\u00e9e en soaring - Deco et Dunes au niveau de l'hopital maritime. Strictement interdit sur la dune marchand qui est un site protege",
+          "balise": "https://www.allosurf.net/meteo/live/dunkerque-station-meteo-lfak-8329.html",
+          "ffvl": "",
+          "youtube": "https://www.youtube.com/watch?v=QERFnPOx-B0"
+        }
+       
         
     ]
 }

@@ -23,7 +23,14 @@ $windDirTranslation = [
     "W" => "O",
     "WNW" => "ONO",
     "NW" => "NO",
-    "NNW" => "NNO"
+    "NNW" => "NNO",
+    "SSO" => "SSO",
+    "SO"   => "SO",
+    "OSO" => "OSO",
+    "O" => "O",
+    "ONO" => "ONO",
+    "NO" => "NO",
+    "NNO" => "NNO",
 ];
 function getDateMs(){
     $date = date("Y-m-d H:i:s");
@@ -74,7 +81,9 @@ function getSpots () {
     } else if ($BATCH_NUMBER == 3) {
         $spots = array_slice($spots, 20, 10);
     } else if ($BATCH_NUMBER == 4) {
-        $spots = array_slice($spots, 30, 100);
+        $spots = array_slice($spots, 30, 10);
+    } else if ($BATCH_NUMBER == 5) {
+        $spots = array_slice($spots, 40, 100);
     } else {
         $spots = array_slice($spots, 0, 10);
     }
@@ -178,14 +187,14 @@ function parseMeteoblue($url, $day){
             sleep(3);
             continue;
         } else {
-            usleep(500000);
+            sleep(1);
             break;
         
         }
     }
     if ($retryCount == $maxRetries) {
         _log("error", "Failed to fetch HTML after $maxRetries retries");
-        // Handle the error or throw an exception
+        exit(1);
     }
     _log("info","Will parse with url " . $urlBuilded);
     $maxTemp = preg_replace('/\s+/', ' ',preg_replace('/[^0-9]/', '', $html->find('div[id=day'.$day.'] div.tab-content div.temps div.tab-temp-max',0)->plaintext));
@@ -344,16 +353,22 @@ function evaluateWind($speedWind,$minSpeed,$maxSpeed){
     return ["speed" => $speedWind, "flyable" => $flyable];
 }
 
-function deleteLogFile(){
+function deleteLogFile() {
     global $LOGFILE;
     if (file_exists($LOGFILE)) {
-        if (unlink($LOGFILE)) {
-            _log("info",'Le fichier de log a été supprimé avec succès.');
+        $fileSize = filesize($LOGFILE);
+        _log("info", 'error.log filesize : ' . round($fileSize / 1024, 2) . ' Ko' );
+        if ($fileSize > 500 * 1024) { 
+            if (unlink($LOGFILE)) {
+                _log("info", 'Le fichier de log a été supprimé avec succès (taille : ' . round($fileSize / 1024, 2) . ' Ko).');
+            } else {
+                _log("error", 'Erreur lors de la suppression du fichier de log.');
+            }
         } else {
-            _log("info",'Erreur lors de la suppression du fichier de log.');
+            _log("info", 'Le fichier de log existe mais sa taille est inférieure à 500 Ko (taille : ' . round($fileSize / 1024, 2) . ' Ko).');
         }
     } else {
-        _log("info",'Le fichier de log n\'existe pas.');
+        _log("info", 'Le fichier de log n\'existe pas.');
     }
 }
 
@@ -381,7 +396,7 @@ function getParameters(&$SPOT_FILE, &$BATCH_NUMBER){
 
      if (empty($BATCH_NUMBER)) {
         $currentHour = (int)date('G'); 
-        if (in_array($currentHour, [6, 12, 18, 22])) {
+        if (in_array($currentHour, [6, 12, 18, 21])) {
             $BATCH_NUMBER = 1;
         } else if (in_array($currentHour, [5, 11, 17, 22])) {
             $BATCH_NUMBER = 2;
@@ -389,6 +404,8 @@ function getParameters(&$SPOT_FILE, &$BATCH_NUMBER){
             $BATCH_NUMBER = 3;
         } else if (in_array($currentHour, [3, 15])) {
             $BATCH_NUMBER = 4;
+        } else if (in_array($currentHour, [2,14])) {
+            $BATCH_NUMBER = 5;
         }
     }
 }
@@ -402,7 +419,6 @@ $results = scrapeSpots($spots);
 file_put_contents($TEMP_PATH, json_encode($results));
 $results = evaluateResults();
 $results->lastRun = date("d-m-Y H:i");
-_log("info",json_encode($results));
 
 $previousResults = json_decode(file_get_contents($RESULT_PATH));
 

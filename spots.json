@@ -88,7 +88,7 @@
         1,
         2
       ],
-      "description": "Interdit le dimanche en p\u00e9riode de chasse de fin septembre \u00e0 fin f\u00e9vrier. Interdit au-dessus de 1350m (TMA Lille- classe D). 2 orientations : O, NO et jusque NNO. Turbulent en OSO (deconseille). L'orientation la plus accessible est l'ONO car c'est pile face sur la pente O. Le site est petit et tres frequente. Au dela de 10 voiles quand il n'y a pas d'etagement, le vol ressemble a du close contact! Veillez a suivre le sens de circulation anti-horaire et faites preuve de bon sens. Au besoin observez. Le club de Vol a Voile de Arras est susceptible de demander une desactivation de la TMA 3.1. Pour savoir si la zone TMA 3.1 est desactivee: tel de l'ATIS de Lille Lesquin : 03 20 16 19 54",
+      "description": "Interdit le dimanche en p\u00e9riode de chasse de fin septembre \u00e0 fin f\u00e9vrier. Interdit au-dessus de 1350m (TMA Lille- classe D). 2 orientations : O, NO et jusque NNO. Turbulent en OSO (deconseille). L'orientation la plus accessible est l'ONO car c'est pile face sur la pente O. Le site est petit et tres frequente. Au dela de 10 voiles quand il n'y a pas d'etagement, le vol ressemble a du close contact! Veillez a suivre le sens de circulation anti-horaire et faites preuve de bon sens. Au besoin observez. Le club Razmotte est susceptible de demander une desactivation de la TMA 3.1. Pour savoir si la zone TMA 3.1 est desactivee: tel de l'ATIS de Lille Lesquin : 03 20 16 19 54",
       "balise": "https://www.openwindmap.org/pioupiou-1750",
       "ffvl": "https://federation.ffvl.fr/sites_pratique/voir/1303",
       "youtube": "https://www.youtube.com/watch?v=0z5yDrYiJ8g"
@@ -1140,6 +1140,218 @@
       "balise": "",
       "ffvl": "",
       "youtube": "https://www.youtube.com/watch?v=kEmqnZoQSWU"
-    }
+    },
+    {
+      "name": "Corimont",
+      "type": "plaine",
+      "localisation": "autre",
+      "url": "la-roche-en-ardenne_belgique_2793279",
+      "goodDirection": [
+        "NO",
+        "NW"
+      ],
+      "goodDirectionInFrench": [
+        "NO"
+      ],
+      "minSpeed": 13,
+      "maxSpeed": 23,
+      "distance": "215km,2h20",
+      "geoloc": "50.6332463,3.0961699",
+      "description": "Vol Thermodynamique / départ en cross. En Belgique",
+      "balise": "",
+      "ffvl": "https://www.larochailes.be/decollages/corimont/",
+      "youtube": "https://www.youtube.com/watch?v=tV-4tzHQbV4"
+  },
+  {
+    "name": "Marcourt",
+    "type": "plaine",
+    "localisation": "autre",
+    "url": "marcourt_belgique_2791721",
+    "goodDirection": [
+      "E",
+      "SE"
+    ],
+    "goodDirectionInFrench": [
+      "E",
+      "SE"
+    ],
+    "minSpeed": 13,
+    "maxSpeed": 23,
+    "distance": "215km,2h20",
+    "geoloc": "50.220083, 5.524406",
+    "description": "Vol Thermodynamique / départ en cross. En Belgique",
+    "balise": "",
+    "ffvl": "https://www.larochailes.be/decollages/marcourt/",
+    "youtube": "https://www.youtube.com/watch?v=2JE8oNDcWCQ"
+  },
+  {
+    "name": "Maboge",
+    "type": "plaine",
+    "localisation": "autre",
+    "url": "maboge_belgique_2791959",
+    "goodDirection": [
+      "SSO",
+      "SSW",
+      "SO",
+      "SW"
+    ],
+    "goodDirectionInFrench": [
+      "SSO",
+      "SO"
+    ],
+    "minSpeed": 13,
+    "maxSpeed": 23,
+    "distance": "229km,2h39",
+    "geoloc": "50.180306,5.636673",
+    "description": "Vol Thermodynamique / départ en cross. En Belgique",
+    "balise": "",
+    "ffvl": "https://www.larochailes.be/decollages/328-2/",
+    "youtube": "https://www.youtube.com/watch?v=-lPn6kWkQjs"
+  },
+  {
+    "name": "Clécy",
+    "type": "plaine",
+    "localisation": "autre",
+    "url": "48.926N-0.474E",
+    "goodDirection": [
+      "SSO",
+      "SSW",
+      "S",
+      "O",
+      "W",
+      "ONO",
+      "WNW",
+      "OSO",
+      "WSW"
+    ],
+    "goodDirectionInFrench": [
+      "SSO",
+      "S",
+      "O",
+      "ONO",
+      "OSO"
+    ],
+    "minSpeed": 5,
+    "maxSpeed": 15,
+    "distance": "422km,4h30",
+    "geoloc": "48.925601,-0.4736137",
+    "description": "Vol Thermodynamique / départ en cross. En Normandie",
+    "balise": "https://balisemeteo.com/balise.php?idBalise=122",
+    "ffvl": "https://federation.ffvl.fr/terrain/103",
+    "youtube": "https://www.youtube.com/watch?v=ZTCRMfJMuB4"
+  },
+  {
+    "name": "Commes",
+    "type": "bord-de-mer",
+    "localisation": "autre",
+    "url": "48.926N-0.474E",
+    "goodDirection": [
+      "NNO",
+      "NNW",
+      "N",
+      "NNE",
+      "NE"
+    ],
+    "goodDirectionInFrench": [
+      "NNO",
+      "N",
+      "NNE",
+      "NE"
+    ],
+    "minSpeed": 15,
+    "maxSpeed": 25,
+    "distance": "422km,4h30",
+    "geoloc": "49.3421253,-0.7250977",
+    "description": "Vol bord de mer, falaise. En Normandie",
+    "balise": "https://www.balisemeteo.com/balise.php?idBalise=158",
+    "ffvl": "https://federation.ffvl.fr/terrain/99",
+    "youtube": "https://www.youtube.com/watch?v=rdLFDHS8h2Q&t=236s"
+  },
+  {
+    "name": "Vierville",
+    "type": "bord-de-mer",
+    "localisation": "autre",
+    "url": "vierville-sur-mer_france_2969258",
+    "goodDirection": [
+      "NNE",
+      "NE",
+      "ENE",
+      "E"
+    ],
+    "goodDirectionInFrench": [
+      "NNE",
+      "NE",
+      "ENE",
+      "E"
+    ],
+    "minSpeed": 15,
+    "maxSpeed": 25,
+    "distance": "422km,4h30",
+    "geoloc": "49.3850548,-0.8843994",
+    "description": "Vol bord de mer, falaise. En Normandie",
+    "balise": "https://www.balisemeteo.com/balise.php?idBalise=97",
+    "ffvl": "https://federation.ffvl.fr/terrain/97",
+    "youtube": "https://www.youtube.com/watch?v=Ms-7AiIKnkA"
+  },
+  {
+    "name": "Ecalgrain",
+    "type": "bord-de-mer",
+    "localisation": "autre",
+    "url": "49.716N-1.941E",
+    "goodDirection": [
+      "O",
+      "W",
+      "ONO",
+      "WNW",
+      "OSO",
+      "WSW"
+    ],
+    "goodDirectionInFrench": [
+      "O",
+      "ONO",
+      "OSO"
+    ],
+    "minSpeed": 15,
+    "maxSpeed": 25,
+    "distance": "536km,5h30",
+    "geoloc": "49.697283, -1.932907",
+    "description": "Vol bord de mer. En Normandie",
+    "balise": "https://balisemeteo.com/balise.php?idBalise=1013",
+    "ffvl": "https://federation.ffvl.fr/terrain/852",
+    "youtube": "https://www.youtube.com/watch?v=GnT9pVIdVLc"
+  },
+  {
+    "name": "Markstein",
+    "type": "plaine",
+    "localisation": "autre",
+    "url": "le-marksteinkopf_france_7645333",
+    "goodDirection": [
+      "SO",
+      "SW",
+      "OSO",
+      "WSW",
+      "O",
+      "W",
+      "ONO",
+      "WNW",
+      "NO",
+      "NW"
+    ],
+    "goodDirectionInFrench": [
+      "SO",
+      "OSO",
+      "O",
+      "ONO",
+      "NO"
+    ],
+    "minSpeed": 5,
+    "maxSpeed": 15,
+    "distance": "556km,6h00",
+    "geoloc": "47.928018, 7.010994",
+    "description": "Vol de montagne. Dans les vosges",
+    "balise": "https://balisemeteo.com/balise.php?idBalise=136",
+    "ffvl": "https://federation.ffvl.fr/terrain/1126",
+    "youtube": "https://www.youtube.com/watch?v=kiXZnEXAZb4"
+  }
   ]
 }
