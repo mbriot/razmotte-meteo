@@ -1,29 +1,31 @@
 {
     "spots" : [
        
-        {
-          "name": "Zuydcoote",
-          "type": "bord-de-mer",
-          "localisation": "nord",
-          "url": "zuydcoote_france_2967110",
-          "goodDirection": [
-            "NNO",
-            "NNW"
-          ],
-          "goodDirectionInFrench": [
-            "NNO"
-          ],
-          "minSpeed": 20,
-          "maxSpeed": 28,
-          "distance": "89km, 1h10mn",
-          "geoloc": "51.0695241732366, 2.4778886748927222",
-          "needSeaCheck": true,
-          "tideTableUrl": "Zuydcoote/",
-          "description": "Pratique toler\u00e9e en soaring - Deco et Dunes au niveau de l'hopital maritime. Strictement interdit sur la dune marchand qui est un site protege",
-          "balise": "https://www.allosurf.net/meteo/live/dunkerque-station-meteo-lfak-8329.html",
-          "ffvl": "",
-          "youtube": "https://www.youtube.com/watch?v=QERFnPOx-B0"
-        }
+      {
+        "name": "Londinieres",
+        "type": "plaine",
+        "localisation": "autre",
+        "url": "londini\u00e8res_france_2997784",
+        "goodDirection": [
+          "SSO",
+          "SSW",
+          "S",
+          "SSE"
+        ],
+        "goodDirectionInFrench": [
+          "SSO",
+          "S",
+          "SSE"
+        ],
+        "minSpeed": 13,
+        "maxSpeed": 22,
+        "distance": "250km,2h30",
+        "geoloc": "49.849593053570125, 1.410575098921615",
+        "description": "Soaring et thermique",
+        "balise": "https://balisemeteo.com/balise.php?idBalise=2914",
+        "ffvl": "https://federation.ffvl.fr/terrain/1372",
+        "youtube": "https://www.youtube.com/watch?v=JzHkNxy5MxM"
+      }
        
         
     ]

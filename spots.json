@@ -4,7 +4,7 @@
       "name": "Equihen",
       "type": "bord-de-mer",
       "localisation": "nord",
-      "url": "\u00c9quihen-plage_france_3019957",
+      "url": "%C3%89quihen-plage_france_3019957",
       "goodDirection": [
         "O",
         "W",
@@ -56,7 +56,7 @@
       "name": "La Comt\u00e9",
       "type": "plaine",
       "localisation": "nord",
-      "url": "la-comt\u00e9_france_3009940",
+      "url": "la-comt%C3%A9_france_3009940",
       "goodDirection": [
         "O",
         "W",
@@ -348,7 +348,7 @@
       "name": "Mont Saint Eloi",
       "type": "treuil",
       "localisation": "nord",
-      "url": "mont-saint-\u00c9loi_france_2992001",
+      "url": "mont-saint-%C3%89loi_france_2992001",
       "goodDirection": [
         "NNE",
         "NE",
@@ -372,7 +372,7 @@
       "name": "Sept Meuse",
       "type": "plaine",
       "localisation": "autre",
-      "url": "rivi\u00e8re_belgique_2787999",
+      "url": "rivi%C3%A8re_belgique_2787999",
       "goodDirection": [
         "S",
         "SSE",
@@ -534,7 +534,7 @@
       "name": "Port \u00e0 Binson",
       "type": "plaine",
       "localisation": "autre",
-      "url": "port-\u00e0-binson_france_2986040",
+      "url": "port-%C3%A0-binson_france_2986040",
       "goodDirection": [
         "NNE",
         "N"
@@ -834,7 +834,7 @@
       "name": "Mont St-Pere",
       "type": "plaine",
       "localisation": "autre",
-      "url": "mont-saint-p\u00e8re_france_2991990",
+      "url": "mont-saint-p%C3%A8re_france_2991990",
       "goodDirection": [
         "SE"
       ],
@@ -945,7 +945,7 @@
       "name": "Letanne",
       "type": "plaine",
       "localisation": "autre",
-      "url": "l\u00e9tanne_france_2999279",
+      "url": "l%C3%A9tanne_france_2999279",
       "goodDirection": [
         "ENE",
         "NE",
@@ -1017,7 +1017,7 @@
       "name": "Londinieres",
       "type": "plaine",
       "localisation": "autre",
-      "url": "londini\u00e8res_france_2997784",
+      "url": "londini%C3%A8res_france_2997784",
       "goodDirection": [
         "SSO",
         "SSW",
