@@ -1031,9 +1031,20 @@
       ],
       "minSpeed": 13,
       "maxSpeed": 22,
+      "excludeDays": [
+        0
+      ],
+      "monthsToExcludes": [
+        9,
+        10,
+        11,
+        12,
+        1,
+        2
+      ],
       "distance": "250km,2h30",
       "geoloc": "49.849593053570125, 1.410575098921615",
-      "description": "Soaring et thermique",
+      "description": "Soaring et thermique. Site ferme les dimanches pendant la periode de chasse de septembre a fevrier.",
       "balise": "https://balisemeteo.com/balise.php?idBalise=2914",
       "ffvl": "https://federation.ffvl.fr/terrain/1372",
       "youtube": "https://www.youtube.com/watch?v=JzHkNxy5MxM"
