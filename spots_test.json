@@ -1,32 +1,26 @@
 {
     "spots" : [
-       
-      {
-        "name": "Londinieres",
-        "type": "plaine",
-        "localisation": "autre",
-        "url": "londini\u00e8res_france_2997784",
-        "goodDirection": [
-          "SSO",
-          "SSW",
-          "S",
-          "SSE"
-        ],
-        "goodDirectionInFrench": [
-          "SSO",
-          "S",
-          "SSE"
-        ],
-        "minSpeed": 13,
-        "maxSpeed": 22,
-        "distance": "250km,2h30",
-        "geoloc": "49.849593053570125, 1.410575098921615",
-        "description": "Soaring et thermique",
-        "balise": "https://balisemeteo.com/balise.php?idBalise=2914",
-        "ffvl": "https://federation.ffvl.fr/terrain/1372",
-        "youtube": "https://www.youtube.com/watch?v=JzHkNxy5MxM"
-      }
-       
-        
+   {
+    "name": "Marcourt",
+    "type": "plaine",
+    "localisation": "autre",
+    "url": "marcourt_belgique_2791721",
+    "goodDirection": [
+      "E",
+      "SE"
+    ],
+    "goodDirectionInFrench": [
+      "E",
+      "SE"
+    ],
+    "minSpeed": 13,
+    "maxSpeed": 23,
+    "distance": "215km,2h20",
+    "geoloc": "50.220083, 5.524406",
+    "description": "Vol Thermodynamique / départ en cross. En Belgique",
+    "balise": "",
+    "ffvl": "https://www.larochailes.be/decollages/marcourt/",
+    "youtube": "https://www.youtube.com/watch?v=2JE8oNDcWCQ"
+  }
     ]
 }

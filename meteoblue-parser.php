@@ -4,7 +4,7 @@ require __DIR__ . '/simple_html_dom.php';
 
 $LOGFILE =  __DIR__ . '/error.log';
 $RESULT_PATH = __DIR__ . '/result.json';
-$TEMP_PATH = __DIR__ . 'temp_result.json';
+$TEMP_PATH = __DIR__ . '/temp_result.json';
 $SPOT_FILE = __DIR__ . '/spots.json';
 
 $windDirTranslation = [
@@ -372,6 +372,24 @@ function deleteLogFile() {
     }
 }
 
+function initializeResultFile() {
+    global $RESULT_PATH;
+    if (!file_exists($RESULT_PATH)) {
+        _log("info", "Le fichier result.json n'existe pas, initialisation avec une structure minimale");
+        $minimalStructure = [
+            "spots" => (object)[],
+            "lastRun" => date("d-m-Y H:i")
+        ];
+        $result = file_put_contents($RESULT_PATH, json_encode($minimalStructure, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+        if ($result === false) {
+            _log("error", "Erreur lors de la création du fichier result.json");
+            exit(1);
+        } else {
+            _log("info", "Fichier result.json créé avec succès");
+        }
+    }
+}
+
 function getParameters(&$SPOT_FILE, &$BATCH_NUMBER){
     global $argv;
     foreach ($argv as $argument) {
@@ -411,6 +429,7 @@ function getParameters(&$SPOT_FILE, &$BATCH_NUMBER){
 }
 
 deleteLogFile();
+initializeResultFile();
 getParameters($SPOT_FILE, $BATCH_NUMBER);
 _log("info","Starting new parsing");
 $spots = getSpots();
