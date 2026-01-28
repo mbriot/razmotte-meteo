@@ -211,9 +211,10 @@ function parseMeteoblue($url, $day){
     $fifteenHourWindDir = $windDirTranslation[$html->find('div.tab-detail.active table tr',4)->find('td',4)->plaintext];
     _log("info","windDir = " . $nineHourWindDir . "/" . $twelveHourWindDir . "/" . $fifteenHourWindDir . "\n");
 
-    $nineHourWind = preg_replace('/\s+/', '',$html->find('div.tab-detail.active table tr',5)->find('td',2)->find('div.cell.no-mobile',0)->plaintext);
-    $twelveHourWind = preg_replace('/\s+/', '',$html->find('div.tab-detail.active table tr',5)->find('td',3)->find('div.cell.no-mobile',0)->plaintext);
-    $fifteenHourWind = preg_replace('/\s+/', '',$html->find('div.tab-detail.active table tr',5)->find('td',4)->find('div.cell.no-mobile',0)->plaintext);
+    $nineHourWind = preg_replace('/\s+/', '',$html->find('div.tab-detail.active table tr',5)->find('td',2)->find('div.cell',0)->plaintext);
+    $twelveHourWind = preg_replace('/\s+/', '',$html->find('div.tab-detail.active table tr',5)->find('td',3)->find('div.cell',0)->plaintext);
+    $fifteenHourWind = preg_replace('/\s+/', '',$html->find('div.tab-detail.active table tr',5)->find('td',4)->find('div.cell',0)->plaintext);
+    _log("info","wind = " . $nineHourWind . "/" . $twelveHourWind . "/" . $fifteenHourWind . "\n");
 
     $dayName = preg_replace('/\s+/', '',$html->find('div[id=day'.$day.'] div.tab-day-short',0)->plaintext);
     _log("info",'day : ' . $dayName . " \n");

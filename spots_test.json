@@ -1,26 +1,33 @@
 {
     "spots" : [
    {
-    "name": "Marcourt",
-    "type": "plaine",
-    "localisation": "autre",
-    "url": "marcourt_belgique_2791721",
-    "goodDirection": [
-      "E",
-      "SE"
-    ],
-    "goodDirectionInFrench": [
-      "E",
-      "SE"
-    ],
-    "minSpeed": 13,
-    "maxSpeed": 23,
-    "distance": "215km,2h20",
-    "geoloc": "50.220083, 5.524406",
-    "description": "Vol Thermodynamique / départ en cross. En Belgique",
-    "balise": "",
-    "ffvl": "https://www.larochailes.be/decollages/marcourt/",
-    "youtube": "https://www.youtube.com/watch?v=2JE8oNDcWCQ"
-  }
+      "name": "Equihen",
+      "type": "bord-de-mer",
+      "localisation": "nord",
+      "url": "%C3%89quihen-plage_france_3019957",
+      "goodDirection": [
+        "O",
+        "W",
+        "OSO",
+        "WSW",
+        "SO",
+        "SW"
+      ],
+      "goodDirectionInFrench": [
+        "O",
+        "OSO",
+        "SO"
+      ],
+      "minSpeed": 13,
+      "maxSpeed": 23,
+      "distance": "140km,2h",
+      "geoloc": "50.67953007244548, 1.5670255869881216",
+      "needSeaCheck": true,
+      "tideTableUrl": "Equihen-Plage/",
+      "description": "Interdiction",
+      "balise": "https://balisemeteo.com/balise.php?idBalise=159",
+      "ffvl": "https://federation.ffvl.fr/terrain/1355",
+      "youtube": "https://www.youtube.com/watch?v=E1Ju9g2Javw"
+    }
     ]
 }
