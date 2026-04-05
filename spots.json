@@ -155,7 +155,7 @@
     {
       "name": "Mont Clairon",
       "type": "plaine",
-      "localisation": "nord",
+      "localisation": "picardie",
       "url": "chuignolles_france_3024997",
       "goodDirection": [
         "SO",
@@ -371,7 +371,7 @@
     {
       "name": "Sept Meuse",
       "type": "plaine",
-      "localisation": "autre",
+      "localisation": "belgique",
       "url": "rivi%C3%A8re_belgique_2787999",
       "goodDirection": [
         "S",
@@ -398,7 +398,7 @@
     {
       "name": "Hornu",
       "type": "plaine",
-      "localisation": "autre",
+      "localisation": "belgique",
       "url": "hornu_belgique_2795361",
       "goodDirection": [
         "O",
@@ -425,7 +425,7 @@
     {
       "name": "Pasly",
       "type": "plaine",
-      "localisation": "autre",
+      "localisation": "picardie",
       "url": "pasly_france_2988421",
       "goodDirection": [
         "SO",
@@ -453,7 +453,7 @@
     {
       "name": "Mont de la Clique",
       "type": "plaine",
-      "localisation": "autre",
+      "localisation": "normandie",
       "url": "nesle-normandeuse_france_2990734",
       "goodDirection": [
         "ONO",
@@ -480,7 +480,7 @@
     {
       "name": "Criel",
       "type": "bord-de-mer",
-      "localisation": "autre",
+      "localisation": "normandie",
       "url": "criel-sur-mer_france_3022461",
       "goodDirection": [
         "NO",
@@ -511,7 +511,7 @@
     {
       "name": "Chamery",
       "type": "plaine",
-      "localisation": "autre",
+      "localisation": "champagne",
       "url": "chamery_france_3027315",
       "goodDirection": [
         "NNE",
@@ -533,7 +533,7 @@
     {
       "name": "Port \u00e0 Binson",
       "type": "plaine",
-      "localisation": "autre",
+      "localisation": "champagne",
       "url": "port-%C3%A0-binson_france_2986040",
       "goodDirection": [
         "NNE",
@@ -555,7 +555,7 @@
     {
       "name": "Fismes",
       "type": "plaine",
-      "localisation": "autre",
+      "localisation": "champagne",
       "url": "fismes_france_3018453",
       "goodDirection": [
         "E",
@@ -570,7 +570,7 @@
       "minSpeed": 15,
       "maxSpeed": 20,
       "distance": "191km,2h2O",
-      "geoloc": "",
+      "geoloc": "49.29240084759323, 3.66598635536799",
       "description": "Site dynamique et thermique selon les conditions, pas de piege particulier en dehors des epineux dans la pente et des ronces omni-presentes.",
       "balise": "",
       "ffvl": "",
@@ -579,7 +579,7 @@
     {
       "name": "Beauraing",
       "type": "plaine",
-      "localisation": "autre",
+      "localisation": "belgique",
       "url": "beauraing_belgique_2802501",
       "goodDirection": [
         "N",
@@ -604,7 +604,7 @@
     {
       "name": "Rochefort",
       "type": "plaine",
-      "localisation": "autre",
+      "localisation": "belgique",
       "url": "rochefort_belgique_2787948",
       "goodDirection": [
         "N",
@@ -630,7 +630,7 @@
     {
       "name": "Revin",
       "type": "plaine",
-      "localisation": "autre",
+      "localisation": "ardennes",
       "url": "revin_france_2983806",
       "goodDirection": [
         "S",
@@ -670,7 +670,7 @@
     {
       "name": "Fumay",
       "type": "plaine",
-      "localisation": "autre",
+      "localisation": "ardennes",
       "url": "fumay_france_3016907",
       "goodDirection": [
         "O",
@@ -713,7 +713,7 @@
     {
       "name": "Nohan",
       "type": "plaine",
-      "localisation": "autre",
+      "localisation": "ardennes",
       "url": "nohan_france_7628410",
       "goodDirection": [
         "NNE",
@@ -756,7 +756,7 @@
     {
       "name": "Haulme",
       "type": "plaine",
-      "localisation": "autre",
+      "localisation": "ardennes",
       "url": "liry_france_2998160",
       "goodDirection": [
         "NE",
@@ -795,7 +795,7 @@
     {
       "name": "Lalandelle",
       "type": "plaine",
-      "localisation": "autre",
+      "localisation": "picardie",
       "url": "ons-en-bray_france_2989501",
       "goodDirection": [
         "N",
@@ -833,7 +833,7 @@
     {
       "name": "Mont St-Pere",
       "type": "plaine",
-      "localisation": "autre",
+      "localisation": "picardie",
       "url": "mont-saint-p%C3%A8re_france_2991990",
       "goodDirection": [
         "SE"
@@ -853,7 +853,7 @@
     {
       "name": "Joigny",
       "type": "plaine",
-      "localisation": "autre",
+      "localisation": "champagne",
       "url": "joigny-sur-meuse_france_3012317",
       "goodDirection": [
         "SE"
@@ -873,7 +873,7 @@
     {
       "name": "Prayon",
       "type": "plaine",
-      "localisation": "autre",
+      "localisation": "belgique",
       "url": "prayon_belgique_2788650",
       "goodDirection": [
         "NE",
@@ -897,7 +897,7 @@
     {
       "name": "Osmoy",
       "type": "plaine",
-      "localisation": "autre",
+      "localisation": "normandie",
       "url": "osmoy-saint-valery_france_2989133",
       "goodDirection": [
         "N",
@@ -923,7 +923,7 @@
     {
       "name": "Grauves",
       "type": "plaine",
-      "localisation": "autre",
+      "localisation": "champagne",
       "url": "grauves_france_3014826",
       "goodDirection": [
         "SO",
@@ -944,7 +944,7 @@
     {
       "name": "Letanne",
       "type": "plaine",
-      "localisation": "autre",
+      "localisation": "ardennes",
       "url": "l%C3%A9tanne_france_2999279",
       "goodDirection": [
         "ENE",
@@ -968,7 +968,7 @@
     {
       "name": "Coo",
       "type": "plaine",
-      "localisation": "autre",
+      "localisation": "belgique",
       "url": "grand-coo_belgique_2797298",
       "goodDirection": [
         "O",
@@ -991,7 +991,7 @@
     {
       "name": "Vincelles",
       "type": "plaine",
-      "localisation": "autre",
+      "localisation": "champagne",
       "url": "vincelles_france_2968058",
       "goodDirection": [
         "SSO",
@@ -1016,7 +1016,7 @@
     {
       "name": "Londinieres",
       "type": "plaine",
-      "localisation": "autre",
+      "localisation": "picardie",
       "url": "londini%C3%A8res_france_2997784",
       "goodDirection": [
         "SSO",
@@ -1052,7 +1052,7 @@
     {
       "name": "Brimont",
       "type": "plaine",
-      "localisation": "autre",
+      "localisation": "belgique",
       "url": "brimont_france_3030034",
       "goodDirection": [
         "NNE",
@@ -1125,7 +1125,7 @@
     {
       "name": "Zoutelande",
       "type": "bord-de-mer",
-      "localisation": "autre",
+      "localisation": "hollande",
       "url": "zoutelande_pays-bas_2743822",
       "goodDirection": [
         "ONO",
@@ -1155,7 +1155,7 @@
     {
       "name": "Corimont",
       "type": "plaine",
-      "localisation": "autre",
+      "localisation": "ardennes",
       "url": "la-roche-en-ardenne_belgique_2793279",
       "goodDirection": [
         "NO",
@@ -1176,7 +1176,7 @@
   {
     "name": "Marcourt",
     "type": "plaine",
-    "localisation": "autre",
+    "localisation": "belgique",
     "url": "marcourt_belgique_2791721",
     "goodDirection": [
       "E",
@@ -1198,7 +1198,7 @@
   {
     "name": "Maboge",
     "type": "plaine",
-    "localisation": "autre",
+    "localisation": "belgique",
     "url": "maboge_belgique_2791959",
     "goodDirection": [
       "SSO",
@@ -1222,7 +1222,7 @@
   {
     "name": "Clécy",
     "type": "plaine",
-    "localisation": "autre",
+    "localisation": "normandie",
     "url": "48.926N-0.474E",
     "goodDirection": [
       "SSO",
@@ -1254,7 +1254,7 @@
   {
     "name": "Commes",
     "type": "bord-de-mer",
-    "localisation": "autre",
+    "localisation": "normandie",
     "url": "48.926N-0.474E",
     "goodDirection": [
       "NNO",
@@ -1281,7 +1281,7 @@
   {
     "name": "Vierville",
     "type": "bord-de-mer",
-    "localisation": "autre",
+    "localisation": "normandie",
     "url": "vierville-sur-mer_france_2969258",
     "goodDirection": [
       "NNE",
@@ -1307,7 +1307,7 @@
   {
     "name": "Ecalgrain",
     "type": "bord-de-mer",
-    "localisation": "autre",
+    "localisation": "normandie",
     "url": "49.716N-1.941E",
     "goodDirection": [
       "O",
@@ -1334,7 +1334,7 @@
   {
     "name": "Markstein",
     "type": "plaine",
-    "localisation": "autre",
+    "localisation": "vosges",
     "url": "le-marksteinkopf_france_7645333",
     "goodDirection": [
       "SO",
@@ -1365,9 +1365,37 @@
     "youtube": "https://www.youtube.com/watch?v=kiXZnEXAZb4"
   },
   {
+    "name": "Drumont",
+    "type": "plaine",
+    "localisation": "vosges",
+    "url": "le-drumont_france_7645344",
+    "goodDirection": [
+      "NE",
+      "ENE",
+      "E",
+      "ESE",
+      "SE"
+    ],
+    "goodDirectionInFrench": [
+      "NE",
+      "ENE",
+      "E",
+      "ESE",
+      "SE"
+    ],
+    "minSpeed": 5,
+    "maxSpeed": 15,
+    "distance": "556km,6h00",
+    "geoloc": "47.90032880723539, 6.915530523465371",
+    "description": "Vol de montagne. Dans les vosges",
+    "balise": "https://www.spotair.mobi/page/wind/ffvl/147",
+    "ffvl": "https://federation.ffvl.fr/terrain/1126",
+    "youtube": "https://www.youtube.com/watch?v=HV0AZ7zUE8s"
+  },
+  {
     "name": "Dom Le Mesnil",
     "type": "plaine",
-    "localisation": "autre",
+    "localisation": "ardennes",
     "url": "dom-le-mesnil_france_3021181",
     "goodDirection": [
       "N",

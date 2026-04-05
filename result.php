@@ -109,7 +109,7 @@ function filterByLocalisation($results, $localisations) {
     $multiLoc = array_map('trim', $multiLoc);
     
     // Validate localizations
-    $validLocs = ['nord', 'autre', 'normandie', 'ardenne', 'belgique', 'vosges'];
+    $validLocs = ['nord', 'picardie', 'normandie', 'champagne', 'ardennes', 'belgique', 'vosges', 'hollande'];
     foreach ($multiLoc as $loc) {
         if (!in_array(strtolower($loc), $validLocs)) {
             throw new Exception("Invalid localisation: $loc");

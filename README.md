@@ -16,8 +16,7 @@ crawling of meteo data for the razmotte paragliding club
 
 # TODO
 
-- ajouter filtre region : ardenne, belgique, normandie, vosges
-- ajouter de nouveaux sites : drumont, Haulme, normandie
+- ajouter de nouveaux sites : drumont
 - un script local qui alerte si 3j de suite volable sur une région
 - optimiser batch timing avec délais entre appels
 - ajouter tests unitaires
