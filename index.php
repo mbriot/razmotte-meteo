@@ -37,16 +37,25 @@ echo '
                 <div>
                     <span>Localisation : </span>
                     <div class="dropdown" id="localisation-dropdown">
-                        <button class="dropdown-toggle" onclick="toggleDropdown(this)">Sélectionner régions <i class="fas fa-chevron-down"></i></button>
+                        <button class="dropdown-toggle" onclick="toggleDropdown(this)" id="localisation-button">
+                            <span id="selected-regions-display">Sélectionner régions</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
                         <div class="dropdown-menu" id="localisation-menu">
-                            <label><input type="checkbox" class="region-checkbox" value="nord"> Nord</label>
-                            <label><input type="checkbox" class="region-checkbox" value="picardie"> Picardie</label>
-                            <label><input type="checkbox" class="region-checkbox" value="normandie"> Normandie</label>
-                            <label><input type="checkbox" class="region-checkbox" value="champagne"> Champagne</label>
-                            <label><input type="checkbox" class="region-checkbox" value="ardennes"> Ardennes</label>
-                            <label><input type="checkbox" class="region-checkbox" value="belgique"> Belgique</label>
-                            <label><input type="checkbox" class="region-checkbox" value="vosges"> Vosges</label>
-                            <label><input type="checkbox" class="region-checkbox" value="hollande"> Hollande</label>
+                            <div class="dropdown-header">
+                                <button class="dropdown-action-btn" onclick="selectAllRegions()"><i class="fas fa-check"></i> Tout</button>
+                                <button class="dropdown-action-btn" onclick="clearAllRegions()"><i class="fas fa-times"></i> Rien</button>
+                            </div>
+                            <div class="dropdown-content">
+                                <label><input type="checkbox" class="region-checkbox" value="nord" onchange="updateRegionDisplay()"> Nord</label>
+                                <label><input type="checkbox" class="region-checkbox" value="picardie" onchange="updateRegionDisplay()"> Picardie</label>
+                                <label><input type="checkbox" class="region-checkbox" value="normandie" onchange="updateRegionDisplay()"> Normandie</label>
+                                <label><input type="checkbox" class="region-checkbox" value="champagne" onchange="updateRegionDisplay()"> Champagne</label>
+                                <label><input type="checkbox" class="region-checkbox" value="ardennes" onchange="updateRegionDisplay()"> Ardennes</label>
+                                <label><input type="checkbox" class="region-checkbox" value="belgique" onchange="updateRegionDisplay()"> Belgique</label>
+                                <label><input type="checkbox" class="region-checkbox" value="hollande" onchange="updateRegionDisplay()"> Hollande</label>
+                                <label><input type="checkbox" class="region-checkbox" value="vosges" onchange="updateRegionDisplay()"> Vosges</label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -202,6 +211,37 @@ foreach ($predictions->spots as $spotName => $values) {
         }
     });
 
+    function updateRegionDisplay() {
+        var checked = [];
+        document.querySelectorAll('input.region-checkbox:checked').forEach(function(checkbox) {
+            var label = checkbox.nextSibling.nodeValue;
+            checked.push(checkbox.value.charAt(0).toUpperCase() + checkbox.value.slice(1));
+        });
+        
+        var display = document.getElementById('selected-regions-display');
+        if (checked.length === 0) {
+            display.textContent = 'Sélectionner régions';
+        } else if (checked.length === 8) {
+            display.textContent = 'Toutes les régions';
+        } else {
+            display.textContent = checked.join(', ');
+        }
+    }
+
+    function selectAllRegions() {
+        document.querySelectorAll('input.region-checkbox').forEach(function(checkbox) {
+            checkbox.checked = true;
+        });
+        updateRegionDisplay();
+    }
+
+    function clearAllRegions() {
+        document.querySelectorAll('input.region-checkbox').forEach(function(checkbox) {
+            checkbox.checked = false;
+        });
+        updateRegionDisplay();
+    }
+
     function toggleDropdown(button) {
         var menu = button.nextElementSibling;
         menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
@@ -277,6 +317,7 @@ foreach ($predictions->spots as $spotName => $values) {
     }
 
     fillFiltersBasedOnUrl();
+    updateRegionDisplay();
 
     function getDefaultDays() {
         var days = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
