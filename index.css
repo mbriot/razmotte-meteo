@@ -266,6 +266,32 @@ a {
     text-decoration:none;
 }
 
+button.choice-day.inactive {
+    border:1px solid black;
+    border-radius: 5px;
+    padding: 3px;
+    font-size: 1.3em;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    min-width: 50px;
+}
+
+button.choice-day.active {
+    border:1px solid black;
+    border-radius: 5px;
+    padding: 3px;
+    font-size: 1.3em;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    min-width: 50px;
+}
+
+button.choice-day:hover {
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 1200px) {
 
     body {

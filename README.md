@@ -10,8 +10,8 @@ crawling of meteo data for the razmotte paragliding club
 
 
 # TODO
-faire en sorte qu'un batch prenne le max de temps possible avec du temps entre chaque appel
-pas de goodDirection en anglais/francais faire la traduction en live avec une map
-un 5eme batch necessaire
-type de spot : bdm, plaine, cross, treuil
-ajouter filtre : ardenne, nord, belgique, normandie, vosges
+- ajouter filtre region : ardenne, nord, belgique, normandie, vosges
+- ajouter le drumont, Haulme, des sites de normandie
+- generer un nouveau Readme qui explique le fonctionnement du projet, pour utilisateur et developpeur
+- un endpoint /result qui permet de récupérer les resultats
+- un script local qui alerte si 3j de suite volable sur une région
