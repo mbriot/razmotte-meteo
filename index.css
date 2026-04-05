@@ -415,7 +415,7 @@ button.choice-day:hover {
     body {
         padding:0px;
         margin:0px;
-        font:0.7em/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font:0.9em/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
         color:#555;
         font-weight:300;
     }
@@ -426,11 +426,11 @@ button.choice-day:hover {
     }
 
     table.wind-data {
-        font-size: 0.8em;
+        font-size: 1em;
     }
 
     table.day-result {
-        font-size: 0.8em;
+        font-size: 1em;
     }
 
     div.tide, div.weatherResume, div.weatherSentence {
@@ -464,6 +464,7 @@ button.choice-day:hover {
         border: none;
         border-bottom: 1px solid black;
         box-sizing: border-box;
+        font-size: 1em;
     }
 
     #settings-table th.settings-button {
@@ -481,6 +482,7 @@ button.choice-day:hover {
         gap: 12px;
         width: 100%;
         box-sizing: border-box;
+        font-size: 1em;
     }
 
     #div-settings > div {
@@ -493,7 +495,7 @@ button.choice-day:hover {
 
     .dropdown-toggle {
         width: 100%;
-        font-size: 0.9em;
+        font-size: 1.05em;
         padding: 6px 10px;
         box-sizing: border-box;
     }
@@ -506,6 +508,7 @@ button.choice-day:hover {
         max-width: calc(100vw - 10px);
         box-sizing: border-box;
         overflow-y: auto;
+        font-size: 1em;
     }
 
     .loc-input {
@@ -519,7 +522,7 @@ button.choice-day:hover {
     .loc-input button {
         flex: 1;
         min-width: calc(33.333% - 4px);
-        font-size: 0.8em;
+        font-size: 1em;
         padding: 6px 8px;
         box-sizing: border-box;
     }
@@ -527,7 +530,7 @@ button.choice-day:hover {
     .settings-button button {
         width: 100%;
         padding: 12px 16px;
-        font-size: 1em;
+        font-size: 1.15em;
         font-weight: bold;
         box-sizing: border-box;
     }
