@@ -35,10 +35,19 @@ echo '
         <th class="settings-form">
             <div id="div-settings">
                 <div>
-                    <span>Localisation : </<span>
-                    <div class="loc-input">
-                        <button id="nord-button" onclick="toggleLocationOrType(this)" class="choice inactive" >Nord</button>
-                        <button id="autre-button" onclick="toggleLocationOrType(this)" class="choice inactive" >Autre</button>
+                    <span>Localisation : </span>
+                    <div class="dropdown" id="localisation-dropdown">
+                        <button class="dropdown-toggle" onclick="toggleDropdown(this)">Sélectionner régions <i class="fas fa-chevron-down"></i></button>
+                        <div class="dropdown-menu" id="localisation-menu">
+                            <label><input type="checkbox" class="region-checkbox" value="nord"> Nord</label>
+                            <label><input type="checkbox" class="region-checkbox" value="picardie"> Picardie</label>
+                            <label><input type="checkbox" class="region-checkbox" value="normandie"> Normandie</label>
+                            <label><input type="checkbox" class="region-checkbox" value="champagne"> Champagne</label>
+                            <label><input type="checkbox" class="region-checkbox" value="ardennes"> Ardennes</label>
+                            <label><input type="checkbox" class="region-checkbox" value="belgique"> Belgique</label>
+                            <label><input type="checkbox" class="region-checkbox" value="vosges"> Vosges</label>
+                            <label><input type="checkbox" class="region-checkbox" value="hollande"> Hollande</label>
+                        </div>
                     </div>
                 </div>
 
@@ -193,6 +202,11 @@ foreach ($predictions->spots as $spotName => $values) {
         }
     });
 
+    function toggleDropdown(button) {
+        var menu = button.nextElementSibling;
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+
     function toggleLocationOrType(clickedButton) {
         if (clickedButton.classList.contains("active")){
             clickedButton.classList.remove("active");
@@ -202,6 +216,14 @@ foreach ($predictions->spots as $spotName => $values) {
             clickedButton.classList.add("active");
         }
     }
+
+    document.addEventListener('click', function(event) {
+        var dropdown = document.getElementById('localisation-dropdown');
+        if (dropdown && !dropdown.contains(event.target)) {
+            var menu = dropdown.querySelector('.dropdown-menu');
+            if (menu) menu.style.display = 'none';
+        }
+    });
 
     function toggleDay(clickedButton) {
         if(clickedButton.classList.contains("active")){
@@ -231,20 +253,13 @@ foreach ($predictions->spots as $spotName => $values) {
     }
 
     function fillFiltersBasedOnUrl(){
-        var nordButton = document.getElementById('nord-button');
-        var autreButton = document.getElementById('autre-button');
-        var bdmButton = document.getElementById('bdm-button');
-        var plaineButton = document.getElementById('plaine-button');
-        var treuilButton = document.getElementById('treuil-button');
-        var daysButtons = document.querySelectorAll('.choice-day');
-
         var url = window.location.href.split('?')[1];
         var defaultDays = getDefaultDays();
         
         if(url) {
             var params = url.split('&');
         } else {
-            nordButton.classList.add("active");
+            document.querySelector('input[value="nord"]').checked = true;
             defaultDays.forEach(function(day) {
                 var btn = document.getElementById('flyability-' + day.toLowerCase());
                 if (btn) {
@@ -259,11 +274,13 @@ foreach ($predictions->spots as $spotName => $values) {
             var paramName = params[index].split('=')[0];
             var paramValue = params[index].split('=')[1].split(',');
             for (let j = 0; j < paramValue.length; j++){
-                if(paramName == "localisation" && paramValue[j] == "nord") {nordButton.classList.add("active");}
-                if(paramName == "localisation" && paramValue[j] == "autre") {autreButton.classList.add("active");}
-                if(paramName == "type" && paramValue[j] == "plaine") {plaineButton.classList.add("active");}
-                if(paramName == "type" && paramValue[j] == "treuil") {treuilButton.classList.add("active");}
-                if(paramName == "type" && paramValue[j] == "bord-de-mer") {bdmButton.classList.add("active");}
+                if(paramName == "localisation") {
+                    var checkbox = document.querySelector('input[value="' + paramValue[j] + '"]');
+                    if (checkbox) checkbox.checked = true;
+                }
+                if(paramName == "type" && paramValue[j] == "plaine") {document.getElementById('plaine-button').classList.add("active");}
+                if(paramName == "type" && paramValue[j] == "treuil") {document.getElementById('treuil-button').classList.add("active");}
+                if(paramName == "type" && paramValue[j] == "bord-de-mer") {document.getElementById('bdm-button').classList.add("active");}
                 if(paramName == "days" ) {
                     var dayId = 'flyability-' + paramValue[j].toLowerCase();
                     var btn = document.getElementById(dayId);
@@ -277,8 +294,6 @@ foreach ($predictions->spots as $spotName => $values) {
     }
 
     function submitFilters() {
-        var nordButton = document.getElementById('nord-button');
-        var autreButton = document.getElementById('autre-button');
         var bdmButton = document.getElementById('bdm-button');
         var plaineButton = document.getElementById('plaine-button');
         var treuilButton = document.getElementById('treuil-button');
@@ -288,9 +303,13 @@ foreach ($predictions->spots as $spotName => $values) {
         url = url.split('#')[0];
         var params = [];
 
-        if (nordButton.classList.contains("active") && autreButton.classList.contains("active")){params.push('localisation=nord,autre');}
-        else if (nordButton.classList.contains("active")) {params.push('localisation=nord');}
-        else if (autreButton.classList.contains("active")) {params.push('localisation=autre');}
+        var checkedRegions = [];
+        document.querySelectorAll('input.region-checkbox:checked').forEach(function(checkbox) {
+            checkedRegions.push(checkbox.value);
+        });
+        if (checkedRegions.length > 0) {
+            params.push('localisation=' + checkedRegions.join(','));
+        }
 
         if(bdmButton.classList.contains("active") && plaineButton.classList.contains("active") && treuilButton.classList.contains("active")){
             params.push('type=bord-de-mer,treuil,plaine');

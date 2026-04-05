@@ -105,6 +105,7 @@ Endpoint HTTP pour récupérer les résultats du scraping avec filtres avancés.
 ```bash
 GET /result.php
 GET /result.php?localisation=nord
+GET /result.php?localisation=belgique,hollande
 GET /result.php?type=bord-de-mer
 GET /result.php?days=lun,mar,ven
 GET /result.php?spot=equihen
@@ -116,7 +117,7 @@ GET /result.php?format=pretty
 
 | Paramètre | Description | Exemple |
 |-----------|-------------|----------|
-| `localisation` | Filtrer par région (nord/autre) | `?localisation=nord` |
+| `localisation` | Filtrer par région (nord/picardie/normandie/champagne/ardennes/belgique/vosges/hollande) | `?localisation=nord` |
 | `type` | Filtrer par type de site (bord-de-mer/plaine/treuil/cross) | `?type=plaine` |
 | `days` | Trier par jours spécifiques (lun/mar/mer/jeu/ven/sam/dim) | `?days=sam,dim` |
 | `spot` | Filtrer par nom de site (exact ou contient) | `?spot=equihen` |
@@ -154,6 +155,9 @@ curl http://localhost:8000/result.php | jq
 
 # Filtrer par région
 curl http://localhost:8000/result.php?localisation=nord | jq
+
+# Combiner plusieurs régions
+curl "http://localhost:8000/result.php?localisation=belgique,hollande" | jq
 
 # Filtrer par type
 curl http://localhost:8000/result.php?type=bord-de-mer | jq
@@ -359,25 +363,51 @@ php meteoblue-parser.php batchNumber=1
 
 ## Ajouter une nouvelle région
 
+Les régions disponibles sont définies par les valeurs `localisation` dans `spots.json`:
+- nord
+- picardie
+- normandie
+- champagne
+- ardennes
+- belgique
+- vosges
+- hollande
+
+Pour ajouter une nouvelle région à filtrer:
+
 1. **Ajouter les sites avec la nouvelle `localisation`**:
 ```json
 {
-  "localisation": "normandie",
+  "localisation": "ma-region",
   ...
 }
 ```
 
-2. **Passer les jours à affichage en l'état**, les filtres suppriment automatiquement les autres régions
+2. **Mettre à jour result.php** - ajouter la région à `$validLocs`:
+```php
+$validLocs = ['nord', 'picardie', ..., 'ma-region'];
+```
+
+3. **Mettre à jour index.php** - ajouter un bouton de filtre:
+```html
+<button id="ma-region-button" onclick="toggleLocationOrType(this)" class="choice inactive">Ma Region</button>
+```
+
+Et dans la fonction `fillFiltersBasedOnUrl()` et `submitFilters()` du JavaScript, ajouter à `regionButtons`:
+```javascript
+'ma-region': document.getElementById('ma-region-button')
+```
 
 ## Structure des URL de paramètres
 
 ```
-?localisation=nord           // Sites du Nord
-?localisation=autre          // Autres sites
-?type=bord-de-mer           // Sites côtiers
-?type=plaine,treuil         // Plaines OU treuils
-?days=lun,mar,mer           // Trier par lun+mar+mer
-?days=sam,dim               // Ou par week-end
+?localisation=nord                    // Sites du Nord
+?localisation=belgique,hollande       // Sites de Belgique et Hollande
+?localisation=ardennes,champagne      // Ardennes OU Champagne
+?type=bord-de-mer                     // Sites côtiers
+?type=plaine,treuil                   // Plaines OU treuils
+?days=lun,mar,mer                     // Trier par lun+mar+mer
+?days=sam,dim                         // Ou par week-end
 ?localisation=nord&type=plaine&days=ven
 ```
 
