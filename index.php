@@ -88,7 +88,7 @@ echo '
         <tr>
         <th> <div id="legend-back" class="legend"><i id="settings" class="fas fa-cog"></i></div></th>';
             foreach ($days as $day) {
-                echo  "<th>
+                echo  "<th style='cursor: pointer;' onclick=\"filterByDay(this, '${day}')\">
                         ${day}
                         <table><td>9h</td><td>12h</td><td>15h</td></table>
                     </th>";
@@ -224,6 +224,47 @@ foreach ($predictions->spots as $spotName => $values) {
             if (menu) menu.style.display = 'none';
         }
     });
+
+    function filterByDay(headerCell, dayText) {
+        // Extract day abbreviation from text like "lun.  6 avril"
+        var dayAbbrev = dayText.split('.')[0].toLowerCase();
+        
+        // Get current filters (regions and types)
+        var checkedRegions = [];
+        document.querySelectorAll('input.region-checkbox:checked').forEach(function(checkbox) {
+            checkedRegions.push(checkbox.value);
+        });
+        
+        var bdmButton = document.getElementById('bdm-button');
+        var plaineButton = document.getElementById('plaine-button');
+        var treuilButton = document.getElementById('treuil-button');
+        
+        var selectedTypes = [];
+        if (bdmButton.classList.contains('active')) selectedTypes.push('bord-de-mer');
+        if (plaineButton.classList.contains('active')) selectedTypes.push('plaine');
+        if (treuilButton.classList.contains('active')) selectedTypes.push('treuil');
+        
+        // Build URL
+        var url = window.location.href.split('?')[0];
+        url = url.split('#')[0];
+        var params = [];
+        
+        if (checkedRegions.length > 0) {
+            params.push('localisation=' + checkedRegions.join(','));
+        }
+        
+        if (selectedTypes.length > 0) {
+            params.push('type=' + selectedTypes.join(','));
+        }
+        
+        // Add only the clicked day
+        params.push('days=' + dayAbbrev);
+        
+        // Reload page with new filters
+        if (params.length > 0) {
+            window.location.href = url + '?' + params.join('&');
+        }
+    }
 
     function toggleDay(clickedButton) {
         if(clickedButton.classList.contains("active")){

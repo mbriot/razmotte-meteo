@@ -284,6 +284,20 @@ th.title {
     font-weight: bold;
 }
 
+table thead th[onclick] {
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s ease;
+    color: #39c;
+    text-decoration: none;
+}
+
+table thead th[onclick]:hover {
+    background-color: #e0e0e0 !important;
+    color: #0066cc;
+    text-decoration: underline;
+}
+
 table {
   width:100%;
   border-collapse:collapse;
