@@ -5,13 +5,19 @@ crawling of meteo data for the razmotte paragliding club
 ### Launch localy
 
 - php 8+
-- php meteoblue-parser.py #parse meteo-blue and build a result.json file with all the data
-- php -S localhost:8000 # open http://localhost:8000 to see the index.php
+- `php meteoblue-parser.php` - parse meteo-blue and build a result.json file with all the data
+- `php -S localhost:8000` - open http://localhost:8000 to see the index.php
+
+## Documentation
+
+- [USERS.md](USERS.md) - Guide utilisateur: comment utiliser le site
+- [DEVELOPERS.md](DEVELOPERS.md) - Documentation technique: API endpoint, architecture, flux de données
 
 
 # TODO
-- ajouter filtre region : ardenne, nord, belgique, normandie, vosges
-- ajouter le drumont, Haulme, des sites de normandie
-- generer un nouveau Readme qui explique le fonctionnement du projet, pour utilisateur et developpeur
-- un endpoint /result qui permet de récupérer les resultats
+
+- ajouter filtre region : ardenne, belgique, normandie, vosges
+- ajouter de nouveaux sites : drumont, Haulme, normandie
 - un script local qui alerte si 3j de suite volable sur une région
+- optimiser batch timing avec délais entre appels
+- ajouter tests unitaires

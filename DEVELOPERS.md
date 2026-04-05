@@ -96,6 +96,100 @@ Structure des résultats générés après scraping:
 }
 ```
 
+## API Endpoint (`result.php`)
+
+Endpoint HTTP pour récupérer les résultats du scraping avec filtres avancés.
+
+### Usage
+
+```bash
+GET /result.php
+GET /result.php?localisation=nord
+GET /result.php?type=bord-de-mer
+GET /result.php?days=lun,mar,ven
+GET /result.php?spot=equihen
+GET /result.php?localisation=nord&type=plaine&days=sam,dim
+GET /result.php?format=pretty
+```
+
+### Paramètres
+
+| Paramètre | Description | Exemple |
+|-----------|-------------|----------|
+| `localisation` | Filtrer par région (nord/autre) | `?localisation=nord` |
+| `type` | Filtrer par type de site (bord-de-mer/plaine/treuil/cross) | `?type=plaine` |
+| `days` | Trier par jours spécifiques (lun/mar/mer/jeu/ven/sam/dim) | `?days=sam,dim` |
+| `spot` | Filtrer par nom de site (exact ou contient) | `?spot=equihen` |
+| `format` | Format de sortie (pretty pour lisible) | `?format=pretty` |
+
+### Response
+
+Retourne du JSON avec structure:
+
+```json
+{
+  "lastRun": "05-04-2026 14:30",
+  "spots": {
+    "Equihen": { ... },
+    "Olhain": { ... }
+  },
+  "filtered_by_localisation": ["nord"],
+  "filtered_by_type": ["plaine"],
+  "sorted_by_days": ["sam", "dim"]
+}
+```
+
+### Codes HTTP
+
+- **200 OK**: Données valides retournées
+- **400 Bad Request**: Paramètres invalides
+- **404 Not Found**: `result.json` n'existe pas
+- **500 Internal Server Error**: Erreur lors de la lecture des données
+
+### Exemples
+
+```bash
+# Tous les résultats
+curl http://localhost:8000/result.php | jq
+
+# Filtrer par région
+curl http://localhost:8000/result.php?localisation=nord | jq
+
+# Filtrer par type
+curl http://localhost:8000/result.php?type=bord-de-mer | jq
+
+# Filtrer par jours sélectionnés
+curl "http://localhost:8000/result.php?days=lun,mar,ven" | jq
+
+# Filtrer un site
+curl "http://localhost:8000/result.php?spot=equihen" | jq
+
+# Combiner filtres
+curl "http://localhost:8000/result.php?localisation=nord&type=plaine&days=sam,dim" | jq
+
+# Format lisible
+curl "http://localhost:8000/result.php?format=pretty" | jq
+```
+
+### Cas d'usage
+
+Python:
+```python
+import requests
+
+resp = requests.get('http://localhost:8000/result.php', params={
+    'localisation': 'nord',
+    'days': 'sam,dim'
+})
+results = resp.json()
+```
+
+Bash:
+```bash
+weekend_spots=$(curl -s 'http://localhost:8000/result.php?days=sam,dim' | jq '.spots | keys')
+echo "Meilleurs spots week-end: $weekend_spots"
+```
+
 ## Flux de données
 
 ### 1. Scraping (`meteoblue-parser.php`)
