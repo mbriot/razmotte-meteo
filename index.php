@@ -363,11 +363,12 @@ foreach ($predictions->spots as $spotName => $values) {
         if(url) {
             var params = url.split('&');
         } else {
-            document.querySelector('input[value="nord"]').checked = true;
+            document.querySelector('input.region-checkbox[value="nord"]').checked = true;
             defaultDays.forEach(function(day) {
                 var checkbox = document.querySelector('input.day-checkbox[value="' + day.toLowerCase() + '"]');
                 if (checkbox) checkbox.checked = true;
             });
+            updateRegionDisplay();
             updateDaysDisplay();
             return;
         }
@@ -377,7 +378,7 @@ foreach ($predictions->spots as $spotName => $values) {
             var paramValue = params[index].split('=')[1].split(',');
             for (let j = 0; j < paramValue.length; j++){
                 if(paramName == "localisation") {
-                    var checkbox = document.querySelector('input[value="' + paramValue[j] + '"]');
+                    var checkbox = document.querySelector('input.region-checkbox[value="' + paramValue[j] + '"]');
                     if (checkbox) checkbox.checked = true;
                 }
                 if(paramName == "type" && paramValue[j] == "plaine") {document.getElementById('plaine-button').classList.add("active");}
@@ -389,6 +390,7 @@ foreach ($predictions->spots as $spotName => $values) {
                 }
             }
         }
+        updateRegionDisplay();
         updateDaysDisplay();
     }
 
@@ -505,13 +507,19 @@ function filterPredictions($predictions, $arguments){
         $predictions = filterByType($predictions, $arguments['type']);
     }
 
+    // Apply default localisation (Nord) if not specified
     if(isset($arguments['localisation'])){
         $predictions = filterByLocalisation($predictions, $arguments['localisation']);
+    } else {
+        $predictions = filterByLocalisation($predictions, 'nord');
     }
 
+    // Apply default days (first 3 days) if not specified
     if(isset($arguments['days'])){
         $daysList = explode(',', $arguments['days']);
         $predictions = sortByMultipleDays($predictions, $daysList);
+    } else {
+        $predictions = sortByMultipleDays($predictions, ['dim', 'lun', 'mar']);
     }
 
     return json_decode(json_encode($predictions));
