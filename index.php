@@ -47,14 +47,14 @@ echo '
                                 <button class="dropdown-action-btn" onclick="clearAllRegions()"><i class="fas fa-times"></i> Rien</button>
                             </div>
                             <div class="dropdown-content">
-                                <label><input type="checkbox" class="region-checkbox" value="nord" onchange="updateRegionDisplay()"> Nord</label>
-                                <label><input type="checkbox" class="region-checkbox" value="picardie" onchange="updateRegionDisplay()"> Picardie</label>
-                                <label><input type="checkbox" class="region-checkbox" value="normandie" onchange="updateRegionDisplay()"> Normandie</label>
-                                <label><input type="checkbox" class="region-checkbox" value="champagne" onchange="updateRegionDisplay()"> Champagne</label>
-                                <label><input type="checkbox" class="region-checkbox" value="ardennes" onchange="updateRegionDisplay()"> Ardennes</label>
-                                <label><input type="checkbox" class="region-checkbox" value="belgique" onchange="updateRegionDisplay()"> Belgique</label>
-                                <label><input type="checkbox" class="region-checkbox" value="hollande" onchange="updateRegionDisplay()"> Hollande</label>
-                                <label><input type="checkbox" class="region-checkbox" value="vosges" onchange="updateRegionDisplay()"> Vosges</label>
+                                <label><input type="checkbox" class="region-checkbox" value="nord" onchange="updateRegionDisplay();"> Nord</label>
+                                <label><input type="checkbox" class="region-checkbox" value="picardie" onchange="updateRegionDisplay();"> Picardie</label>
+                                <label><input type="checkbox" class="region-checkbox" value="normandie" onchange="updateRegionDisplay();"> Normandie</label>
+                                <label><input type="checkbox" class="region-checkbox" value="champagne" onchange="updateRegionDisplay();"> Champagne</label>
+                                <label><input type="checkbox" class="region-checkbox" value="ardennes" onchange="updateRegionDisplay();"> Ardennes</label>
+                                <label><input type="checkbox" class="region-checkbox" value="belgique" onchange="updateRegionDisplay();"> Belgique</label>
+                                <label><input type="checkbox" class="region-checkbox" value="hollande" onchange="updateRegionDisplay();"> Hollande</label>
+                                <label><input type="checkbox" class="region-checkbox" value="vosges" onchange="updateRegionDisplay();"> Vosges</label>
                             </div>
                         </div>
                     </div>
@@ -70,15 +70,27 @@ echo '
                 </div>
 
                 <div>
-                    <span>Trier par jour : </span> 
-                    <div class="flyability-input">
-                        <button id="flyability-lun" onclick="toggleDay(this)" class="choice-day inactive" >Lun</button>
-                        <button id="flyability-mar" onclick="toggleDay(this)" class="choice-day inactive" >Mar</button>
-                        <button id="flyability-mer" onclick="toggleDay(this)" class="choice-day inactive" >Mer</button>
-                        <button id="flyability-jeu" onclick="toggleDay(this)" class="choice-day inactive" >Jeu</button>
-                        <button id="flyability-ven" onclick="toggleDay(this)" class="choice-day inactive" >Ven</button>
-                        <button id="flyability-sam" onclick="toggleDay(this)" class="choice-day inactive" >Sam</button>
-                        <button id="flyability-dim" onclick="toggleDay(this)" class="choice-day inactive" >Dim</button>
+                    <span>Trier par jour : </span>
+                    <div class="dropdown" id="days-dropdown">
+                        <button class="dropdown-toggle" onclick="toggleDropdown(this)" id="days-button">
+                            <span id="selected-days-display">Sélectionner jours</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu" id="days-menu">
+                            <div class="dropdown-header">
+                                <button class="dropdown-action-btn" onclick="selectAllDays()"><i class="fas fa-check"></i> Tout</button>
+                                <button class="dropdown-action-btn" onclick="clearAllDays()"><i class="fas fa-times"></i> Rien</button>
+                            </div>
+                            <div class="dropdown-content">
+                                <label><input type="checkbox" class="day-checkbox" value="lun"> Lundi</label>
+                                <label><input type="checkbox" class="day-checkbox" value="mar"> Mardi</label>
+                                <label><input type="checkbox" class="day-checkbox" value="mer"> Mercredi</label>
+                                <label><input type="checkbox" class="day-checkbox" value="jeu"> Jeudi</label>
+                                <label><input type="checkbox" class="day-checkbox" value="ven"> Vendredi</label>
+                                <label><input type="checkbox" class="day-checkbox" value="sam"> Samedi</label>
+                                <label><input type="checkbox" class="day-checkbox" value="dim"> Dimanche</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -106,7 +118,7 @@ echo    '</tr></thead>';
 
 echo '<tbody>';
 foreach ($predictions->spots as $spotName => $values) {
-    echo  '<tr class="week-result">
+    echo  '<tr class="week-result" data-type="' . $values->type . '" data-localisation="' . $values->localisation . '">
             <th>
                 <a id="' . str_replace(' ', '_', strtolower($spotName)) . '" href="#' . str_replace(' ', '_', strtolower($spotName)) . '-desc">' . $spotName . '</a>
                 <div>' . $values->minSpeed . ' à '. $values->maxSpeed .'km/h</div>
@@ -211,6 +223,37 @@ foreach ($predictions->spots as $spotName => $values) {
         }
     });
 
+    function updateDaysDisplay() {
+        var checked = [];
+        document.querySelectorAll('input.day-checkbox:checked').forEach(function(checkbox) {
+            var dayNames = {'lun': 'Lun', 'mar': 'Mar', 'mer': 'Mer', 'jeu': 'Jeu', 'ven': 'Ven', 'sam': 'Sam', 'dim': 'Dim'};
+            checked.push(dayNames[checkbox.value]);
+        });
+        
+        var display = document.getElementById('selected-days-display');
+        if (checked.length === 0) {
+            display.textContent = 'Sélectionner jours';
+        } else if (checked.length === 7) {
+            display.textContent = 'Tous les jours';
+        } else {
+            display.textContent = checked.join(', ');
+        }
+    }
+
+    function selectAllDays() {
+        document.querySelectorAll('input.day-checkbox').forEach(function(checkbox) {
+            checkbox.checked = true;
+        });
+        updateDaysDisplay();
+    }
+
+    function clearAllDays() {
+        document.querySelectorAll('input.day-checkbox').forEach(function(checkbox) {
+            checkbox.checked = false;
+        });
+        updateDaysDisplay();
+    }
+
     function updateRegionDisplay() {
         var checked = [];
         document.querySelectorAll('input.region-checkbox:checked').forEach(function(checkbox) {
@@ -269,41 +312,20 @@ foreach ($predictions->spots as $spotName => $values) {
         // Extract day abbreviation from text like "lun.  6 avril"
         var dayAbbrev = dayText.split('.')[0].toLowerCase();
         
-        // Get current filters (regions and types)
-        var checkedRegions = [];
-        document.querySelectorAll('input.region-checkbox:checked').forEach(function(checkbox) {
-            checkedRegions.push(checkbox.value);
+        // Uncheck all day checkboxes
+        document.querySelectorAll('input.day-checkbox').forEach(function(checkbox) {
+            checkbox.checked = false;
         });
         
-        var bdmButton = document.getElementById('bdm-button');
-        var plaineButton = document.getElementById('plaine-button');
-        var treuilButton = document.getElementById('treuil-button');
-        
-        var selectedTypes = [];
-        if (bdmButton.classList.contains('active')) selectedTypes.push('bord-de-mer');
-        if (plaineButton.classList.contains('active')) selectedTypes.push('plaine');
-        if (treuilButton.classList.contains('active')) selectedTypes.push('treuil');
-        
-        // Build URL
-        var url = window.location.href.split('?')[0];
-        url = url.split('#')[0];
-        var params = [];
-        
-        if (checkedRegions.length > 0) {
-            params.push('localisation=' + checkedRegions.join(','));
+        // Check only the clicked day
+        var dayCheckbox = document.querySelector('input.day-checkbox[value="' + dayAbbrev + '"]');
+        if (dayCheckbox) {
+            dayCheckbox.checked = true;
         }
         
-        if (selectedTypes.length > 0) {
-            params.push('type=' + selectedTypes.join(','));
-        }
-        
-        // Add only the clicked day
-        params.push('days=' + dayAbbrev);
-        
-        // Reload page with new filters
-        if (params.length > 0) {
-            window.location.href = url + '?' + params.join('&');
-        }
+        // Update display and submit filters
+        updateDaysDisplay();
+        submitFilters();
     }
 
     function toggleDay(clickedButton) {
@@ -343,12 +365,10 @@ foreach ($predictions->spots as $spotName => $values) {
         } else {
             document.querySelector('input[value="nord"]').checked = true;
             defaultDays.forEach(function(day) {
-                var btn = document.getElementById('flyability-' + day.toLowerCase());
-                if (btn) {
-                    btn.classList.remove('inactive');
-                    btn.classList.add('active');
-                }
+                var checkbox = document.querySelector('input.day-checkbox[value="' + day.toLowerCase() + '"]');
+                if (checkbox) checkbox.checked = true;
             });
+            updateDaysDisplay();
             return;
         }
         
@@ -364,58 +384,51 @@ foreach ($predictions->spots as $spotName => $values) {
                 if(paramName == "type" && paramValue[j] == "treuil") {document.getElementById('treuil-button').classList.add("active");}
                 if(paramName == "type" && paramValue[j] == "bord-de-mer") {document.getElementById('bdm-button').classList.add("active");}
                 if(paramName == "days" ) {
-                    var dayId = 'flyability-' + paramValue[j].toLowerCase();
-                    var btn = document.getElementById(dayId);
-                    if (btn) {
-                        btn.classList.remove('inactive');
-                        btn.classList.add('active');
-                    }
+                    var checkbox = document.querySelector('input.day-checkbox[value="' + paramValue[j].toLowerCase() + '"]');
+                    if (checkbox) checkbox.checked = true;
                 }
             }
         }
+        updateDaysDisplay();
     }
 
     function submitFilters() {
-        var bdmButton = document.getElementById('bdm-button');
-        var plaineButton = document.getElementById('plaine-button');
-        var treuilButton = document.getElementById('treuil-button');
-        var daysButtons = document.querySelectorAll('.choice-day.active');
-
-        var url = window.location.href.split('?')[0];
-        url = url.split('#')[0];
-        var params = [];
-
+        // Collect selected regions
         var checkedRegions = [];
         document.querySelectorAll('input.region-checkbox:checked').forEach(function(checkbox) {
             checkedRegions.push(checkbox.value);
         });
+        
+        // Collect selected types
+        var selectedTypes = [];
+        if (document.getElementById('bdm-button').classList.contains('active')) selectedTypes.push('bord-de-mer');
+        if (document.getElementById('plaine-button').classList.contains('active')) selectedTypes.push('plaine');
+        if (document.getElementById('treuil-button').classList.contains('active')) selectedTypes.push('treuil');
+        
+        // Collect selected days from checkboxes
+        var checkedDays = [];
+        document.querySelectorAll('input.day-checkbox:checked').forEach(function(checkbox) {
+            checkedDays.push(checkbox.value);
+        });
+        
+        // Build URL
+        var url = window.location.href.split('?')[0].split('#')[0];
+        var params = [];
+        
         if (checkedRegions.length > 0) {
             params.push('localisation=' + checkedRegions.join(','));
         }
-
-        if(bdmButton.classList.contains("active") && plaineButton.classList.contains("active") && treuilButton.classList.contains("active")){
-            params.push('type=bord-de-mer,treuil,plaine');
+        
+        if (selectedTypes.length > 0) {
+            params.push('type=' + selectedTypes.join(','));
         }
-        else if(bdmButton.classList.contains("active") && treuilButton.classList.contains("active")){params.push('type=bord-de-mer,treuil');}
-        else if(bdmButton.classList.contains("active") && plaineButton.classList.contains("active")){params.push('type=bord-de-mer,plaine');}
-        else if(plaineButton.classList.contains("active") && treuilButton.classList.contains("active")){params.push('type=plaine,treuil');}
-        else if(plaineButton.classList.contains("active")){params.push('type=plaine');}
-        else if(treuilButton.classList.contains("active")){params.push('type=treuil');}
-        else if(bdmButton.classList.contains("active")){params.push('type=bord-de-mer');}
-
-        if (daysButtons.length > 0) {
-            var selectedDays = [];
-            daysButtons.forEach(function(btn) {
-                var dayText = btn.textContent.toLowerCase();
-                selectedDays.push(dayText);
-            });
-            params.push('days=' + selectedDays.join(','));
+        
+        if (checkedDays.length > 0) {
+            params.push('days=' + checkedDays.join(','));
         }
-
-        if (params.length > 0) {
-            url += '?' + params.join('&');
-        }
-        window.location.href = url;
+        
+        var newUrl = params.length > 0 ? url + '?' + params.join('&') : url;
+        window.location.href = newUrl;
     }
 
 </script>
@@ -499,16 +512,6 @@ function filterPredictions($predictions, $arguments){
     if(isset($arguments['days'])){
         $daysList = explode(',', $arguments['days']);
         $predictions = sortByMultipleDays($predictions, $daysList);
-    } else {
-        $predictions = filterByLocalisation($predictions, "nord");
-        $defaultDays = getDefaultSelectedDays();
-        $predictions = sortByMultipleDays($predictions, $defaultDays);
-    }
-
-    if (count($arguments) == 0){
-        $predictions = filterByLocalisation($predictions, "nord");
-        $defaultDays = getDefaultSelectedDays();
-        $predictions = sortByMultipleDays($predictions, $defaultDays);
     }
 
     return json_decode(json_encode($predictions));
