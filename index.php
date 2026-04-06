@@ -30,7 +30,7 @@ echo '
 ';
 
 echo '
-    <table id="settings-table" style="display:none;">
+    <table id="settings-table" class="settings-table-desktop">
     <tr>
         <th class="settings-form">
             <div id="div-settings">
@@ -219,11 +219,7 @@ foreach ($predictions->spots as $spotName => $values) {
 <script>
     window.document.getElementById('settings').addEventListener('click', function() {
         var settingsTable = window.document.getElementById('settings-table');
-        if (settingsTable.style.display === 'none') {
-            settingsTable.style.display = 'block';
-        } else {
-            settingsTable.style.display = 'none';
-        }
+        settingsTable.classList.toggle('show-on-mobile');
     });
 
 

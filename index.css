@@ -213,6 +213,14 @@ table.start th, #settings-table th{
     border: 1px solid black;
 }
 
+.settings-table-desktop {
+    width: 50%;
+    margin-left: 33%;
+    margin-right: 33%;
+    margin-top:10px;
+    display: block;
+}
+
 #settings-table {
     width: 50%;
     margin-left: 33%;
@@ -527,9 +535,13 @@ button.choice-day:hover {
         margin-left: 5px;
         margin-right: 5px;
         margin-top:5px;
-        display: block;
+        display: none;
         border: 1px solid black;
         box-sizing: content-box;
+    }
+
+    #settings-table.show-on-mobile {
+        display: block;
     }
 
     #settings-table tr {
