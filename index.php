@@ -287,19 +287,20 @@ foreach ($predictions->spots as $spotName => $values) {
         // Extract day abbreviation from text like "lun.  6 avril"
         var dayAbbrev = dayText.split('.')[0].toLowerCase();
         
-        // Uncheck all day checkboxes
-        document.querySelectorAll('input.day-checkbox').forEach(function(checkbox) {
-            checkbox.checked = false;
+        // Deactivate all day buttons
+        document.querySelectorAll('button.day-button').forEach(function(button) {
+            button.classList.remove('active');
+            button.classList.add('inactive');
         });
         
-        // Check only the clicked day
-        var dayCheckbox = document.querySelector('input.day-checkbox[value="' + dayAbbrev + '"]');
-        if (dayCheckbox) {
-            dayCheckbox.checked = true;
+        // Activate only the clicked day
+        var dayButton = document.querySelector('button.day-button[data-day="' + dayAbbrev + '"]');
+        if (dayButton) {
+            dayButton.classList.remove('inactive');
+            dayButton.classList.add('active');
         }
         
-        // Update display and submit filters
-        updateDaysDisplay();
+        // Submit filters
         submitFilters();
     }
 
