@@ -71,26 +71,14 @@ echo '
 
                 <div>
                     <span>Trier par jour : </span>
-                    <div class="dropdown" id="days-dropdown">
-                        <button class="dropdown-toggle" onclick="toggleDropdown(this)" id="days-button">
-                            <span id="selected-days-display">Sélectionner jours</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="dropdown-menu" id="days-menu">
-                            <div class="dropdown-header">
-                                <button class="dropdown-action-btn" onclick="selectAllDays()"><i class="fas fa-check"></i> Tout</button>
-                                <button class="dropdown-action-btn" onclick="clearAllDays()"><i class="fas fa-times"></i> Rien</button>
-                            </div>
-                            <div class="dropdown-content">
-                                <label><input type="checkbox" class="day-checkbox" value="lun"> Lundi</label>
-                                <label><input type="checkbox" class="day-checkbox" value="mar"> Mardi</label>
-                                <label><input type="checkbox" class="day-checkbox" value="mer"> Mercredi</label>
-                                <label><input type="checkbox" class="day-checkbox" value="jeu"> Jeudi</label>
-                                <label><input type="checkbox" class="day-checkbox" value="ven"> Vendredi</label>
-                                <label><input type="checkbox" class="day-checkbox" value="sam"> Samedi</label>
-                                <label><input type="checkbox" class="day-checkbox" value="dim"> Dimanche</label>
-                            </div>
-                        </div>
+                    <div class="days-input">
+                        <button class="day-button inactive" data-day="lun" onclick="toggleDay(this)">LUN</button>
+                        <button class="day-button inactive" data-day="mar" onclick="toggleDay(this)">MAR</button>
+                        <button class="day-button inactive" data-day="mer" onclick="toggleDay(this)">MER</button>
+                        <button class="day-button inactive" data-day="jeu" onclick="toggleDay(this)">JEU</button>
+                        <button class="day-button inactive" data-day="ven" onclick="toggleDay(this)">VEN</button>
+                        <button class="day-button inactive" data-day="sam" onclick="toggleDay(this)">SAM</button>
+                        <button class="day-button inactive" data-day="dim" onclick="toggleDay(this)">DIM</button>
                     </div>
                 </div>
             </div>
@@ -224,34 +212,21 @@ foreach ($predictions->spots as $spotName => $values) {
 
 
     function updateDaysDisplay() {
-        var checked = [];
-        document.querySelectorAll('input.day-checkbox:checked').forEach(function(checkbox) {
-            var dayNames = {'lun': 'Lun', 'mar': 'Mar', 'mer': 'Mer', 'jeu': 'Jeu', 'ven': 'Ven', 'sam': 'Sam', 'dim': 'Dim'};
-            checked.push(dayNames[checkbox.value]);
-        });
-        
-        var display = document.getElementById('selected-days-display');
-        if (checked.length === 0) {
-            display.textContent = 'Sélectionner jours';
-        } else if (checked.length === 7) {
-            display.textContent = 'Tous les jours';
-        } else {
-            display.textContent = checked.join(', ');
-        }
+        // No longer needed - days are shown as buttons
     }
 
     function selectAllDays() {
-        document.querySelectorAll('input.day-checkbox').forEach(function(checkbox) {
-            checkbox.checked = true;
+        document.querySelectorAll('button.day-button').forEach(function(btn) {
+            btn.classList.remove('inactive');
+            btn.classList.add('active');
         });
-        updateDaysDisplay();
     }
 
     function clearAllDays() {
-        document.querySelectorAll('input.day-checkbox').forEach(function(checkbox) {
-            checkbox.checked = false;
+        document.querySelectorAll('button.day-button').forEach(function(btn) {
+            btn.classList.remove('active');
+            btn.classList.add('inactive');
         });
-        updateDaysDisplay();
     }
 
     function updateRegionDisplay() {
@@ -365,11 +340,13 @@ foreach ($predictions->spots as $spotName => $values) {
         } else {
             document.querySelector('input.region-checkbox[value="nord"]').checked = true;
             defaultDays.forEach(function(day) {
-                var checkbox = document.querySelector('input.day-checkbox[value="' + day.toLowerCase() + '"]');
-                if (checkbox) checkbox.checked = true;
+                var btn = document.querySelector('button.day-button[data-day="' + day.toLowerCase() + '"]');
+                if (btn) {
+                    btn.classList.remove('inactive');
+                    btn.classList.add('active');
+                }
             });
             updateRegionDisplay();
-            updateDaysDisplay();
             return;
         }
         
@@ -385,13 +362,15 @@ foreach ($predictions->spots as $spotName => $values) {
                 if(paramName == "type" && paramValue[j] == "treuil") {document.getElementById('treuil-button').classList.add("active");}
                 if(paramName == "type" && paramValue[j] == "bord-de-mer") {document.getElementById('bdm-button').classList.add("active");}
                 if(paramName == "days" ) {
-                    var checkbox = document.querySelector('input.day-checkbox[value="' + paramValue[j].toLowerCase() + '"]');
-                    if (checkbox) checkbox.checked = true;
+                    var btn = document.querySelector('button.day-button[data-day="' + paramValue[j].toLowerCase() + '"]');
+                    if (btn) {
+                        btn.classList.remove('inactive');
+                        btn.classList.add('active');
+                    }
                 }
             }
         }
         updateRegionDisplay();
-        updateDaysDisplay();
     }
 
     function submitFilters() {
@@ -407,10 +386,10 @@ foreach ($predictions->spots as $spotName => $values) {
         if (document.getElementById('plaine-button').classList.contains('active')) selectedTypes.push('plaine');
         if (document.getElementById('treuil-button').classList.contains('active')) selectedTypes.push('treuil');
         
-        // Collect selected days from checkboxes
+        // Collect selected days from active buttons
         var checkedDays = [];
-        document.querySelectorAll('input.day-checkbox:checked').forEach(function(checkbox) {
-            checkedDays.push(checkbox.value);
+        document.querySelectorAll('button.day-button.active').forEach(function(btn) {
+            checkedDays.push(btn.getAttribute('data-day'));
         });
         
         // Build URL

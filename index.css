@@ -266,9 +266,42 @@ button.choice.active {
     font-weight: bold;
 }
 
-.loc-input, .sort-input, .type-input {
+.loc-input, .sort-input, .type-input, .days-input {
     display: block;
     margin-bottom: 10px;
+}
+
+.days-input {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+button.day-button {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 0.95em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex: 1;
+    min-width: 50px;
+    text-align: center;
+}
+
+button.day-button.inactive {
+    background-color: white;
+    color: black;
+}
+
+button.day-button.active {
+    background-color: black;
+    color: white;
+}
+
+button.day-button:hover {
+    transform: scale(1.05);
 }
 
 /* Dropdown Styles */
@@ -625,6 +658,24 @@ button.choice-day:hover {
         padding: 12px 16px;
         font-size: 1.25em;
         font-weight: bold;
+        box-sizing: border-box;
+    }
+
+    .days-input {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    button.day-button {
+        flex: 1;
+        min-width: calc(25% - 6px);
+        padding: 12px 6px;
+        font-size: 1.1em;
+        text-align: center;
+        height: auto;
         box-sizing: border-box;
     }
 }
