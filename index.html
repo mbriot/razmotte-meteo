@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Météo des sites</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="icon" href="/images/photos/LOGO/Logo_Razmotte_accueil.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <style>
+        [v-cloak] { display: none; }
+        th.day-header-cell {
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.2s ease;
+            color: #39c;
+            text-decoration: none;
+        }
+        th.day-header-cell:hover {
+            background-color: #e0e0e0 !important;
+            color: #0066cc;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app" v-cloak>
+
+    <table class="start">
+        <tr>
+            <th class="logo"><img src="images/razmotte_logo.jpg"></th>
+            <th class="title"><span>Météo des sites du Nord pas de calais</span></th>
+        </tr>
+    </table>
+
+    <table id="settings-table" class="settings-table-desktop" :class="{'show-on-mobile': showSettings}">
+    <tr>
+        <th class="settings-form">
+            <div id="div-settings">
+                <div>
+                    <span>Localisation : </span>
+                    <div class="dropdown" id="localisation-dropdown" ref="locDropdown">
+                        <button class="dropdown-toggle" @click.stop="showLocDropdown = !showLocDropdown" id="localisation-button">
+                            <span id="selected-regions-display">{{ regionDisplayText }}</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu" id="localisation-menu" v-show="showLocDropdown">
+                            <div class="dropdown-header">
+                                <button class="dropdown-action-btn" @click="selectAllRegions()"><i class="fas fa-check"></i> Tout</button>
+                                <button class="dropdown-action-btn" @click="clearAllRegions()"><i class="fas fa-times"></i> Rien</button>
+                            </div>
+                            <div class="dropdown-content">
+                                <label v-for="r in allRegions" :key="r.value">
+                                    <input type="checkbox" class="region-checkbox" :value="r.value" v-model="selectedRegions" @change="updateUrl()"> {{ r.label }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <span>Type de site : </span>
+                    <div class="loc-input">
+                        <button id="bdm-button" @click="toggleType('bord-de-mer')"
+                                :class="['choice', selectedTypes.includes('bord-de-mer') ? 'active' : 'inactive']">Bord de mer</button>
+                        <button id="plaine-button" @click="toggleType('plaine')"
+                                :class="['choice', selectedTypes.includes('plaine') ? 'active' : 'inactive']">Plaine</button>
+                        <button id="treuil-button" @click="toggleType('treuil')"
+                                :class="['choice', selectedTypes.includes('treuil') ? 'active' : 'inactive']">Treuil</button>
+                    </div>
+                </div>
+
+                <div>
+                    <span>Trier par jour : </span>
+                    <div class="days-input">
+                        <button v-for="d in allDays" :key="d.value"
+                                :class="['day-button', selectedDays.includes(d.value) ? 'active' : 'inactive']"
+                                :data-day="d.value"
+                                @click="toggleDay(d.value)">{{ d.label }}</button>
+                    </div>
+                </div>
+            </div>
+        </th>
+        <th class="settings-button">
+            <button @click="updateUrl()">Valider</button>
+        </th>
+    </tr>
+    </table>
+
+    <span v-if="lastRun">Dernier run :{{ lastRun }}</span>
+
+    <div class="table-container">
+    <table class="wind-data" border="1">
+        <thead>
+        <tr>
+            <th>
+                <div id="legend-back" class="legend" @click="showSettings = !showSettings">
+                    <i id="settings" class="fas fa-filter"></i>
+                    <span id="filter-label">FILTRER</span>
+                </div>
+            </th>
+            <th v-for="day in dayColumns" :key="day"
+                class="day-header-cell"
+                @click="filterByDay(day)">
+                <div class="day-header">
+                    <span>{{ day }}</span>
+                    <i class="fas fa-filter day-filter-icon"></i>
+                </div>
+                <table><tr><td>9h</td><td>12h</td><td>15h</td></tr></table>
+            </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr v-for="entry in filteredSpotsArray" :key="entry.name"
+            class="week-result" :data-type="entry.spot.type" :data-localisation="entry.spot.localisation">
+            <th>
+                <a :id="spotId(entry.name)" :href="'#' + spotId(entry.name) + '-desc'">{{ entry.name }}</a>
+                <div>{{ entry.spot.minSpeed }} à {{ entry.spot.maxSpeed }}km/h</div>
+                <div>{{ entry.spot.goodDirectionInFrench.join(', ') }}</div>
+                <div>{{ entry.spot.distance }}</div>
+            </th>
+            <td v-for="(day, dayIdx) in entry.spot.days" :key="dayIdx">
+                <div v-if="day.closed" class="closed">Fermé</div>
+                <template v-else>
+                    <table class="day-result">
+                        <tr>
+                            <td :class="day._9h.min.flyable"><span :class="day._9h.min.flyable">{{ day._9h.min.speed }}</span></td>
+                            <td :class="day._12h.min.flyable"><span :class="day._12h.min.flyable">{{ day._12h.min.speed }}</span></td>
+                            <td :class="day._15h.min.flyable"><span :class="day._15h.min.flyable">{{ day._15h.min.speed }}</span></td>
+                        </tr>
+                        <tr>
+                            <td :class="day._9h.max.flyable"><span :class="day._9h.max.flyable">{{ day._9h.max.speed }}</span></td>
+                            <td :class="day._12h.max.flyable"><span :class="day._12h.max.flyable">{{ day._12h.max.speed }}</span></td>
+                            <td :class="day._15h.max.flyable"><span :class="day._15h.max.flyable">{{ day._15h.max.speed }}</span></td>
+                        </tr>
+                        <tr>
+                            <td :class="day._9h.dir.flyable ? 'flyable-wind' : 'not-flyable-wind'"><span>{{ day._9h.dir.dir }}</span></td>
+                            <td :class="day._12h.dir.flyable ? 'flyable-wind' : 'not-flyable-wind'"><span>{{ day._12h.dir.dir }}</span></td>
+                            <td :class="day._15h.dir.flyable ? 'flyable-wind' : 'not-flyable-wind'"><span>{{ day._15h.dir.dir }}</span></td>
+                        </tr>
+                    </table>
+                    <div class="weatherSentence">{{ day.weatherSentence }}</div>
+                    <div class="weatherResume">
+                        <span :class="day.rain.rainClass">{{ day.rain.rain }}</span>
+                        <span :class="day.sunHour.sunClass">{{ day.sunHour.sun }}h</span>
+                        <span class="temp">{{ day.temp }}°C</span>
+                    </div>
+                    <div v-if="day.tide" class="tide">
+                        <span class="tide-text">PM : {{ day.tide.first }} et {{ day.tide.second }}, coeff {{ day.tide.coeff }} </span>
+                    </div>
+                </template>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+
+    <template v-for="entry in filteredSpotsArray" :key="entry.name + '-desc'">
+        <h1><a :id="spotId(entry.name) + '-desc'" :href="'#' + spotId(entry.name)">{{ entry.name }}</a></h1>
+        <table class="spot-desc">
+            <tr>
+                <td class="spot-title">Vent conseillé (min/max)</td>
+                <td class="spot-value">{{ entry.spot.minSpeed }}/{{ entry.spot.maxSpeed }}</td>
+            </tr>
+            <tr>
+                <td class="spot-title">Directions du vent</td>
+                <td class="spot-value">{{ entry.spot.goodDirectionInFrench.join(', ') }}</td>
+            </tr>
+            <tr>
+                <td class="spot-title">Description</td>
+                <td class="spot-value" v-html="entry.spot.description"></td>
+            </tr>
+            <tr>
+                <td class="spot-title">Distance de Lille</td>
+                <td class="spot-value">{{ entry.spot.distance }}</td>
+            </tr>
+            <tr>
+                <td class="spot-title">Geolocalisation déco</td>
+                <td class="spot-value">{{ entry.spot.geoloc }}</td>
+            </tr>
+            <tr>
+                <td class="spot-title">FFVL</td>
+                <td class="spot-value">
+                    <a v-if="entry.spot.ffvl" :href="entry.spot.ffvl">FFVL</a>
+                    <span v-else>N/A</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="spot-title">Balise</td>
+                <td class="spot-value">
+                    <a v-if="entry.spot.balise" :href="entry.spot.balise">Balise</a>
+                    <span v-else>N/A</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="spot-title">Lien Météoblue</td>
+                <td class="spot-value"><a :href="'https://www.meteoblue.com/fr/meteo/semaine/' + entry.spot.url">météoblue</a></td>
+            </tr>
+            <tr>
+                <td class="spot-title">Qques images Youtube</td>
+                <td class="spot-value"><a :href="entry.spot.youtube">youtube</a></td>
+            </tr>
+        </table>
+    </template>
+
+</div>
+
+<script>
+const { createApp } = Vue;
+
+createApp({
+    data() {
+        return {
+            allData: null,
+            loading: true,
+            lastRun: '',
+            showSettings: false,
+            showLocDropdown: false,
+            selectedRegions: [],
+            selectedTypes: [],
+            selectedDays: [],
+            allRegions: [
+                { value: 'nord', label: 'Nord' },
+                { value: 'picardie', label: 'Picardie' },
+                { value: 'normandie', label: 'Normandie' },
+                { value: 'champagne', label: 'Champagne' },
+                { value: 'ardennes', label: 'Ardennes' },
+                { value: 'belgique', label: 'Belgique' },
+                { value: 'hollande', label: 'Hollande' },
+                { value: 'vosges', label: 'Vosges' },
+            ],
+            allDays: [
+                { value: 'lun', label: 'LUN' },
+                { value: 'mar', label: 'MAR' },
+                { value: 'mer', label: 'MER' },
+                { value: 'jeu', label: 'JEU' },
+                { value: 'ven', label: 'VEN' },
+                { value: 'sam', label: 'SAM' },
+                { value: 'dim', label: 'DIM' },
+            ]
+        };
+    },
+    computed: {
+        dayColumns() {
+            if (!this.allData || !this.allData.spots) return [];
+            const firstSpot = Object.values(this.allData.spots)[0];
+            if (!firstSpot || !firstSpot.days) return [];
+            return firstSpot.days.map(d => d.day);
+        },
+        regionDisplayText() {
+            if (this.selectedRegions.length === 0) return 'Sélectionner régions';
+            if (this.selectedRegions.length === this.allRegions.length) return 'Toutes les régions';
+            return this.selectedRegions.map(r => r.charAt(0).toUpperCase() + r.slice(1)).join(', ');
+        },
+        filteredSpotsArray() {
+            if (!this.allData || !this.allData.spots) return [];
+
+            let entries = Object.entries(this.allData.spots)
+                .map(([name, spot]) => ({ name, spot }));
+
+            // Filter by localisation
+            if (this.selectedRegions.length > 0) {
+                entries = entries.filter(e => this.selectedRegions.includes(e.spot.localisation));
+            }
+
+            // Filter by type
+            if (this.selectedTypes.length > 0) {
+                entries = entries.filter(e => this.selectedTypes.includes(e.spot.type));
+            }
+
+            // Sort by selected days scores
+            const daysForSort = this.selectedDays.length > 0
+                ? this.selectedDays
+                : this.getDefaultDays();
+            entries.sort((a, b) => {
+                let scoreA = 0, scoreB = 0;
+                daysForSort.forEach(day => {
+                    const field = day + 'Score';
+                    scoreA += (a.spot[field] || 0);
+                    scoreB += (b.spot[field] || 0);
+                });
+                return scoreB - scoreA;
+            });
+
+            return entries;
+        }
+    },
+    methods: {
+        spotId(name) {
+            return name.replace(/ /g, '_').toLowerCase();
+        },
+        toggleType(type) {
+            const idx = this.selectedTypes.indexOf(type);
+            if (idx >= 0) {
+                this.selectedTypes.splice(idx, 1);
+            } else {
+                this.selectedTypes.push(type);
+            }
+            this.updateUrl();
+        },
+        toggleDay(day) {
+            const idx = this.selectedDays.indexOf(day);
+            if (idx >= 0) {
+                this.selectedDays.splice(idx, 1);
+            } else {
+                this.selectedDays.push(day);
+            }
+            this.updateUrl();
+        },
+        filterByDay(dayText) {
+            const dayAbbrev = dayText.split('.')[0].toLowerCase().trim();
+            this.selectedDays = [dayAbbrev];
+            this.updateUrl();
+        },
+        selectAllRegions() {
+            this.selectedRegions = this.allRegions.map(r => r.value);
+            this.updateUrl();
+        },
+        clearAllRegions() {
+            this.selectedRegions = [];
+            this.updateUrl();
+        },
+        getDefaultDays() {
+            const dayNames = ['lun', 'mar', 'mer', 'jeu', 'ven', 'sam', 'dim'];
+            const today = new Date();
+            let todayIndex = today.getDay();
+            if (todayIndex === 0) todayIndex = 7;
+            todayIndex = todayIndex - 1;
+            const result = [];
+            for (let i = 0; i < 3; i++) {
+                result.push(dayNames[(todayIndex + i) % 7]);
+            }
+            return result;
+        },
+        loadFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+
+            if (params.has('localisation')) {
+                this.selectedRegions = params.get('localisation').split(',').filter(Boolean);
+            } else {
+                this.selectedRegions = ['nord'];
+            }
+
+            if (params.has('type')) {
+                this.selectedTypes = params.get('type').split(',').filter(Boolean);
+            }
+
+            if (params.has('days')) {
+                this.selectedDays = params.get('days').split(',').filter(Boolean);
+            } else {
+                this.selectedDays = this.getDefaultDays();
+            }
+        },
+        updateUrl() {
+            const params = [];
+            if (this.selectedRegions.length > 0) {
+                params.push('localisation=' + this.selectedRegions.join(','));
+            }
+            if (this.selectedTypes.length > 0) {
+                params.push('type=' + this.selectedTypes.join(','));
+            }
+            if (this.selectedDays.length > 0) {
+                params.push('days=' + this.selectedDays.join(','));
+            }
+            const newUrl = params.length > 0
+                ? window.location.pathname + '?' + params.join('&')
+                : window.location.pathname;
+            history.replaceState(null, '', newUrl);
+        }
+    },
+    mounted() {
+        this.loadFromUrl();
+
+        fetch('result.json')
+            .then(r => r.json())
+            .then(data => {
+                this.allData = data;
+                this.lastRun = data.lastRun || '';
+                this.loading = false;
+            })
+            .catch(err => {
+                console.error('Erreur chargement result.json:', err);
+                this.loading = false;
+            });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (event) => {
+            const dropdown = this.$refs.locDropdown;
+            if (dropdown && !dropdown.contains(event.target)) {
+                this.showLocDropdown = false;
+            }
+        });
+    }
+}).mount('#app');
+</script>
+
+</body>
+</html>

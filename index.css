@@ -339,7 +339,6 @@ button.day-button:hover {
 }
 
 .dropdown-menu {
-    display: none;
     position: absolute;
     background-color: white;
     min-width: 320px;
