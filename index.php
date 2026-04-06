@@ -107,13 +107,16 @@ echo '
     <table class="wind-data" border="1">
         <thead>
         <tr>
-        <th> <div id="legend-back" class="legend"><i id="settings" class="fas fa-cog"></i></div></th>';
+        <th> <div id="legend-back" class="legend"><i id="settings" class="fas fa-filter"></i><span id="filter-label">FILTRER</span></div></th>';
             foreach ($days as $day) {
                 echo  "<th style='cursor: pointer;' onclick=\"filterByDay(this, '${day}')\">
-                        ${day}
+                        <div class='day-header'>
+                            <span>${day}</span>
+                            <i class='fas fa-filter day-filter-icon'></i>
+                        </div>
                         <table><td>9h</td><td>12h</td><td>15h</td></table>
                     </th>";
-            } 
+            }
 echo    '</tr></thead>';
 
 echo '<tbody>';
@@ -222,6 +225,7 @@ foreach ($predictions->spots as $spotName => $values) {
             settingsTable.style.display = 'none';
         }
     });
+
 
     function updateDaysDisplay() {
         var checked = [];

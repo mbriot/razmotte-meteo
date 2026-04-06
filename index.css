@@ -162,6 +162,53 @@ img.img-legend {
     margin-right: 25%;
 }
 
+.day-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: 100%;
+}
+
+.day-filter-icon {
+    font-size: 0.8em;
+    color: currentColor;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+}
+
+.day-header:hover .day-filter-icon {
+    opacity: 1;
+}
+
+#legend-back {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+}
+
+#legend-back:hover {
+    background-color: #f0f0f0;
+}
+
+#settings {
+    font-size: 1.5em;
+    color: #333;
+}
+
+#filter-label {
+    font-size: 0.85em;
+    font-weight: 600;
+    color: #333;
+    white-space: nowrap;
+}
+
 table.start th, #settings-table th{
     border: 1px solid black;
 }
@@ -420,6 +467,25 @@ button.choice-day:hover {
         font-weight:300;
     }
 
+    #legend-back {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        padding: 8px 10px;
+        font-size: 1.1em;
+    }
+
+    #settings {
+        font-size: 1.4em;
+    }
+
+    #filter-label {
+        font-size: 0.9em;
+        font-weight: 600;
+    }
+
     .table-container {
         max-height: 700px;
         overflow:auto;
@@ -427,6 +493,21 @@ button.choice-day:hover {
 
     table.wind-data {
         font-size: 1.1em;
+    }
+
+    .day-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .day-filter-icon {
+        font-size: 0.75em;
+        color: currentColor;
+        opacity: 0.6;
     }
 
     table.day-result {
