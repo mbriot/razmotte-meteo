@@ -182,7 +182,7 @@ img.img-legend {
 }
 
 #legend-back {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -234,6 +234,7 @@ table.start th, #settings-table th{
 
 #settings-table th.settings-button {
     vertical-align: middle;
+    display: none;
 }
 
 .settings-button button {
@@ -267,8 +268,14 @@ button.choice.active {
 }
 
 .loc-input, .sort-input, .type-input, .days-input {
-    display: block;
+    display: flex;
+    gap: 8px;
     margin-bottom: 10px;
+}
+
+.loc-input button {
+    flex: 1;
+    text-align: center;
 }
 
 .days-input {
