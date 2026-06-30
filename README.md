@@ -16,7 +16,11 @@ crawling of meteo data for the razmotte paragliding club
 
 # TODO
 
-- ajouter de nouveaux sites : drumont
-- un script local qui alerte si 3j de suite volable sur une région
-- optimiser batch timing avec délais entre appels
-- ajouter tests unitaires
+- alerte si 3j de suite volable sur une région : normandie, vosges, ardennes
+- site de gonflage bondue et l'autre et parc des iles - ajouter type=gonflage
+- racourci clavier avec point interrogation, l = lundi, m = mardi, m fois deux = mercredi... 
+ s pour semain, mm pour mercredi -> smm ou alors smj -> semaine mardi et jeudi
+ l pour localisation, nor,ard
+
+Je veux un nouveau script php, qui lit le fichier result.json
+Pour l'ensemble des sites avec localisation=normandie. Si j'ai un score > 25 pour un des sites et à la fois pour vendredi,samedi,dimanche. Ou bien samedi,dimanche,lundi alors ecrire avec un echo "alerte 3j volable : localistion, j1,j2,j3

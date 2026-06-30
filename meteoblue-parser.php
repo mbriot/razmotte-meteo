@@ -173,6 +173,15 @@ function spotIsClosed($date, $spot){
     return false;
 }
 
+function parseWindRange($rawWind) {
+    $rawWind = preg_replace('/\s+/', '', $rawWind);
+    if (preg_match('/^([A-Z]+)?(\d+)-(\d+)$/u', $rawWind, $m)) {
+        return ['min' => (int)$m[2], 'max' => (int)$m[3]];
+    }
+    _log("error", "Impossible de parser le vent : " . $rawWind);
+    return ['min' => 0, 'max' => 0];
+}
+
 function parseMeteoblue($url, $day){
     global $windDirTranslation;
     $urlBuilded = 'https://www.meteoblue.com/fr/meteo/semaine/' . $url . "?day=" . $day;
@@ -225,9 +234,16 @@ function parseMeteoblue($url, $day){
     $result['sunHour'] = $sunHour;
     $result['temp'] = $minTemp . '~' . $maxTemp;
     $result["weatherSentence"] = $sentenceWeather;
-    $result["_9h"] = ["min" => explode('-',$nineHourWind)[0], "max"=> explode('-',$nineHourWind)[1], "dir"=> $nineHourWindDir];
+    /*$result["_9h"] = ["min" => explode('-',$nineHourWind)[0], "max"=> explode('-',$nineHourWind)[1], "dir"=> $nineHourWindDir];
     $result["_12h"] = ["min" => explode('-',$twelveHourWind)[0], "max"=> explode('-',$twelveHourWind)[1], "dir"=> $twelveHourWindDir];
-    $result["_15h"] = ["min" => explode('-',$fifteenHourWind)[0], "max"=> explode('-',$fifteenHourWind)[1], "dir"=> $fifteenHourWindDir];
+    $result["_15h"] = ["min" => explode('-',$fifteenHourWind)[0], "max"=> explode('-',$fifteenHourWind)[1], "dir"=> $fifteenHourWindDir];*/
+    $w9 = parseWindRange($nineHourWind);
+    $w12 = parseWindRange($twelveHourWind);
+    $w15 = parseWindRange($fifteenHourWind);
+
+    $result["_9h"]  = ["min" => $w9['min'],  "max" => $w9['max'],  "dir" => $nineHourWindDir];
+    $result["_12h"] = ["min" => $w12['min'], "max" => $w12['max'], "dir" => $twelveHourWindDir];
+    $result["_15h"] = ["min" => $w15['min'], "max" => $w15['max'], "dir" => $fifteenHourWindDir];
     return $result;
 
 }
